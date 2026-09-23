@@ -1,0 +1,17 @@
+{
+  "name": "Sim Racing Ecuador",
+  "short_name": "Sim Racing EC",
+  "description": "Equipos y asesoría para simulación de carreras en Ecuador.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05080D",
+  "theme_color": "#05080D",
+  "icons": [
+    {
+      "src": "/favicon.png?v=2",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
