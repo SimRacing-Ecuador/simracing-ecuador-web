@@ -133,6 +133,7 @@ foreach ($chairDetail in @('Diseño plegable', 'Soporte para palanca de cambios 
   if ($chair -notmatch [regex]::Escape($chairDetail)) { throw "Missing chair cockpit detail: $chairDetail" }
 }
 if ($products -notmatch 'href="cockpit-con-silla\.html"') { throw 'Cockpit con silla must link to its product page' }
+if ($products -notmatch 'href="https://wa\.me/593989019836\?text=Hola%2C%20quiero%20consultar%20la%20disponibilidad%20del%20cockpit%20con%20silla"') { throw 'Chair cockpit availability must link to WhatsApp' }
 foreach ($link in @('moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html')) {
   if ($products -notmatch [regex]::Escape($link)) { throw "Missing MOZA catalog link: $link" }
 }
