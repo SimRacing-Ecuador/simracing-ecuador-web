@@ -157,6 +157,9 @@ h2 { margin-bottom: 0; font-size: clamp(3rem, 6vw, 6.5rem); font-weight: 900; }
 .tag-dot-red { background: var(--red); box-shadow: 0 0 0 4px rgba(237,28,36,.18); }
 .tag-dot-blue { background: var(--cyan); box-shadow: 0 0 0 4px rgba(0,184,242,.2); }
 .product-copy h2 { margin-bottom: 28px; }
+.product-copy-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.product-direct-link { color: var(--blue); border-color: var(--blue); }
+.product-direct-link:hover { color: var(--ink); }
 .spec-list { margin: 38px 0 38px; padding: 0; list-style: none; border-top: 1px solid rgba(5,8,13,.2); }
 .spec-list li { display: grid; grid-template-columns: 32px 1fr; gap: 5px 14px; padding: 15px 0; border-bottom: 1px solid rgba(5,8,13,.2); }
 .spec-list span { grid-row: span 2; color: var(--blue); font-size: .63rem; font-weight: 800; }
@@ -370,6 +373,7 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
   .cockpit-visual img { min-height: 260px; }
   .product-line-copy { min-height: 280px; padding: 34px 24px; }
   .product-line-actions { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .product-copy-actions { align-items: flex-start; flex-direction: column; gap: 14px; }
   .control-row, .control-row-featured { grid-template-columns: 34px 1fr; gap: 16px; min-height: 0; margin-inline: 0; padding: 28px 0; }
   .control-row-featured { padding-inline: 18px; }
   .control-row p { grid-column: 2; }

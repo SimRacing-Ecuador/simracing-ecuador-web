@@ -110,6 +110,7 @@ foreach ($kineticStyle in @('data-kinetic', 'scroll-velocity', 'perspective', 'r
   if ($css -notmatch [regex]::Escape($kineticStyle)) { throw "Missing kinetic motion style: $kineticStyle" }
 }
 if ($html -notmatch 'href="productos.html"') { throw 'Main navigation must link to the products page' }
+if ($html -notmatch 'href="cockpit-con-silla\.html"') { throw 'Home page must link directly to the chair cockpit product page' }
 foreach ($product in @('Simulador tipo trípode', 'Logitech G29', 'MOZA R3', 'MOZA R5', 'MOZA R9', 'MOZA R12')) {
   if ($products -notmatch [regex]::Escape($product)) { throw "Missing catalog product: $product" }
 }
