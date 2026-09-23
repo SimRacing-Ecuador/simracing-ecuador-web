@@ -126,6 +126,8 @@ if ($products -notmatch 'control-row-link" href="moza-r3.html"') { throw 'MOZA R
 foreach ($detail in @('youtube.com/embed/Qryc6QBhAPc', 'Placa para Volante Ajustable', 'Diseño Plegable', '522x831x815mm', '20kg (44lbs)', 'Marco Plegable', 'optimized/tripode-pies-ai.png', 'optimized/tripode-cockpit-ai.png', 'optimized/tripode-volante.jpg', 'optimized/tripode-plegado-ai.png', 'optimized/tripode-ajuste-ai.png')) {
   if ($tripod -notmatch [regex]::Escape($detail)) { throw "Missing tripod product detail: $detail" }
 }
+if ($tripod -notmatch 'src="https://www\.youtube\.com/embed/Qryc6QBhAPc\?rel=0&modestbranding=1"') { throw 'Tripod video must use the canonical YouTube embed URL' }
+if ($tripod -notmatch '<iframe[^>]*loading="eager"') { throw 'Tripod video must load when the section is opened' }
 foreach ($chairAsset in @('optimized/cockpit-silla-hero.png', 'optimized/cockpit-silla-rear.png', 'optimized/cockpit-silla-scene.png', 'optimized/cockpit-silla-cover.png', 'optimized/cockpit-silla-folded.png', 'optimized/cockpit-silla-wheel-plate.png', 'optimized/cockpit-silla-pedal-plate.png', 'optimized/cockpit-silla-mounting.png', 'optimized/cockpit-silla-dimensions.png')) {
   if ($chair -notmatch [regex]::Escape($chairAsset)) { throw "Missing chair cockpit asset: $chairAsset" }
 }
