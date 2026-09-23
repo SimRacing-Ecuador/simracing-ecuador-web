@@ -28,38 +28,38 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .skip-link:focus { transform: translateY(0); }
 
 /* Cinematic scroll motion: clip reveals, direction-aware depth, authored hero sequence, and bounded parallax. */
-html.motion-ready [data-motion] { --motion-x: 0px; --motion-y: 40px; --motion-scale: .985; opacity: 0; clip-path: inset(0 0 14% 0); transform: translate3d(var(--motion-x), var(--motion-y), 0) scale(var(--motion-scale)); transition: opacity 320ms ease, clip-path 520ms cubic-bezier(.16, 1, .3, 1), transform 520ms cubic-bezier(.16, 1, .3, 1), filter 520ms ease; filter: saturate(.78) blur(2px); will-change: opacity, clip-path, transform, filter; }
-html.motion-ready [data-motion="hero"] { --motion-y: 34px; --motion-scale: .97; clip-path: inset(0 0 100% 0); transform-origin: 50% 100%; }
-html.motion-ready [data-motion="content"] { --motion-y: 26px; }
-html.motion-ready [data-motion="item"] { --motion-y: 22px; --motion-scale: .97; }
-html.motion-ready [data-motion="media"] { --motion-x: 42px; --motion-y: 0px; --motion-scale: .95; clip-path: inset(0 10% 0 0); }
-html.motion-ready [data-motion="panel"] { --motion-y: 32px; --motion-scale: .96; }
-html.motion-ready [data-motion="structure"] { --motion-y: 30px; --motion-scale: .975; }
-html.motion-ready[data-scroll-direction="up"] [data-motion] { --motion-y: -40px; }
-html.motion-ready[data-scroll-direction="up"] [data-motion="hero"] { --motion-y: -34px; }
-html.motion-ready[data-scroll-direction="up"] [data-motion="content"] { --motion-y: -26px; }
-html.motion-ready[data-scroll-direction="up"] [data-motion="item"] { --motion-y: -22px; }
-html.motion-ready[data-scroll-direction="up"] [data-motion="panel"] { --motion-y: -32px; }
-html.motion-ready[data-scroll-direction="up"] [data-motion="media"] { --motion-x: -42px; }
-html.motion-ready [data-motion].is-visible { opacity: 1; clip-path: inset(0); transform: translate3d(0, 0, 0) scale(1); filter: saturate(1) blur(0); transition-duration: 680ms; transition-delay: var(--motion-delay, 0ms); transition-timing-function: cubic-bezier(.16, 1, .3, 1); }
-html.motion-ready [data-motion]:not(.is-visible) { transition-delay: 0ms; }
+html.motion-ready [data-motion] { --motion-x: 0px; --motion-y: 72px; --motion-scale: .965; opacity: 0; clip-path: inset(0 0 20% 0); transform: translate3d(var(--motion-x), var(--motion-y), 0) scale(var(--motion-scale)); transition: opacity 520ms ease, clip-path 820ms cubic-bezier(.16, 1, .3, 1), transform 920ms cubic-bezier(.16, 1, .3, 1), filter 820ms ease; filter: saturate(.7) blur(4px); will-change: opacity, clip-path, transform, filter; }
+html.motion-ready [data-motion="hero"] { --motion-y: 66px; --motion-scale: .94; clip-path: inset(0 0 100% 0); transform-origin: 50% 100%; }
+html.motion-ready [data-motion="content"] { --motion-y: 50px; }
+html.motion-ready [data-motion="item"] { --motion-y: 42px; --motion-scale: .95; }
+html.motion-ready [data-motion="media"] { --motion-x: 78px; --motion-y: 0px; --motion-scale: .92; clip-path: inset(0 14% 0 0); }
+html.motion-ready [data-motion="panel"] { --motion-y: 56px; --motion-scale: .93; }
+html.motion-ready [data-motion="structure"] { --motion-y: 48px; --motion-scale: .95; }
+html.motion-ready[data-scroll-direction="up"] [data-motion] { --motion-y: -72px; }
+html.motion-ready[data-scroll-direction="up"] [data-motion="hero"] { --motion-y: -66px; }
+html.motion-ready[data-scroll-direction="up"] [data-motion="content"] { --motion-y: -50px; }
+html.motion-ready[data-scroll-direction="up"] [data-motion="item"] { --motion-y: -42px; }
+html.motion-ready[data-scroll-direction="up"] [data-motion="panel"] { --motion-y: -56px; }
+html.motion-ready[data-scroll-direction="up"] [data-motion="media"] { --motion-x: -78px; }
+html.motion-ready [data-motion].is-visible { opacity: 1; clip-path: inset(0); transform: translate3d(0, 0, 0) scale(1); filter: saturate(1) blur(0); transition-duration: 1120ms; transition-delay: var(--motion-delay, 0ms); transition-timing-function: cubic-bezier(.16, 1, .3, 1); }
+html.motion-ready [data-motion]:not(.is-visible) { transition-duration: 760ms; transition-delay: 0ms; }
 html.motion-ready [data-motion]:focus-within { opacity: 1; transform: none; }
 html.motion-ready [data-kinetic] { --motion-velocity: var(--scroll-velocity, 0px); }
-html.motion-ready [data-kinetic].is-visible { transform: perspective(1000px) translate3d(0, calc(var(--motion-velocity) * .18), 0) rotateX(var(--scroll-tilt, 0deg)) rotateZ(var(--scroll-skew, 0deg)); }
+html.motion-ready [data-kinetic].is-visible { transform: perspective(1000px) translate3d(0, calc(var(--motion-velocity) * .26), 0) rotateX(var(--scroll-tilt, 0deg)) rotateZ(var(--scroll-skew, 0deg)); }
 html.motion-ready [data-kinetic].is-visible:hover { transform: perspective(1000px) translate3d(0, -10px, 0) rotateX(0deg) rotateZ(0deg) scale(1.02); }
 
 @keyframes hero-enter {
-  from { opacity: 0; clip-path: inset(0 0 100% 0); filter: blur(5px); transform: translate3d(0, 42px, 0) scale(.97); }
+  from { opacity: 0; clip-path: inset(0 0 100% 0); filter: blur(7px); transform: translate3d(0, 84px, 0) scale(.93); }
   to { opacity: 1; clip-path: inset(0); filter: blur(0); transform: translate3d(0, 0, 0) scale(1); }
 }
 html.motion-ready .hero { opacity: 1; clip-path: inset(0); transform: none; filter: none; }
-html.motion-ready .hero-copy > *, html.motion-ready .hero-readout, html.motion-ready .hero-foot { animation: hero-enter 760ms cubic-bezier(.16, 1, .3, 1) both; }
-html.motion-ready .hero-copy > *:nth-child(1) { animation-delay: 80ms; }
-html.motion-ready .hero-copy > *:nth-child(2) { animation-delay: 210ms; }
-html.motion-ready .hero-copy > *:nth-child(3) { animation-delay: 340ms; }
-html.motion-ready .hero-copy > *:nth-child(4) { animation-delay: 470ms; }
-html.motion-ready .hero-readout { animation-delay: 580ms; }
-html.motion-ready .hero-foot { animation-delay: 680ms; }
+html.motion-ready .hero-copy > *, html.motion-ready .hero-readout, html.motion-ready .hero-foot { animation: hero-enter 1100ms cubic-bezier(.16, 1, .3, 1) both; }
+html.motion-ready .hero-copy > *:nth-child(1) { animation-delay: 100ms; }
+html.motion-ready .hero-copy > *:nth-child(2) { animation-delay: 260ms; }
+html.motion-ready .hero-copy > *:nth-child(3) { animation-delay: 420ms; }
+html.motion-ready .hero-copy > *:nth-child(4) { animation-delay: 580ms; }
+html.motion-ready .hero-readout { animation-delay: 740ms; }
+html.motion-ready .hero-foot { animation-delay: 900ms; }
 
 .hero-video { --scroll-parallax: 0px; transform: scale(1.06) translate3d(0, var(--scroll-parallax), 0); }
 .hero-grid { --scroll-parallax: 0px; transform: translate3d(0, calc(var(--scroll-parallax) * .35), 0); }

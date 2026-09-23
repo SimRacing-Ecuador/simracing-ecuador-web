@@ -100,7 +100,7 @@ function setMotionDelays() {
 
 function updateScrollEffects() {
   const currentScrollY = window.scrollY;
-  const scrollVelocity = Math.max(-24, Math.min(24, currentScrollY - lastFrameY));
+  const scrollVelocity = Math.max(-32, Math.min(32, currentScrollY - lastFrameY));
   if (Math.abs(currentScrollY - lastScrollY) > 1) {
     document.documentElement.dataset.scrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
     lastScrollY = currentScrollY;
@@ -114,8 +114,8 @@ function updateScrollEffects() {
     const viewportCenter = window.innerHeight / 2;
     visibleParallaxTargets.forEach((element) => {
       const rect = element.getBoundingClientRect();
-      const distance = (viewportCenter - (rect.top + rect.height / 2)) * 0.035;
-      const offset = Math.max(-30, Math.min(30, distance));
+      const distance = (viewportCenter - (rect.top + rect.height / 2)) * 0.055;
+      const offset = Math.max(-52, Math.min(52, distance));
       element.style.setProperty('--scroll-parallax', `${offset.toFixed(2)}px`);
     });
   }

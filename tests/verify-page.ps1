@@ -78,6 +78,9 @@ if ($js -notmatch '\.load\(\)') { throw 'Hero video loader must call video.load(
 foreach ($cinematicStyle in @('clip-path', '--scroll-parallax', 'data-scroll-direction', 'data-motion="hero"')) {
   if ($css -notmatch [regex]::Escape($cinematicStyle)) { throw "Missing cinematic motion style: $cinematicStyle" }
 }
+foreach ($longMotionStyle in @('--motion-y: 72px', '--motion-x: 78px', 'transition-duration: 1120ms', 'hero-enter 1100ms', 'calc(var(--motion-velocity) * .26)')) {
+  if ($css -notmatch [regex]::Escape($longMotionStyle)) { throw "Missing extended motion style: $longMotionStyle" }
+}
 foreach ($kineticStyle in @('data-kinetic', 'scroll-velocity', 'perspective', 'rotateZ')) {
   if ($css -notmatch [regex]::Escape($kineticStyle)) { throw "Missing kinetic motion style: $kineticStyle" }
 }
