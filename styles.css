@@ -308,6 +308,7 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
 .product-line-copy > p { max-width: 26ch; margin: 20px 0 38px; color: rgba(5,8,13,.66); }
 .product-line-actions { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 16px; border-top: 1px solid rgba(5,8,13,.2); }
 .price-ask { color: rgba(5,8,13,.72); font-size: .7rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+.cockpit-price { color: var(--blue); font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900; letter-spacing: -.04em; line-height: .9; white-space: nowrap; }
 .product-line-actions a { padding-bottom: 3px; border-bottom: 1px solid var(--blue); color: var(--blue); font-size: .7rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .control-catalog { color: var(--paper); background: var(--blue); }
 .catalog-heading-dark h2 span { color: var(--yellow); }
@@ -477,12 +478,15 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
 /* Simulador tipo trípode product detail */
 .product-detail-page { color: var(--ink); background: var(--paper); }
 .tripod-hero { overflow: hidden; color: var(--paper); background: var(--ink); }
-.tripod-hero-layout { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 620px; }
+.tripod-hero-layout { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 720px; }
 .tripod-hero-copy { align-self: center; padding: 80px 0; }
 .tripod-hero h1 { max-width: 8ch; margin: 20px 0 26px; font-size: clamp(3.8rem, 6.2vw, 6.5rem); font-weight: 900; letter-spacing: -.04em; line-height: .84; }
 .tripod-hero h1 em { color: var(--cyan); font-style: normal; }
 .tripod-hero-copy > p:not(.catalog-route) { max-width: 40ch; margin: 0; color: rgba(247,249,252,.78); font-size: 1rem; }
-.tripod-hero-product { position: relative; display: grid; min-height: 620px; margin: 0; place-items: center; overflow: hidden; background: var(--yellow); }
+.product-price-line { display: flex; align-items: baseline; gap: 18px; margin-top: 32px; }
+.product-price-line strong { color: var(--yellow); font-family: var(--display); font-size: clamp(3.2rem, 5vw, 5.5rem); font-weight: 900; letter-spacing: -.06em; line-height: .8; white-space: nowrap; }
+.product-price-line span { color: rgba(247,249,252,.76); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.tripod-hero-product { position: relative; display: grid; min-height: 720px; margin: 0; place-items: center; overflow: hidden; background: var(--yellow); }
 .tripod-hero-product::before { position: absolute; inset: 24px; border: 1px solid rgba(5,8,13,.28); content: ""; pointer-events: none; }
 .tripod-hero-product::after { position: absolute; right: -9%; bottom: -25%; width: 70%; aspect-ratio: 1; border: 28px solid rgba(7,90,158,.22); border-radius: 50%; content: ""; pointer-events: none; }
 .tripod-hero-product img { position: relative; z-index: 1; width: min(88%, 620px); max-height: 500px; object-fit: contain; filter: drop-shadow(0 28px 20px rgba(5,8,13,.25)); }
@@ -568,12 +572,12 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
 /* Cockpit con silla product detail */
 .chair-cockpit-page { color: var(--ink); background: var(--paper); }
 .chair-hero { overflow: hidden; color: var(--paper); background: var(--ink); }
-.chair-hero-layout { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 620px; }
+.chair-hero-layout { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 720px; }
 .chair-hero-copy { align-self: center; min-width: 0; padding: 80px 0; }
 .chair-hero h1 { max-width: 8ch; margin: 20px 0 26px; font-size: clamp(3.8rem, 6.2vw, 6.5rem); font-weight: 900; letter-spacing: -.04em; line-height: .92; overflow-wrap: normal; }
 .chair-hero h1 em { color: var(--cyan); font-style: normal; }
 .chair-hero-copy > p:not(.catalog-route) { max-width: 40ch; margin: 0; color: rgba(247,249,252,.78); font-size: 1rem; overflow-wrap: anywhere; }
-.chair-hero-product { position: relative; display: grid; min-height: 620px; margin: 0; place-items: center; overflow: hidden; background: var(--cyan); }
+.chair-hero-product { position: relative; display: grid; min-height: 720px; margin: 0; place-items: center; overflow: hidden; background: var(--cyan); }
 .chair-hero-product::before { position: absolute; inset: 24px; border: 1px solid rgba(5,8,13,.28); content: ""; pointer-events: none; }
 .chair-hero-product::after { position: absolute; right: -9%; bottom: -25%; width: 70%; aspect-ratio: 1; border: 28px solid rgba(7,90,158,.25); border-radius: 50%; content: ""; pointer-events: none; }
 .chair-hero-product img { position: relative; z-index: 1; width: min(88%, 620px); max-height: 520px; object-fit: contain; filter: drop-shadow(0 28px 20px rgba(5,8,13,.25)); }

@@ -134,6 +134,10 @@ foreach ($chairDetail in @('Diseño plegable', 'Soporte para palanca de cambios 
 }
 if ($products -notmatch 'href="cockpit-con-silla\.html"') { throw 'Cockpit con silla must link to its product page' }
 if ($products -notmatch 'href="https://wa\.me/593989019836\?text=Hola%2C%20quiero%20consultar%20la%20disponibilidad%20del%20cockpit%20con%20silla"') { throw 'Chair cockpit availability must link to WhatsApp' }
+if ($products -notmatch '(?s)<article class="cockpit-feature cockpit-feature-chair">.*?<h3>Cockpit con silla</h3>.*?\$350') { throw 'Chair cockpit must show the $350 price' }
+if ($products -notmatch '(?s)<article class="cockpit-feature">.*?<h3>Simulador tipo trípode</h3>.*?\$185') { throw 'Tripod cockpit must show the $185 price' }
+if ($chair -notmatch '\$350') { throw 'Chair cockpit detail must show the $350 price' }
+if ($tripod -notmatch '\$185') { throw 'Tripod cockpit detail must show the $185 price' }
 foreach ($link in @('moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html')) {
   if ($products -notmatch [regex]::Escape($link)) { throw "Missing MOZA catalog link: $link" }
 }
