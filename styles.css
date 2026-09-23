@@ -61,6 +61,10 @@ html.motion-ready .hero-copy > *:nth-child(4) { animation-delay: 580ms; }
 html.motion-ready .hero-readout { animation-delay: 740ms; }
 html.motion-ready .hero-foot { animation-delay: 900ms; }
 
+img[data-scroll-image] { --scroll-parallax: 0px; transform: translate3d(0, calc(var(--scroll-parallax) * var(--image-depth, .48)), 0) scale(1.025); transition: transform 460ms cubic-bezier(.16, 1, .3, 1); will-change: transform; }
+@media (hover: hover) and (pointer: fine) {
+  img[data-scroll-image]:hover { transform: translate3d(0, calc(var(--scroll-parallax) * var(--image-depth, .48) - 6px), 0) scale(1.045); }
+}
 .hero-video { --scroll-parallax: 0px; transform: scale(1.06) translate3d(0, var(--scroll-parallax), 0); }
 .hero-grid { --scroll-parallax: 0px; transform: translate3d(0, calc(var(--scroll-parallax) * .35), 0); }
 .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img { --scroll-parallax: 0px; transform: scale(1.06) translate3d(0, var(--scroll-parallax), 0); }
@@ -69,6 +73,7 @@ html.motion-ready .hero-foot { animation-delay: 900ms; }
 @media (prefers-reduced-motion: reduce) {
   html.motion-ready [data-motion],
   html.motion-ready [data-motion].is-visible { opacity: 1; clip-path: inset(0); transform: none; filter: none; transition: none; will-change: auto; }
+  img[data-scroll-image] { transform: none !important; transition: none; will-change: auto; }
   .hero-video, .hero-grid, .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img { transform: none; }
 }
 

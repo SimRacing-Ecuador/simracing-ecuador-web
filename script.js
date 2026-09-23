@@ -19,7 +19,16 @@ const motionTargets = [
 
 const motionElements = new Set();
 const structuralMotionTargets = document.querySelectorAll('main > section > .shell > *, main article, main figure, main li, footer > .shell > *');
-const parallaxTargets = document.querySelectorAll('.hero-video, .hero-grid, .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img');
+const imageMotionTargets = [...document.querySelectorAll('img')]
+  .filter((element) => !element.closest('.brand'));
+imageMotionTargets.forEach((element, index) => {
+  element.dataset.scrollImage = 'true';
+  element.style.setProperty('--image-depth', `${0.42 + (index % 3) * 0.08}`);
+});
+const parallaxTargets = [...new Set([
+  ...document.querySelectorAll('.hero-video, .hero-grid, .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img'),
+  ...imageMotionTargets,
+])];
 const kineticTargets = document.querySelectorAll('.setup-choice, .tech-item, .control-row, .tripod-feature-card, .r3-component-card, .moza-kit-parts article, .accessories-preview article, .cockpit-feature, .community-panel');
 const visibleParallaxTargets = new Set(parallaxTargets);
 let parallaxVisibilityObserver = null;

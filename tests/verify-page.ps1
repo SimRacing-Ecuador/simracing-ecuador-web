@@ -51,8 +51,14 @@ foreach ($cinematicHook in @('scrollDirection', 'requestAnimationFrame', 'scroll
 foreach ($coverageHook in @('main > section > .shell > *', 'main article', 'main figure', 'main li', 'toggleMotionVisibility', 'scroll-velocity', 'dataset.kinetic')) {
   if ($js -notmatch [regex]::Escape($coverageHook)) { throw "Missing motion coverage hook: $coverageHook" }
 }
+foreach ($imageMotionHook in @('imageMotionTargets', 'dataset.scrollImage', "querySelectorAll('img')", 'image-depth')) {
+  if ($js -notmatch [regex]::Escape($imageMotionHook)) { throw "Missing image motion hook: $imageMotionHook" }
+}
 foreach ($motionStyle in @('motion-ready', 'prefers-reduced-motion', 'data-motion')) {
   if ($css -notmatch [regex]::Escape($motionStyle)) { throw "Missing scroll motion style: $motionStyle" }
+}
+foreach ($imageMotionStyle in @('img[data-scroll-image]', '--image-depth', 'will-change: transform')) {
+  if ($css -notmatch [regex]::Escape($imageMotionStyle)) { throw "Missing image motion style: $imageMotionStyle" }
 }
 foreach ($responsiveStyle in @('overflow-x: clip', 'env(safe-area-inset-left', 'env(safe-area-inset-right', 'min-width: 0', 'pointer: coarse', 'visibility: hidden')) {
   if ($css -notmatch [regex]::Escape($responsiveStyle)) { throw "Missing responsive safeguard: $responsiveStyle" }
