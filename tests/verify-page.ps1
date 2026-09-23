@@ -39,6 +39,9 @@ foreach ($page in $htmlPages) {
   foreach ($footerToken in @('footer-grid', '098 901 9836', 'Todos los derechos reservados')) {
     if ($pageMarkup -notmatch [regex]::Escape($footerToken)) { throw "Missing sitewide footer detail on $($page.Name): $footerToken" }
   }
+  foreach ($socialLink in @('https://www.instagram.com/SimRacingEcuador/', 'https://www.tiktok.com/@simracingec')) {
+    if ($pageMarkup -notmatch [regex]::Escape($socialLink)) { throw "Missing social link on $($page.Name): $socialLink" }
+  }
 }
 foreach ($category in @('Volantes y pedales', 'Cockpits', 'Accesorios')) {
   if ($html -notmatch [regex]::Escape($category)) { throw "Missing home product category: $category" }
