@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$required = @('index.html', 'productos.html', 'simulador-tripode.html', 'moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html', 'styles.css', 'script.js', 'favicon.svg', 'cover.png', 'sim racing.png', 'infografia soporte.png', 'simulador vuelo.png', '5dae82990e6d41dab0c886ad8da88529.mp4', 'tripode-pies.png', 'tripode-cockpit.png', 'tripode-volante.png', 'tripode-plegado.png', 'tripode-ajuste.png', 'r3-bundle.png', 'r3-base.png', 'r3-wheel.png', 'r3-pedals.png')
+$required = @('index.html', 'productos.html', 'simulador-tripode.html', 'cockpit-con-silla.html', 'moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html', 'styles.css', 'script.js', 'favicon.svg', 'cover.png', 'sim racing.png', 'infografia soporte.png', 'simulador vuelo.png', '5dae82990e6d41dab0c886ad8da88529.mp4', 'tripode-pies.png', 'tripode-cockpit.png', 'tripode-volante.png', 'tripode-plegado.png', 'tripode-ajuste.png', 'r3-bundle.png', 'r3-base.png', 'r3-wheel.png', 'r3-pedals.png')
 $missing = @($required | Where-Object { -not (Test-Path (Join-Path $root $_)) })
 if ($missing.Count -gt 0) { throw "Missing required files: $($missing -join ', ')" }
 
@@ -11,6 +11,7 @@ $r3 = Get-Content -Raw (Join-Path $root 'moza-r3.html')
 $r5 = Get-Content -Raw (Join-Path $root 'moza-r5.html')
 $r9 = Get-Content -Raw (Join-Path $root 'moza-r9-kit.html')
 $r12 = Get-Content -Raw (Join-Path $root 'moza-r12-kit.html')
+$chair = Get-Content -Raw (Join-Path $root 'cockpit-con-silla.html')
 $css = Get-Content -Raw (Join-Path $root 'styles.css')
 $js = Get-Content -Raw (Join-Path $root 'script.js')
 $htmlPages = Get-ChildItem -Path $root -Filter '*.html' -File
@@ -124,6 +125,13 @@ if ($products -notmatch 'control-row-link" href="moza-r3.html"') { throw 'MOZA R
 foreach ($detail in @('youtube.com/embed/Qryc6QBhAPc', 'Placa para Volante Ajustable', 'Diseño Plegable', '522x831x815mm', '20kg (44lbs)', 'Marco Plegable', 'optimized/tripode-pies-ai.png', 'optimized/tripode-cockpit-ai.png', 'optimized/tripode-volante.jpg', 'optimized/tripode-plegado-ai.png', 'optimized/tripode-ajuste-ai.png')) {
   if ($tripod -notmatch [regex]::Escape($detail)) { throw "Missing tripod product detail: $detail" }
 }
+foreach ($chairAsset in @('optimized/cockpit-silla-hero.png', 'optimized/cockpit-silla-rear.png', 'optimized/cockpit-silla-scene.png', 'optimized/cockpit-silla-cover.png', 'optimized/cockpit-silla-folded.png', 'optimized/cockpit-silla-wheel-plate.png', 'optimized/cockpit-silla-pedal-plate.png', 'optimized/cockpit-silla-mounting.png', 'optimized/cockpit-silla-dimensions.png')) {
+  if ($chair -notmatch [regex]::Escape($chairAsset)) { throw "Missing chair cockpit asset: $chairAsset" }
+}
+foreach ($chairDetail in @('Diseño plegable', 'Soporte para palanca de cambios ajustable', 'Puntos de montaje pretaladrados', 'Placa de volante inclinable', 'Soporte para pedal ajustable', 'Funda de asiento transpirable removible', 'Pies de silicona', '1350~1600x938x1042mm', '120kg (264lbs)', 'Marco plegable', 'Acero, plástico', 'UNE EN 12520')) {
+  if ($chair -notmatch [regex]::Escape($chairDetail)) { throw "Missing chair cockpit detail: $chairDetail" }
+}
+if ($products -notmatch 'href="cockpit-con-silla\.html"') { throw 'Cockpit con silla must link to its product page' }
 foreach ($link in @('moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html')) {
   if ($products -notmatch [regex]::Escape($link)) { throw "Missing MOZA catalog link: $link" }
 }
