@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$required = @('index.html', 'productos.html', 'simulador-tripode.html', 'moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html', 'styles.css', 'script.js', 'favicon.svg', 'cover.png', 'sim racing.png', 'infografia soporte.png', 'simulador vuelo.png', '5dae82990e6d41dab0c886ad8da88529.mp4', 'tripode-pies.png', 'tripode-cockpit.png', 'tripode-volante.png', 'tripode-plegado.png', 'tripode-ajuste.png', 'r3-bundle.png', 'r3-base.png', 'r3-wheel.png', 'r3-pedals.png', 'r3-compatibility.png')
+$required = @('index.html', 'productos.html', 'simulador-tripode.html', 'moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html', 'styles.css', 'script.js', 'favicon.svg', 'cover.png', 'sim racing.png', 'infografia soporte.png', 'simulador vuelo.png', '5dae82990e6d41dab0c886ad8da88529.mp4', 'tripode-pies.png', 'tripode-cockpit.png', 'tripode-volante.png', 'tripode-plegado.png', 'tripode-ajuste.png', 'r3-bundle.png', 'r3-base.png', 'r3-wheel.png', 'r3-pedals.png')
 $missing = @($required | Where-Object { -not (Test-Path (Join-Path $root $_)) })
 if ($missing.Count -gt 0) { throw "Missing required files: $($missing -join ', ')" }
 
@@ -58,8 +58,11 @@ foreach ($link in @('moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r1
 foreach ($detail in @('MOZA R3', '$580', '3,9 Nm', 'Codificador de 15 bits', 'Direct Drive')) {
   if ($r3 -notmatch [regex]::Escape($detail)) { throw "Missing R3 technical detail: $detail" }
 }
-foreach ($detail in @('Compatible con PC y Xbox', 'Pedales SR-P Lite', '22 botones', '10 LED RGB de alto brillo', '1000 Hz', 'Abrazadera de mesa', 'r3-bundle.png', 'r3-base.png', 'r3-wheel.png', 'r3-pedals.png', 'r3-compatibility.png')) {
+foreach ($detail in @('Compatible con PC y Xbox', 'Pedales SR-P Lite', '22 botones', '10 LED RGB de alto brillo', '1000 Hz', 'Abrazadera de mesa', 'r3-bundle.png', 'r3-base.png', 'r3-wheel.png', 'r3-pedals.png')) {
   if ($r3 -notmatch [regex]::Escape($detail)) { throw "Missing expanded R3 product detail: $detail" }
+}
+foreach ($game in @('Juegos compatibles', 'Assetto Corsa', 'iRacing', 'Project CARS 3', 'Forza Horizon 5', 'Euro Truck Simulator 2', 'BeamNG.drive', 'r3-game-list')) {
+  if ($r3 -notmatch [regex]::Escape($game)) { throw "Missing R3 compatibility game: $game" }
 }
 foreach ($detail in @('MOZA R5', '$675', '5,5 Nm', '1000 Hz', 'Rotación infinita')) {
   if ($r5 -notmatch [regex]::Escape($detail)) { throw "Missing R5 technical detail: $detail" }
