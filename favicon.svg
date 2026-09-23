@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Sim Racing Ecuador</title>
+  <rect width="64" height="64" rx="12" fill="#05080D"/>
+  <circle cx="32" cy="29" r="18" fill="none" stroke="#00B8F2" stroke-width="5"/>
+  <path d="M18 29h28M24 42l8-13 8 13M22 18l10 11 10-11" fill="none" stroke="#F7F9FC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 51h12M26 51h10M35 51h12" stroke="#FFD400" stroke-width="4"/>
+  <path d="M22 56h12M32 56h10" stroke="#075A9E" stroke-width="4"/>
+  <path d="M38 56h8" stroke="#ED1C24" stroke-width="4"/>
+</svg>

@@ -1,0 +1,6 @@
+# Local deployment and assistant state
+.wrangler/
+.superpowers/
+
+# Generated publish directory
+dist/
