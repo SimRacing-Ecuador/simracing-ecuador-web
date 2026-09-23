@@ -23,11 +23,22 @@ foreach ($page in $htmlPages) {
 foreach ($token in @('#00B8F2', '#FFD400', '#075A9E', '#ED1C24')) {
   if ($css -notmatch [regex]::Escape($token)) { throw "Missing brand token $token" }
 }
-foreach ($asset in @('optimized/cover-ai.png', 'optimized/infografia-soporte-ai.png', 'optimized/simulador-vuelo-ai.png', '5dae82990e6d41dab0c886ad8da88529.mp4')) {
+foreach ($asset in @('optimized/cover-ai.png', 'optimized/simulador-vuelo-ai.png', '5dae82990e6d41dab0c886ad8da88529.mp4')) {
   if ($html -notmatch [regex]::Escape($asset)) { throw "Asset is not referenced: $asset" }
 }
-foreach ($section in @('inicio', 'setups', 'productos', 'soporte', 'comunidad')) {
+foreach ($section in @('inicio', 'setups', 'productos', 'comunidad', 'contacto')) {
   if ($html -notmatch ('id="' + $section + '"')) { throw "Missing section id $section" }
+}
+if ($html -match 'class="section support-section"') { throw 'Removed support section is still present on the home page' }
+if ($html -match 'href="#soporte"') { throw 'Home navigation must not point to the removed support section' }
+foreach ($footerToken in @('footer-grid', 'Ecuador', '098 901 9836', 'Instagram', 'Todos los derechos reservados')) {
+  if ($html -notmatch [regex]::Escape($footerToken)) { throw "Missing footer contact detail: $footerToken" }
+}
+foreach ($page in $htmlPages) {
+  $pageMarkup = Get-Content -Raw $page.FullName
+  foreach ($footerToken in @('footer-grid', '098 901 9836', 'Todos los derechos reservados')) {
+    if ($pageMarkup -notmatch [regex]::Escape($footerToken)) { throw "Missing sitewide footer detail on $($page.Name): $footerToken" }
+  }
 }
 foreach ($category in @('Volantes y pedales', 'Cockpits', 'Accesorios')) {
   if ($html -notmatch [regex]::Escape($category)) { throw "Missing home product category: $category" }

@@ -23,7 +23,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
 .shell { width: var(--shell); margin-inline: auto; }
 .site-header, .site-footer { padding-inline-start: max(0px, env(safe-area-inset-left)); padding-inline-end: max(0px, env(safe-area-inset-right)); }
-.section-heading > *, .product-layout > *, .support-layout > *, .flight-layout > *, .catalog-hero-layout > *, .catalog-heading > *, .cockpit-feature > *, .control-row > *, .kit-intro > *, .moza-hero-grid > *, .moza-spec-grid > *, .moza-kit-heading > *, .r3-product-hero-grid > *, .r3-intro-grid > *, .r3-specs-layout > *, .r3-compatibility-grid > * { min-width: 0; }
+.section-heading > *, .product-layout > *, .flight-layout > *, .catalog-hero-layout > *, .catalog-heading > *, .cockpit-feature > *, .control-row > *, .kit-intro > *, .moza-hero-grid > *, .moza-spec-grid > *, .moza-kit-heading > *, .r3-product-hero-grid > *, .r3-intro-grid > *, .r3-specs-layout > *, .r3-compatibility-grid > * { min-width: 0; }
 .skip-link { position: fixed; top: 12px; left: 12px; z-index: 20; padding: 8px 12px; color: var(--ink); background: var(--yellow); transform: translateY(-150%); transition: transform 180ms ease; }
 .skip-link:focus { transform: translateY(0); }
 
@@ -67,14 +67,14 @@ img[data-scroll-image] { --scroll-parallax: 0px; transform: translate3d(0, calc(
 }
 .hero-video { --scroll-parallax: 0px; transform: scale(1.06) translate3d(0, var(--scroll-parallax), 0); }
 .hero-grid { --scroll-parallax: 0px; transform: translate3d(0, calc(var(--scroll-parallax) * .35), 0); }
-.choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img { --scroll-parallax: 0px; transform: scale(1.06) translate3d(0, var(--scroll-parallax), 0); }
+.choice-media img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img { --scroll-parallax: 0px; transform: scale(1.06) translate3d(0, var(--scroll-parallax), 0); }
 .setup-choice:hover .choice-media img { transform: scale(1.13) translate3d(0, var(--scroll-parallax), 0); }
 
 @media (prefers-reduced-motion: reduce) {
   html.motion-ready [data-motion],
   html.motion-ready [data-motion].is-visible { opacity: 1; clip-path: inset(0); transform: none; filter: none; transition: none; will-change: auto; }
   img[data-scroll-image] { transform: none !important; transition: none; will-change: auto; }
-  .hero-video, .hero-grid, .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img { transform: none; }
+  .hero-video, .hero-grid, .choice-media img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img { transform: none; }
 }
 
 .site-header { position: absolute; inset: 0 0 auto; z-index: 10; border-bottom: 1px solid rgba(247,249,252,.15); background: linear-gradient(180deg, rgba(5,8,13,.72), transparent); }
@@ -163,18 +163,6 @@ h2 { margin-bottom: 0; font-size: clamp(3rem, 6vw, 6.5rem); font-weight: 900; }
 .spec-list strong { font-size: .9rem; text-transform: uppercase; }
 .spec-list small { color: rgba(5,8,13,.62); font-size: .8rem; }
 
-.support-section { overflow: hidden; background: var(--red); }
-.support-layout { display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: clamp(48px, 8vw, 120px); }
-.support-copy h2 { margin-bottom: 30px; color: var(--ink); }
-.support-copy h2 span { color: var(--ink); }
-.support-copy .lead-copy { color: rgba(247,249,252,.85); }
-.support-note { display: flex; align-items: center; gap: 15px; margin: 38px 0; color: var(--paper); }
-.support-note p { max-width: 21ch; margin: 0; font-family: var(--display); font-size: 1.35rem; font-weight: 800; line-height: .98; text-transform: uppercase; }
-.note-line { width: 42px; height: 4px; background: var(--yellow); transform: skew(-22deg); }
-.text-link-light { border-color: var(--paper); }
-.support-art { position: relative; margin: 0; background: var(--ink); }
-.support-art img { width: 100%; min-height: 540px; object-fit: cover; object-position: center; mix-blend-mode: screen; }
-.support-art::after { position: absolute; inset: 18px; border: 1px solid rgba(255,212,0,.65); content: ""; pointer-events: none; }
 figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: var(--yellow); font-size: .58rem; font-weight: 800; letter-spacing: .16em; }
 
 .tech-section { background: var(--blue); }
@@ -207,12 +195,18 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
 .flight-art::after { position: absolute; inset: 18px; border: 1px solid var(--cyan); content: ""; pointer-events: none; }
 .flight-art figcaption { color: var(--cyan); }
 
-.site-footer { padding-block: 30px; background: var(--ink); border-top: 1px solid var(--line); }
-.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.footer-brand { width: 140px; }
-.footer-links { display: flex; gap: 20px; color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.site-footer { padding-block: clamp(46px, 7vw, 76px) 22px; background: var(--ink); border-top: 1px solid var(--line); }
+.footer-inner { display: block; }
+.footer-grid { display: grid; grid-template-columns: 1.25fr repeat(3, 1fr); gap: clamp(24px, 5vw, 72px); }
+.footer-brand { width: 180px; align-self: start; }
+.footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.footer-kicker { margin-bottom: 8px; color: var(--cyan); font-size: .72rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.footer-column p, .footer-column a { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.45; }
+.footer-column a:hover { color: var(--paper); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(247,249,252,.14); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 20px; color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .footer-links a:hover { color: var(--cyan); }
-.footer-inner p { margin: 0; color: rgba(247,249,252,.45); font-size: .65rem; }
+.footer-bottom p { margin: 0; color: rgba(247,249,252,.45); font-size: .65rem; }
 
 @media (max-width: 900px) {
   :root { --shell: min(100% - 40px, 680px); }
@@ -223,10 +217,9 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
   .hero-content { align-items: start; flex-direction: column; padding-top: 160px; }
   .hero-readout { margin-top: 54px; }
   .section { padding-block: 96px; }
-  .section-heading-split, .product-layout, .support-layout, .flight-layout { grid-template-columns: 1fr; gap: 40px; }
+  .section-heading-split, .product-layout, .flight-layout { grid-template-columns: 1fr; gap: 40px; }
   .product-art { min-height: 540px; }
   .product-art img { min-height: 540px; }
-  .support-art { order: -1; }
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
   .tech-item:nth-child(2) { border-right: 0; }
   .tech-item:nth-child(-n+2) { border-bottom: 1px solid rgba(247,249,252,.35); }
@@ -262,7 +255,6 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
   .choice-title { margin-top: 48px; }
   .product-art, .product-art img { min-height: 430px; }
   .product-art img { object-position: 57% center; }
-  .support-art img { min-height: 380px; }
   .tech-grid { grid-template-columns: 1fr 1fr; }
   .tech-item { min-height: 210px; padding: 22px 16px; }
   .tech-symbol { margin-bottom: 34px; }
@@ -270,8 +262,9 @@ figcaption { position: absolute; right: 28px; bottom: 22px; z-index: 1; color: v
   .community-meta { align-items: flex-start; justify-content: end; gap: 12px; margin-top: 65px; }
   .community-meta strong { font-size: 2.3rem; }
   .flight-art img { min-height: 340px; }
-  .footer-inner { align-items: flex-start; flex-direction: column; }
-  .footer-links { flex-wrap: wrap; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { width: 150px; }
+  .footer-bottom { align-items: flex-start; flex-direction: column; gap: 18px; }
 }
 
 /* Product catalogue: preserves the Sim Racing Ecuador palette while giving the inventory a dedicated merchandising surface. */

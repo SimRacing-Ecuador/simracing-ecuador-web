@@ -10,8 +10,8 @@ const motionTargets = [
   ['main > section', 'section'],
   ['main > .event-band', 'panel'],
   ['.section-heading, .catalog-heading, .product-section-heading, .kit-intro, .moza-kit-heading', 'content'],
-  ['.community-copy, .community-meta, .product-copy, .support-copy, .flight-copy, .catalog-hero-copy, .tripod-hero-copy, .r3-hero-copy', 'content'],
-  ['figure, .product-art, .support-art, .flight-art, .catalog-hero-art, .tripod-hero-product, .tripod-video-frame, .r3-bundle-visual, .moza-power, .cockpit-visual', 'media'],
+  ['.community-copy, .community-meta, .product-copy, .flight-copy, .catalog-hero-copy, .tripod-hero-copy, .r3-hero-copy', 'content'],
+  ['figure, .product-art, .flight-art, .catalog-hero-art, .tripod-hero-product, .tripod-video-frame, .r3-bundle-visual, .moza-power, .cockpit-visual', 'media'],
   ['.setup-choice, .tech-item, .spec-list li, .control-row, .cockpit-feature, .tripod-feature-card, .moza-kit-parts article, .accessories-preview article, .r3-component-card', 'item'],
   ['.about-stats, .community-panel, .catalog-close-inner, .tripod-compatibility, .r3-game-list, .r3-spec-block', 'panel'],
   ['footer', 'section'],
@@ -26,7 +26,7 @@ imageMotionTargets.forEach((element, index) => {
   element.style.setProperty('--image-depth', `${0.42 + (index % 3) * 0.08}`);
 });
 const parallaxTargets = [...new Set([
-  ...document.querySelectorAll('.hero-video, .hero-grid, .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img'),
+  ...document.querySelectorAll('.hero-video, .hero-grid, .choice-media img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img'),
   ...imageMotionTargets,
 ])];
 const kineticTargets = document.querySelectorAll('.setup-choice, .tech-item, .control-row, .tripod-feature-card, .r3-component-card, .moza-kit-parts article, .accessories-preview article, .cockpit-feature, .community-panel');
