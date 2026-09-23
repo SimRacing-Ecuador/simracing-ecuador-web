@@ -35,6 +35,10 @@ foreach ($category in @('Volantes y pedales', 'Cockpits', 'Accesorios')) {
 foreach ($categoryLink in @('productos.html#volantes-pedales', 'productos.html#cockpits', 'productos.html#accesorios')) {
   if ($html -notmatch [regex]::Escape($categoryLink)) { throw "Missing home category link: $categoryLink" }
 }
+if ($html -notmatch [regex]::Escape('href="#setups"') -or $html -notmatch 'Ver productos') { throw 'Home product CTA must point to the starting-point section' }
+if ($html -notmatch [regex]::Escape('https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador')) { throw 'Home quote CTA must point to WhatsApp' }
+if ($html -match 'Explorar setups') { throw 'Home hero must use the quote CTA instead of Explore setups' }
+if ($html -notmatch 'Cotiza tu simulador') { throw 'Quote CTA label is missing' }
 if ($html -match 'Bundle MOZA R3 con base direct drive') { throw 'Home page must not feature MOZA R3 as a direct product card' }
 foreach ($hook in @('race-nav', 'event-band', 'about-section', 'choice-media')) {
   if ($html -notmatch ('class="[^"]*' + $hook)) { throw "Missing reference-inspired hook $hook" }
