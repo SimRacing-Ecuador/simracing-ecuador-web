@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js-ready');
+
 const menuToggle = document.querySelector('#menu-toggle');
 const siteNav = document.querySelector('#site-nav');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -16,8 +18,13 @@ const motionTargets = [
 ];
 
 const motionElements = new Set();
+const structuralMotionTargets = document.querySelectorAll('main > section > .shell > *, main article, main figure, main li, footer > .shell > *');
 const parallaxTargets = document.querySelectorAll('.hero-video, .hero-grid, .choice-media img, .support-art img, .flight-art img, .catalog-hero-art img, .product-art img, .tripod-hero-product img, .r3-bundle-visual img');
+const kineticTargets = document.querySelectorAll('.setup-choice, .tech-item, .control-row, .tripod-feature-card, .r3-component-card, .moza-kit-parts article, .accessories-preview article, .cockpit-feature, .community-panel');
+const visibleParallaxTargets = new Set(parallaxTargets);
+let parallaxVisibilityObserver = null;
 let lastScrollY = window.scrollY;
+let lastFrameY = window.scrollY;
 let scrollFrame = 0;
 
 motionTargets.forEach(([selector, type]) => {
@@ -26,6 +33,56 @@ motionTargets.forEach(([selector, type]) => {
     motionElements.add(element);
   });
 });
+
+structuralMotionTargets.forEach((element) => {
+  if (!motionElements.has(element)) element.dataset.motion = 'structure';
+  motionElements.add(element);
+});
+
+kineticTargets.forEach((element) => element.dataset.kinetic = 'true');
+
+function initParallaxVisibility() {
+  if (!parallaxTargets.length || !('IntersectionObserver' in window)) return;
+
+  parallaxVisibilityObserver?.disconnect();
+  visibleParallaxTargets.clear();
+  parallaxVisibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) visibleParallaxTargets.add(entry.target);
+      else visibleParallaxTargets.delete(entry.target);
+    });
+  }, { rootMargin: '240px 0px' });
+
+  parallaxTargets.forEach((element) => parallaxVisibilityObserver.observe(element));
+}
+
+function loadHeroVideo() {
+  if (!heroVideo || reduceMotionQuery.matches) return;
+
+  const source = heroVideo.querySelector('source[data-src]');
+  if (!source) {
+    heroVideo.play().catch(() => {});
+    return;
+  }
+
+  source.src = source.dataset.src;
+  source.removeAttribute('data-src');
+  heroVideo.load();
+  heroVideo.play().catch(() => {});
+}
+
+function scheduleHeroVideoLoad() {
+  if (!heroVideo || reduceMotionQuery.matches || heroVideo.dataset.loadScheduled === 'true') return;
+  heroVideo.dataset.loadScheduled = 'true';
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(loadHeroVideo, { timeout: 1800 });
+  } else {
+    window.setTimeout(loadHeroVideo, 1200);
+  }
+}
+
+if (!reduceMotionQuery.matches) initParallaxVisibility();
 
 function setMotionDelays() {
   let heroDelayIndex = 0;
@@ -43,14 +100,19 @@ function setMotionDelays() {
 
 function updateScrollEffects() {
   const currentScrollY = window.scrollY;
+  const scrollVelocity = Math.max(-24, Math.min(24, currentScrollY - lastFrameY));
   if (Math.abs(currentScrollY - lastScrollY) > 1) {
     document.documentElement.dataset.scrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
     lastScrollY = currentScrollY;
   }
+  lastFrameY = currentScrollY;
+  document.documentElement.style.setProperty('--scroll-velocity', `${scrollVelocity.toFixed(2)}px`);
+  document.documentElement.style.setProperty('--scroll-skew', `${(-scrollVelocity * 0.08).toFixed(2)}deg`);
+  document.documentElement.style.setProperty('--scroll-tilt', `${(scrollVelocity * 0.14).toFixed(2)}deg`);
 
   if (!reduceMotionQuery.matches) {
     const viewportCenter = window.innerHeight / 2;
-    parallaxTargets.forEach((element) => {
+    visibleParallaxTargets.forEach((element) => {
       const rect = element.getBoundingClientRect();
       const distance = (viewportCenter - (rect.top + rect.height / 2)) * 0.035;
       const offset = Math.max(-30, Math.min(30, distance));
@@ -76,6 +138,21 @@ function showMotionContent() {
   motionElements.forEach((element) => element.classList.add('is-visible'));
 }
 
+function toggleMotionVisibility(element, visible) {
+  element.classList.toggle('is-visible', visible);
+
+  if (visible) {
+    let parent = element.parentElement;
+    while (parent) {
+      if (motionElements.has(parent)) parent.classList.add('is-visible');
+      parent = parent.parentElement;
+    }
+    return;
+  }
+
+  element.querySelectorAll('[data-motion]').forEach((child) => child.classList.remove('is-visible'));
+}
+
 function initScrollMotion() {
   if (!motionElements.size || reduceMotionQuery.matches || !('IntersectionObserver' in window)) {
     showMotionContent();
@@ -88,7 +165,7 @@ function initScrollMotion() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      toggleMotionVisibility(entry.target, entry.isIntersecting);
     });
   }, { threshold: 0.12, rootMargin: '-8% 0px -8% 0px' });
 
@@ -131,8 +208,8 @@ mobileNavQuery.addEventListener?.('change', () => setMenu(false));
 
 function syncMotionPreference(event) {
   if (heroVideo) {
-    if (event.matches) {
-      heroVideo.pause();
+  if (event.matches) {
+    heroVideo.pause();
     } else {
       heroVideo.play().catch(() => {});
     }
@@ -141,9 +218,15 @@ function syncMotionPreference(event) {
   if (event.matches) {
     motionObserver?.disconnect();
     motionObserver = null;
+    document.documentElement.style.setProperty('--scroll-velocity', '0px');
+    document.documentElement.style.setProperty('--scroll-skew', '0deg');
+    document.documentElement.style.setProperty('--scroll-tilt', '0deg');
     parallaxTargets.forEach((element) => element.style.setProperty('--scroll-parallax', '0px'));
+    parallaxVisibilityObserver?.disconnect();
+    parallaxVisibilityObserver = null;
     showMotionContent();
   } else if (!motionObserver) {
+    initParallaxVisibility();
     requestScrollEffects();
     motionObserver = initScrollMotion();
   }
@@ -151,3 +234,4 @@ function syncMotionPreference(event) {
 
 syncMotionPreference(reduceMotionQuery);
 reduceMotionQuery.addEventListener?.('change', syncMotionPreference);
+scheduleHeroVideoLoad();
