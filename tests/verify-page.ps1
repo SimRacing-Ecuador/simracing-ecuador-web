@@ -118,6 +118,12 @@ if ($products -match 'LRS13-BS01') { throw 'Removed cockpit LRS13-BS01 is still 
 foreach ($catalogSection in @('id="cockpits"', 'id="volantes-pedales"', 'id="accesorios"')) {
   if ($products -notmatch [regex]::Escape($catalogSection)) { throw "Missing catalog category section: $catalogSection" }
 }
+if ($products -notmatch 'src="optimized/cockpit-silla-hero\.png"') { throw 'Catalog hero must feature the cockpit pro image' }
+if ($products -notmatch 'alt="Cockpit Pro plegable con silla para simulación de carreras"') { throw 'Catalog hero must describe the cockpit pro image' }
+if ($products -notmatch 'COCKPIT PRO / COMPLETO') { throw 'Catalog hero must identify the cockpit pro' }
+if ($products -match 'src="optimized/cover-ai\.png"') { throw 'Catalog hero must no longer feature the MOZA bundle image' }
+if ($products -notmatch 'href="#cockpits"[^>]*>Ver cockpits') { throw 'Catalog hero CTA must point to the cockpit section' }
+if ($css -notmatch '\.catalog-hero-layout[^}]*min-height: 720px') { throw 'Catalog cockpit hero must reserve room for its CTA' }
 foreach ($catalogPreview in @('Cockpit con silla', 'Simulador tipo trípode', 'Mods y pistas de madera', 'Logitech G29', 'MOZA R3', 'MOZA R5', 'MOZA R9 Kit', 'MOZA R12 Kit')) {
   if ($products -notmatch [regex]::Escape($catalogPreview)) { throw "Missing catalog preview: $catalogPreview" }
 }
