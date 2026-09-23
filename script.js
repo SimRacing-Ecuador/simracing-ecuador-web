@@ -229,6 +229,7 @@ function syncMotionPreference(event) {
     initParallaxVisibility();
     requestScrollEffects();
     motionObserver = initScrollMotion();
+    scheduleHeroVideoLoad();
   }
 }
 
