@@ -13,11 +13,17 @@ $r9 = Get-Content -Raw (Join-Path $root 'moza-r9-kit.html')
 $r12 = Get-Content -Raw (Join-Path $root 'moza-r12-kit.html')
 $css = Get-Content -Raw (Join-Path $root 'styles.css')
 $js = Get-Content -Raw (Join-Path $root 'script.js')
+$htmlPages = Get-ChildItem -Path $root -Filter '*.html' -File
+
+foreach ($page in $htmlPages) {
+  $pageMarkup = Get-Content -Raw $page.FullName
+  if ($pageMarkup -notmatch 'viewport-fit=cover') { throw "Missing safe-area viewport on $($page.Name)" }
+}
 
 foreach ($token in @('#00B8F2', '#FFD400', '#075A9E', '#ED1C24')) {
   if ($css -notmatch [regex]::Escape($token)) { throw "Missing brand token $token" }
 }
-foreach ($asset in @('optimized/cover.jpg', 'optimized/infografia soporte.jpg', 'optimized/simulador vuelo.jpg', '5dae82990e6d41dab0c886ad8da88529.mp4')) {
+foreach ($asset in @('optimized/cover-ai.png', 'optimized/infografia-soporte-ai.png', 'optimized/simulador-vuelo-ai.png', '5dae82990e6d41dab0c886ad8da88529.mp4')) {
   if ($html -notmatch [regex]::Escape($asset)) { throw "Asset is not referenced: $asset" }
 }
 foreach ($section in @('inicio', 'setups', 'productos', 'soporte', 'comunidad')) {
@@ -39,8 +45,20 @@ if ($js -notmatch 'menu-toggle') { throw 'Menu script hook is missing' }
 foreach ($motionHook in @('IntersectionObserver', 'dataset.motion', 'motion-ready', 'is-visible')) {
   if ($js -notmatch [regex]::Escape($motionHook)) { throw "Missing scroll motion hook in script: $motionHook" }
 }
+foreach ($cinematicHook in @('scrollDirection', 'requestAnimationFrame', 'scroll-parallax', 'hero')) {
+  if ($js -notmatch [regex]::Escape($cinematicHook)) { throw "Missing cinematic motion hook in script: $cinematicHook" }
+}
 foreach ($motionStyle in @('motion-ready', 'prefers-reduced-motion', 'data-motion')) {
   if ($css -notmatch [regex]::Escape($motionStyle)) { throw "Missing scroll motion style: $motionStyle" }
+}
+foreach ($responsiveStyle in @('overflow-x: clip', 'env(safe-area-inset-left', 'env(safe-area-inset-right', 'min-width: 0', 'pointer: coarse', 'visibility: hidden')) {
+  if ($css -notmatch [regex]::Escape($responsiveStyle)) { throw "Missing responsive safeguard: $responsiveStyle" }
+}
+foreach ($responsiveHook in @('aria-hidden', 'matchMedia.*max-width: 680px')) {
+  if ($js -notmatch $responsiveHook) { throw "Missing responsive navigation hook: $responsiveHook" }
+}
+foreach ($cinematicStyle in @('clip-path', '--scroll-parallax', 'data-scroll-direction', 'data-motion="hero"')) {
+  if ($css -notmatch [regex]::Escape($cinematicStyle)) { throw "Missing cinematic motion style: $cinematicStyle" }
 }
 if ($html -notmatch 'href="productos.html"') { throw 'Main navigation must link to the products page' }
 foreach ($product in @('Simulador tipo trípode', 'Logitech G29', 'MOZA R3', 'MOZA R5', 'MOZA R9', 'MOZA R12')) {
@@ -55,7 +73,7 @@ foreach ($catalogPreview in @('Cockpit con silla', 'Simulador tipo trípode', 'M
 }
 if ($products -notmatch 'href="simulador-tripode.html"') { throw 'Cockpit must link to its product page' }
 if ($products -notmatch 'control-row-link" href="moza-r3.html"') { throw 'MOZA R3 must open its own detail page from the catalog row' }
-foreach ($detail in @('youtube.com/embed/Qryc6QBhAPc', 'Placa para Volante Ajustable', 'Diseño Plegable', '522x831x815mm', '20kg (44lbs)', 'Marco Plegable', 'optimized/tripode-pies.png', 'optimized/tripode-cockpit.png', 'optimized/tripode-volante.jpg', 'optimized/tripode-plegado.jpg', 'optimized/tripode-ajuste.png')) {
+foreach ($detail in @('youtube.com/embed/Qryc6QBhAPc', 'Placa para Volante Ajustable', 'Diseño Plegable', '522x831x815mm', '20kg (44lbs)', 'Marco Plegable', 'optimized/tripode-pies-ai.png', 'optimized/tripode-cockpit-ai.png', 'optimized/tripode-volante.jpg', 'optimized/tripode-plegado-ai.png', 'optimized/tripode-ajuste-ai.png')) {
   if ($tripod -notmatch [regex]::Escape($detail)) { throw "Missing tripod product detail: $detail" }
 }
 foreach ($link in @('moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r12-kit.html')) {
@@ -64,7 +82,7 @@ foreach ($link in @('moza-r3.html', 'moza-r5.html', 'moza-r9-kit.html', 'moza-r1
 foreach ($detail in @('MOZA R3', '$580', '3,9 Nm', 'Codificador de 15 bits', 'Direct Drive')) {
   if ($r3 -notmatch [regex]::Escape($detail)) { throw "Missing R3 technical detail: $detail" }
 }
-foreach ($detail in @('Compatible con PC y Xbox', 'Pedales SR-P Lite', '22 botones', '10 LED RGB de alto brillo', '1000 Hz', 'Abrazadera de mesa', 'optimized/r3-bundle.jpg', 'optimized/r3-base.jpg', 'optimized/r3-wheel.jpg', 'optimized/r3-pedals.jpg')) {
+foreach ($detail in @('Compatible con PC y Xbox', 'Pedales SR-P Lite', '22 botones', '10 LED RGB de alto brillo', '1000 Hz', 'Abrazadera de mesa', 'optimized/r3-bundle-ai.png', 'optimized/r3-base-ai.png', 'optimized/r3-wheel-ai.png', 'optimized/r3-pedals-ai.png')) {
   if ($r3 -notmatch [regex]::Escape($detail)) { throw "Missing expanded R3 product detail: $detail" }
 }
 foreach ($game in @('Juegos compatibles', 'Assetto Corsa', 'iRacing', 'Project CARS 3', 'Forza Horizon 5', 'Euro Truck Simulator 2', 'BeamNG.drive', 'r3-game-list')) {
