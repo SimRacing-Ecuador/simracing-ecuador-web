@@ -2,6 +2,7 @@ document.documentElement.classList.add('js-ready');
 
 const menuToggle = document.querySelector('#menu-toggle');
 const siteNav = document.querySelector('#site-nav');
+const siteHeader = document.querySelector('.site-header');
 const navLinks = document.querySelectorAll('.nav-link');
 const heroVideo = document.querySelector('.hero-video');
 const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -115,6 +116,9 @@ function updateScrollEffects() {
     lastScrollY = currentScrollY;
   }
   lastFrameY = currentScrollY;
+  siteHeader?.classList.toggle('is-scrolled', currentScrollY > 28);
+  const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+  document.documentElement.style.setProperty('--scroll-progress', `${pageHeight > 0 ? (currentScrollY / pageHeight) * 100 : 0}%`);
   document.documentElement.style.setProperty('--scroll-velocity', `${scrollVelocity.toFixed(2)}px`);
   document.documentElement.style.setProperty('--scroll-skew', `${(-scrollVelocity * 0.08).toFixed(2)}deg`);
   document.documentElement.style.setProperty('--scroll-tilt', `${(scrollVelocity * 0.14).toFixed(2)}deg`);
@@ -148,18 +152,13 @@ function showMotionContent() {
 }
 
 function toggleMotionVisibility(element, visible) {
-  element.classList.toggle('is-visible', visible);
-
-  if (visible) {
-    let parent = element.parentElement;
-    while (parent) {
-      if (motionElements.has(parent)) parent.classList.add('is-visible');
-      parent = parent.parentElement;
-    }
-    return;
+  if (!visible) return;
+  element.classList.add('is-visible');
+  let parent = element.parentElement;
+  while (parent) {
+    if (motionElements.has(parent)) parent.classList.add('is-visible');
+    parent = parent.parentElement;
   }
-
-  element.querySelectorAll('[data-motion]').forEach((child) => child.classList.remove('is-visible'));
 }
 
 function initScrollMotion() {
