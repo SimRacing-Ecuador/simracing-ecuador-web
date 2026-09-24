@@ -61,23 +61,29 @@ foreach ($hook in @('race-nav', 'event-band', 'about-section', 'choice-media')) 
 if ($html -notmatch 'aria-expanded') { throw 'Mobile menu must expose aria-expanded' }
 if ($html -notmatch 'alt=') { throw 'Images must have alt text' }
 if ($js -notmatch 'menu-toggle') { throw 'Menu script hook is missing' }
-foreach ($motionHook in @('IntersectionObserver', 'dataset.motion', 'motion-ready', 'is-visible')) {
+foreach ($motionHook in @('IntersectionObserver', 'dataset.reveal', 'motion-ready', 'is-in', 'splitWords', 'checkPendingMedia')) {
   if ($js -notmatch [regex]::Escape($motionHook)) { throw "Missing scroll motion hook in script: $motionHook" }
 }
-foreach ($cinematicHook in @('scrollDirection', 'requestAnimationFrame', 'scroll-parallax', 'hero')) {
+foreach ($cinematicHook in @('scrollDirection', 'requestAnimationFrame', 'velocity', 'homeHero', '--pc', '--px', '--pv')) {
   if ($js -notmatch [regex]::Escape($cinematicHook)) { throw "Missing cinematic motion hook in script: $cinematicHook" }
 }
-foreach ($coverageHook in @('main > section > .shell > *', 'main article', 'main figure', 'main li', 'toggleMotionVisibility', 'scroll-velocity', 'dataset.kinetic')) {
-  if ($js -notmatch [regex]::Escape($coverageHook)) { throw "Missing motion coverage hook: $coverageHook" }
+foreach ($kineticHook in @('buildMarquees', 'dataset.tilt', 'card-glare', '--mgx', 'playIntro', 'sessionStorage', 'footer-wordmark')) {
+  if ($js -notmatch [regex]::Escape($kineticHook)) { throw "Missing kinetic motion hook in script: $kineticHook" }
 }
-foreach ($imageMotionHook in @('imageMotionTargets', 'dataset.scrollImage', "querySelectorAll('img')", 'image-depth')) {
+foreach ($imageMotionHook in @('dataset.scrollImg', 'scrubSelector', 'visibleScrub')) {
   if ($js -notmatch [regex]::Escape($imageMotionHook)) { throw "Missing image motion hook: $imageMotionHook" }
 }
-foreach ($motionStyle in @('motion-ready', 'prefers-reduced-motion', 'data-motion')) {
+foreach ($motionStyle in @('motion-ready', 'prefers-reduced-motion', 'data-reveal', 'split-inner', 'clip-path', '@view-transition')) {
   if ($css -notmatch [regex]::Escape($motionStyle)) { throw "Missing scroll motion style: $motionStyle" }
 }
-foreach ($imageMotionStyle in @('img[data-scroll-image]', '--image-depth', 'will-change: transform')) {
+foreach ($imageMotionStyle in @('[data-scroll-img]', 'var(--pc', 'var(--px', 'will-change: translate')) {
   if ($css -notmatch [regex]::Escape($imageMotionStyle)) { throw "Missing image motion style: $imageMotionStyle" }
+}
+foreach ($kineticStyle in @('intro-lights', 'marquee-track', 'bg-word', 'data-tilt', 'perspective', 'hero-speed', 'scroll-progress')) {
+  if ($css -notmatch [regex]::Escape($kineticStyle)) { throw "Missing kinetic motion style: $kineticStyle" }
+}
+foreach ($kineticMarkup in @('class="marquee', 'class="hero-speed"', 'class="bg-word"')) {
+  if ($html -notmatch [regex]::Escape($kineticMarkup)) { throw "Missing kinetic home markup: $kineticMarkup" }
 }
 foreach ($responsiveStyle in @('overflow-x: clip', 'env(safe-area-inset-left', 'env(safe-area-inset-right', 'min-width: 0', 'pointer: coarse', 'visibility: hidden')) {
   if ($css -notmatch [regex]::Escape($responsiveStyle)) { throw "Missing responsive safeguard: $responsiveStyle" }
@@ -100,19 +106,10 @@ foreach ($page in $htmlPages) {
 $homeVideo = [regex]::Match($html, '<video\b[^>]*>[\s\S]*?</video>').Value
 if ($homeVideo -notmatch 'preload="none"') { throw 'Hero video must start poster-first with preload="none"' }
 if ($homeVideo -notmatch 'data-src="5dae82990e6d41dab0c886ad8da88529\.mp4"') { throw 'Hero video source must be deferred with data-src' }
-foreach ($asyncHook in @('requestIdleCallback', 'loadHeroVideo', 'parallaxVisibilityObserver', 'visibleParallaxTargets')) {
+foreach ($asyncHook in @('requestIdleCallback', 'loadHeroVideo', 'scrubObserver', 'visibleScrub')) {
   if ($js -notmatch [regex]::Escape($asyncHook)) { throw "Missing async performance hook: $asyncHook" }
 }
 if ($js -notmatch '\.load\(\)') { throw 'Hero video loader must call video.load() after assigning the deferred source' }
-foreach ($cinematicStyle in @('clip-path', '--scroll-parallax', 'data-scroll-direction', 'data-motion="hero"')) {
-  if ($css -notmatch [regex]::Escape($cinematicStyle)) { throw "Missing cinematic motion style: $cinematicStyle" }
-}
-foreach ($longMotionStyle in @('--motion-y: 72px', '--motion-x: 78px', 'transition-duration: 1120ms', 'hero-enter 1100ms', 'calc(var(--motion-velocity) * .26)')) {
-  if ($css -notmatch [regex]::Escape($longMotionStyle)) { throw "Missing extended motion style: $longMotionStyle" }
-}
-foreach ($kineticStyle in @('data-kinetic', 'scroll-velocity', 'perspective', 'rotateZ')) {
-  if ($css -notmatch [regex]::Escape($kineticStyle)) { throw "Missing kinetic motion style: $kineticStyle" }
-}
 if ($html -notmatch 'href="productos.html"') { throw 'Main navigation must link to the products page' }
 if ($html -notmatch 'href="cockpit-con-silla\.html"') { throw 'Home page must link directly to the chair cockpit product page' }
 foreach ($product in @('Simulador tipo trípode', 'Logitech G29', 'MOZA R3', 'MOZA R5', 'MOZA R9', 'MOZA R12')) {
