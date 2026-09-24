@@ -82,6 +82,10 @@ foreach ($imageMotionStyle in @('img[data-scroll-image]', '--image-depth', 'will
 foreach ($responsiveStyle in @('overflow-x: clip', 'env(safe-area-inset-left', 'env(safe-area-inset-right', 'min-width: 0', 'pointer: coarse', 'visibility: hidden')) {
   if ($css -notmatch [regex]::Escape($responsiveStyle)) { throw "Missing responsive safeguard: $responsiveStyle" }
 }
+foreach ($responsiveSystem in @('Responsive system', 'max-width: 360px', 'max-height: 520px', 'min-width: 1900px', 'hover: none', 'text-size-adjust')) {
+  if ($css -notmatch [regex]::Escape($responsiveSystem)) { throw "Missing responsive system rule: $responsiveSystem" }
+}
+if ($css -match 'min-width: 5[0-9]{2}px;') { throw 'Spec tables must stack on phones instead of forcing horizontal scroll' }
 foreach ($responsiveHook in @('aria-hidden', 'matchMedia.*max-width: 680px', 'js-ready')) {
   if ($js -notmatch $responsiveHook) { throw "Missing responsive navigation hook: $responsiveHook" }
 }
