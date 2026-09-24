@@ -15,6 +15,13 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (from, to, amount) => from + (to - from) * amount;
 const motionAllowed = () => !reduceMotionQuery.matches;
 
+function createElement(tag, className = '', text = '') {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text) element.textContent = text;
+  return element;
+}
+
 /* ---------------------------------------------------------------------------
    Navigation
 --------------------------------------------------------------------------- */
@@ -80,12 +87,17 @@ function playIntro() {
   }
   if (seen) return;
 
-  const intro = document.createElement('div');
-  intro.className = 'intro-lights';
+  const intro = createElement('div', 'intro-lights');
   intro.setAttribute('aria-hidden', 'true');
-  intro.innerHTML = `
-    <div class="intro-rig">${'<span class="intro-light"><i></i><i></i></span>'.repeat(5)}</div>
-    <p class="intro-caption"><strong>Sim Racing Ecuador</strong><span>Lights out · Tu mejor experiencia</span></p>`;
+  const rig = createElement('div', 'intro-rig');
+  for (let index = 0; index < 5; index += 1) {
+    const light = createElement('span', 'intro-light');
+    light.append(createElement('i'), createElement('i'));
+    rig.append(light);
+  }
+  const caption = createElement('p', 'intro-caption');
+  caption.append(createElement('strong', '', 'Sim Racing Ecuador'), createElement('span', '', 'Lights out · Tu mejor experiencia'));
+  intro.append(rig, caption);
 
   root.classList.add('intro-playing');
   document.body.append(intro);
@@ -245,27 +257,24 @@ function initReveals() {
    Decorative injections: progress bar, card glare, marquee loops, footer mark
 --------------------------------------------------------------------------- */
 
-const progressBar = document.createElement('div');
-progressBar.className = 'scroll-progress';
+const progressBar = createElement('div', 'scroll-progress');
+const progressFill = createElement('span');
 progressBar.setAttribute('aria-hidden', 'true');
-progressBar.innerHTML = '<span></span>';
+progressBar.append(progressFill);
 document.body.prepend(progressBar);
-const progressFill = progressBar.firstElementChild;
 
 const tiltSelector = '.setup-choice, .tech-item, .kit-offer, .tripod-feature-card, .chair-feature-card, .r3-component-card, .moza-kit-parts article, .accessories-preview article, .about-stats';
 const tiltCards = [...document.querySelectorAll(tiltSelector)];
 tiltCards.forEach((card) => {
   card.dataset.tilt = 'true';
-  const glare = document.createElement('span');
-  glare.className = 'card-glare';
+  const glare = createElement('span', 'card-glare');
   glare.setAttribute('aria-hidden', 'true');
   card.append(glare);
 });
 
 const footer = document.querySelector('.site-footer');
 if (footer && !footer.querySelector('.footer-wordmark')) {
-  const mark = document.createElement('div');
-  mark.className = 'footer-wordmark';
+  const mark = createElement('div', 'footer-wordmark');
   mark.setAttribute('aria-hidden', 'true');
   [...'SIM RACING'].forEach((letter, index) => {
     const span = document.createElement('span');
@@ -276,28 +285,32 @@ if (footer && !footer.querySelector('.footer-wordmark')) {
   footer.append(mark);
 }
 
-const marquees = [...document.querySelectorAll('.marquee')].map((element) => ({
-  element,
-  track: element.querySelector('.marquee-track'),
-  direction: element.dataset.direction === 'right' ? 1 : -1,
-  x: 0,
-  half: 0,
-  visible: false,
-}));
+const marquees = [...document.querySelectorAll('.marquee')].map((element) => {
+  const track = element.querySelector('.marquee-track');
+  return {
+    element,
+    track,
+    source: track ? [...track.children].map((child) => child.cloneNode(true)) : [],
+    direction: element.dataset.direction === 'right' ? 1 : -1,
+    x: 0,
+    half: 0,
+    visible: false,
+  };
+});
 
 function buildMarquees() {
   marquees.forEach((marquee) => {
-    const { element, track } = marquee;
-    if (!track) return;
-    if (!track.dataset.source) track.dataset.source = track.innerHTML;
-    track.innerHTML = track.dataset.source;
+    const { element, track, source } = marquee;
+    if (!track || !source.length) return;
+    const cloneSource = () => source.map((node) => node.cloneNode(true));
+    track.replaceChildren(...cloneSource());
     let guard = 0;
     while (track.scrollWidth < element.clientWidth * 1.1 && guard < 12) {
-      track.insertAdjacentHTML('beforeend', track.dataset.source);
+      track.append(...cloneSource());
       guard += 1;
     }
     marquee.half = track.scrollWidth;
-    track.insertAdjacentHTML('beforeend', track.innerHTML);
+    track.append(...[...track.children].map((node) => node.cloneNode(true)));
     marquee.x = marquee.direction > 0 ? -marquee.half : 0;
   });
 }
