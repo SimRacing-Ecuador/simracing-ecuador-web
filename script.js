@@ -36,6 +36,70 @@ let parallaxVisibilityObserver = null;
 let lastScrollY = window.scrollY;
 let lastFrameY = window.scrollY;
 let scrollFrame = 0;
+let pageScrollRange = 0;
+
+const deferredBackgroundDefinitions = [
+  ['.about-stats', 'optimized/setup-garage-bg.png'],
+  ['.tech-item', 'optimized/telemetry-tech-bg.png'],
+  ['.community-panel', 'optimized/pitlane-community-bg.png'],
+  ['.moza-kit-parts article', 'optimized/kit-components-bg.png'],
+  ['.choice-media-accessories', 'optimized/accessories-track-bg.png'],
+  ['.accessories-card-mods', 'optimized/accessories-mods-bg.png'],
+  ['.accessories-card-track', 'optimized/accessories-track-bg.png'],
+  ['.accessories-card-next', 'optimized/accessories-next-bg.png'],
+];
+const deferredBackgroundTargets = [];
+const deferredBackgroundPromises = new Map();
+
+deferredBackgroundDefinitions.forEach(([selector, source]) => {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.dataset.deferredBackground = source;
+    deferredBackgroundTargets.push(element);
+  });
+});
+
+function getDeferredBackground(source) {
+  if (deferredBackgroundPromises.has(source)) return deferredBackgroundPromises.get(source);
+
+  const image = new Image();
+  image.decoding = 'async';
+  image.src = source;
+  const promise = typeof image.decode === 'function'
+    ? image.decode().catch(() => undefined)
+    : new Promise((resolve) => image.addEventListener('load', resolve, { once: true }));
+  deferredBackgroundPromises.set(source, promise);
+  return promise;
+}
+
+function loadDeferredBackground(element) {
+  const source = element.dataset.deferredBackground;
+  if (!source || element.dataset.backgroundLoaded === 'true') return;
+
+  element.dataset.backgroundLoaded = 'loading';
+  getDeferredBackground(source).then(() => {
+    element.style.setProperty('--deferred-bg-image', `url("${source}")`);
+    element.dataset.backgroundLoaded = 'true';
+  });
+}
+
+function initDeferredBackgrounds() {
+  if (!deferredBackgroundTargets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    deferredBackgroundTargets.forEach(loadDeferredBackground);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      loadDeferredBackground(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '400px 0px' });
+
+  deferredBackgroundTargets.forEach((element) => observer.observe(element));
+}
 
 motionTargets.forEach(([selector, type]) => {
   document.querySelectorAll(selector).forEach((element) => {
@@ -111,27 +175,40 @@ function setMotionDelays() {
 function updateScrollEffects() {
   const currentScrollY = window.scrollY;
   const scrollVelocity = Math.max(-32, Math.min(32, currentScrollY - lastFrameY));
-  if (Math.abs(currentScrollY - lastScrollY) > 1) {
-    document.documentElement.dataset.scrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
-    lastScrollY = currentScrollY;
-  }
-  lastFrameY = currentScrollY;
-  siteHeader?.classList.toggle('is-scrolled', currentScrollY > 28);
-  const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-  document.documentElement.style.setProperty('--scroll-progress', `${pageHeight > 0 ? (currentScrollY / pageHeight) * 100 : 0}%`);
-  document.documentElement.style.setProperty('--scroll-velocity', `${scrollVelocity.toFixed(2)}px`);
-  document.documentElement.style.setProperty('--scroll-skew', `${(-scrollVelocity * 0.08).toFixed(2)}deg`);
-  document.documentElement.style.setProperty('--scroll-tilt', `${(scrollVelocity * 0.14).toFixed(2)}deg`);
+  const nextScrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up';
+  const nextHeaderScrolled = currentScrollY > 28;
+  const progress = pageScrollRange > 0 ? (currentScrollY / pageScrollRange) * 100 : 0;
+  const parallaxUpdates = [];
 
+  // Read all geometry before changing styles so scrolling does not force a layout
+  // between each measurement and paint.
   if (!reduceMotionQuery.matches) {
     const viewportCenter = window.innerHeight / 2;
     visibleParallaxTargets.forEach((element) => {
       const rect = element.getBoundingClientRect();
       const distance = (viewportCenter - (rect.top + rect.height / 2)) * 0.055;
       const offset = Math.max(-52, Math.min(52, distance));
-      element.style.setProperty('--scroll-parallax', `${offset.toFixed(2)}px`);
+      parallaxUpdates.push([element, `${offset.toFixed(2)}px`]);
     });
   }
+
+  if (Math.abs(currentScrollY - lastScrollY) > 1) {
+    if (document.documentElement.dataset.scrollDirection !== nextScrollDirection) {
+      document.documentElement.dataset.scrollDirection = nextScrollDirection;
+    }
+    lastScrollY = currentScrollY;
+  }
+  lastFrameY = currentScrollY;
+  const headerChanged = siteHeader && siteHeader.classList.contains('is-scrolled') !== nextHeaderScrolled;
+  if (headerChanged) siteHeader.classList.toggle('is-scrolled', nextHeaderScrolled);
+  document.documentElement.style.setProperty('--scroll-progress', `${progress}%`);
+  document.documentElement.style.setProperty('--scroll-velocity', `${scrollVelocity.toFixed(2)}px`);
+  document.documentElement.style.setProperty('--scroll-skew', `${(-scrollVelocity * 0.08).toFixed(2)}deg`);
+  document.documentElement.style.setProperty('--scroll-tilt', `${(scrollVelocity * 0.14).toFixed(2)}deg`);
+
+  parallaxUpdates.forEach(([element, offset]) => element.style.setProperty('--scroll-parallax', offset));
+
+  if (headerChanged) pageScrollRange = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
 
   scrollFrame = 0;
 }
@@ -143,20 +220,35 @@ function requestScrollEffects() {
 
 document.documentElement.dataset.scrollDirection = 'down';
 window.addEventListener('scroll', requestScrollEffects, { passive: true });
-window.addEventListener('resize', requestScrollEffects);
+function refreshScrollMetrics() {
+  pageScrollRange = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  requestScrollEffects();
+}
+
+window.addEventListener('resize', refreshScrollMetrics, { passive: true });
+window.addEventListener('orientationchange', refreshScrollMetrics, { passive: true });
+refreshScrollMetrics();
 requestScrollEffects();
 
 function showMotionContent() {
   document.documentElement.classList.remove('motion-ready');
-  motionElements.forEach((element) => element.classList.add('is-visible'));
+  motionElements.forEach((element) => {
+    element.classList.remove('motion-pending');
+    element.classList.add('is-visible');
+  });
+}
+
+function revealMotionElement(element) {
+  element.classList.add('motion-pending', 'is-visible');
+  window.setTimeout(() => element.classList.remove('motion-pending'), 1400);
 }
 
 function toggleMotionVisibility(element, visible) {
   if (!visible) return;
-  element.classList.add('is-visible');
+  revealMotionElement(element);
   let parent = element.parentElement;
   while (parent) {
-    if (motionElements.has(parent)) parent.classList.add('is-visible');
+    if (motionElements.has(parent)) revealMotionElement(parent);
     parent = parent.parentElement;
   }
 }
@@ -173,7 +265,9 @@ function initScrollMotion() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      toggleMotionVisibility(entry.target, entry.isIntersecting);
+      if (!entry.isIntersecting) return;
+      toggleMotionVisibility(entry.target, true);
+      observer.unobserve(entry.target);
     });
   }, { threshold: 0.12, rootMargin: '-8% 0px -8% 0px' });
 
@@ -183,14 +277,15 @@ function initScrollMotion() {
     const hero = document.querySelector('.hero');
     const heroIsVisible = hero && hero.getBoundingClientRect().bottom > 0 && hero.getBoundingClientRect().top < window.innerHeight;
     if (!heroIsVisible) return;
-    hero.classList.add('is-visible');
-    hero.querySelectorAll('[data-motion="hero"]').forEach((element) => element.classList.add('is-visible'));
+    revealMotionElement(hero);
+    hero.querySelectorAll('[data-motion="hero"]').forEach(revealMotionElement);
   });
 
   return observer;
 }
 
 let motionObserver = initScrollMotion();
+initDeferredBackgrounds();
 
 function setMenu(open) {
   if (!menuToggle || !siteNav) return;
