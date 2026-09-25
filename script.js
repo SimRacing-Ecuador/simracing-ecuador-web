@@ -15,6 +15,73 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (from, to, amount) => from + (to - from) * amount;
 const motionAllowed = () => !reduceMotionQuery.matches;
 
+/* ---------------------------------------------------------------------------
+   Deferred section backgrounds: keep below-fold artwork out of first paint
+--------------------------------------------------------------------------- */
+
+const deferredBackgroundDefinitions = [
+  ['.about-stats', 'optimized/setup-garage-bg.png'],
+  ['.tech-item', 'optimized/telemetry-tech-bg.png'],
+  ['.community-panel', 'optimized/pitlane-community-bg.png'],
+  ['.moza-kit-parts article', 'optimized/kit-components-bg.png'],
+  ['.choice-media-accessories', 'optimized/accessories-track-bg.png'],
+  ['.accessories-card-mods', 'optimized/accessories-mods-bg.png'],
+  ['.accessories-card-track', 'optimized/accessories-track-bg.png'],
+  ['.accessories-card-next', 'optimized/accessories-next-bg.png'],
+];
+const deferredBackgroundTargets = [];
+const deferredBackgroundPromises = new Map();
+
+deferredBackgroundDefinitions.forEach(([selector, source]) => {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.dataset.deferredBackground = source;
+    deferredBackgroundTargets.push(element);
+  });
+});
+
+function getDeferredBackground(source) {
+  if (deferredBackgroundPromises.has(source)) return deferredBackgroundPromises.get(source);
+
+  const image = new Image();
+  image.decoding = 'async';
+  image.src = source;
+  const promise = typeof image.decode === 'function'
+    ? image.decode().catch(() => undefined)
+    : new Promise((resolve) => image.addEventListener('load', resolve, { once: true }));
+  deferredBackgroundPromises.set(source, promise);
+  return promise;
+}
+
+function loadDeferredBackground(element) {
+  const source = element.dataset.deferredBackground;
+  if (!source || element.dataset.backgroundLoaded === 'true') return;
+
+  element.dataset.backgroundLoaded = 'loading';
+  getDeferredBackground(source).then(() => {
+    element.style.setProperty('--deferred-bg-image', `url("${source}")`);
+    element.dataset.backgroundLoaded = 'true';
+  });
+}
+
+function initDeferredBackgrounds() {
+  if (!deferredBackgroundTargets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    deferredBackgroundTargets.forEach(loadDeferredBackground);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      loadDeferredBackground(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '400px 0px' });
+
+  deferredBackgroundTargets.forEach((element) => observer.observe(element));
+}
+
 function createElement(tag, className = '', text = '') {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -381,11 +448,15 @@ let lastDirectionY = window.scrollY;
 let scrollDirection = 1;
 let velocity = 0;
 let lastScrollEvent = 0;
+let maxScrollRange = 1;
 const heroPointer = { x: 0, y: 0, tx: 0, ty: 0 };
 
+function refreshScrollRange() {
+  maxScrollRange = Math.max(1, root.scrollHeight - window.innerHeight);
+}
+
 function updateChrome(scrollY) {
-  const maxScroll = Math.max(1, root.scrollHeight - window.innerHeight);
-  progressFill.style.transform = `scaleX(${clamp(scrollY / maxScroll, 0, 1).toFixed(4)})`;
+  progressFill.style.transform = `scaleX(${clamp(scrollY / maxScrollRange, 0, 1).toFixed(4)})`;
 
   if (!siteHeader) return;
   siteHeader.classList.toggle('is-stuck', scrollY > 120);
@@ -470,6 +541,7 @@ window.addEventListener('resize', () => {
   window.clearTimeout(resizeTimer);
   resizeTimer = window.setTimeout(() => {
     buildMarquees();
+    refreshScrollRange();
     checkPendingMedia();
     requestTick();
   }, 150);
@@ -570,7 +642,9 @@ function disableMotion() {
 splitHeadings.forEach(splitWords);
 prepareReveals();
 buildMarquees();
+refreshScrollRange();
 bindPointerEffects();
+initDeferredBackgrounds();
 
 if (motionAllowed() && 'IntersectionObserver' in window) {
   playIntro();
