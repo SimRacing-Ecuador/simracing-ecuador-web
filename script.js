@@ -4,7 +4,7 @@ root.classList.add('js-ready');
 const menuToggle = document.querySelector('#menu-toggle');
 const siteNav = document.querySelector('#site-nav');
 const siteHeader = document.querySelector('.site-header');
-const navLinks = document.querySelectorAll('.nav-link');
+const navLinks = document.querySelectorAll('#site-nav a');
 const heroVideo = document.querySelector('.hero-video');
 const homeHero = document.querySelector('.hero');
 const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
