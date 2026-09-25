@@ -162,9 +162,7 @@ function playIntro() {
     light.append(createElement('i'), createElement('i'));
     rig.append(light);
   }
-  const caption = createElement('p', 'intro-caption');
-  caption.append(createElement('strong', '', 'Sim Racing Ecuador'), createElement('span', '', 'Lights out · Tu mejor experiencia'));
-  intro.append(rig, caption);
+  intro.append(rig);
 
   root.classList.add('intro-playing');
   document.body.append(intro);
@@ -240,17 +238,17 @@ function splitWords(element) {
 
 const revealGroups = [
   ['media', '.product-art, .flight-art, .catalog-hero-art, .cockpit-visual, .tripod-hero-product, .chair-hero-product, .r3-bundle-visual, .moza-power, .tripod-video-frame, .chair-gallery-grid figure, .chair-dimensions figure, .r3-game-list'],
-  ['item', '.setup-choice, .tech-item, .about-stats > div, .event-metrics > span, .control-row, .cockpit-feature, .kit-offer, .tripod-feature-card, .chair-feature-card, .r3-component-card, .moza-kit-parts article, .accessories-preview article, .r3-spec-block, .catalog-art-list span'],
+  ['item', '.setup-choice, .tech-item, .about-stats > div, .control-row, .cockpit-feature, .kit-offer, .tripod-feature-card, .chair-feature-card, .r3-component-card, .moza-kit-parts article, .accessories-preview article, .r3-spec-block'],
   ['row', 'main tbody tr, .r3-game-columns li, .spec-list li'],
   ['up', [
     '.section-heading p', '.catalog-heading p', '.kit-intro p', '.section-tag', '.lead-copy', '.about-copy .text-link',
     '.product-copy-actions', '.flight-copy p', '.flight-copy .text-link', '.community-copy p', '.community-copy .button',
-    '.community-sequence', '.community-meta', '.catalog-route', '.catalog-hero-copy > p', '.catalog-jump', '.catalog-close p',
+    '.community-sequence', '.catalog-route', '.catalog-hero-copy > p', '.catalog-jump', '.catalog-close p',
     '.catalog-close a', '.catalog-hero-index', '.product-section-heading .product-code', '.product-code:not(.control-row .product-code):not(.cockpit-feature .product-code):not(article .product-code)',
     '.tripod-hero-copy > :not(h1)', '.chair-hero-copy > :not(h1)', '.r3-hero-copy > :not(h1)', '.moza-hero-grid > div:first-child > :not(h1)',
     '.tripod-intro-grid > p', '.chair-intro-grid > p', '.r3-intro-grid > div', '.moza-spec-grid > div > p', '.moza-kit-heading > p',
     '.tripod-specs-title > p', '.chair-specs-title > p', '.r3-spec-heading > p', '.r3-compatibility p', '.moza-close .button', '.tripod-close .button',
-    '.chair-close .button', '.tripod-compatibility', '.chair-compatibility', '.chair-dimensions p', '.event-label', '.event-action',
+    '.chair-close .button', '.tripod-compatibility', '.chair-compatibility', '.chair-dimensions p',
     '.footer-grid > *', '.footer-bottom',
   ].join(', ')],
 ];
@@ -321,7 +319,7 @@ function initReveals() {
 }
 
 /* ---------------------------------------------------------------------------
-   Decorative injections: progress bar, card glare, marquee loops, footer mark
+   Decorative injections: progress bar and card glare
 --------------------------------------------------------------------------- */
 
 const progressBar = createElement('div', 'scroll-progress');
@@ -338,49 +336,6 @@ tiltCards.forEach((card) => {
   glare.setAttribute('aria-hidden', 'true');
   card.append(glare);
 });
-
-const footer = document.querySelector('.site-footer');
-if (footer && !footer.querySelector('.footer-wordmark')) {
-  const mark = createElement('div', 'footer-wordmark');
-  mark.setAttribute('aria-hidden', 'true');
-  [...'SIM RACING'].forEach((letter, index) => {
-    const span = document.createElement('span');
-    span.textContent = letter === ' ' ? ' ' : letter;
-    span.style.setProperty('--li', String(index));
-    mark.append(span);
-  });
-  footer.append(mark);
-}
-
-const marquees = [...document.querySelectorAll('.marquee')].map((element) => {
-  const track = element.querySelector('.marquee-track');
-  return {
-    element,
-    track,
-    source: track ? [...track.children].map((child) => child.cloneNode(true)) : [],
-    direction: element.dataset.direction === 'right' ? 1 : -1,
-    x: 0,
-    half: 0,
-    visible: false,
-  };
-});
-
-function buildMarquees() {
-  marquees.forEach((marquee) => {
-    const { element, track, source } = marquee;
-    if (!track || !source.length) return;
-    const cloneSource = () => source.map((node) => node.cloneNode(true));
-    track.replaceChildren(...cloneSource());
-    let guard = 0;
-    while (track.scrollWidth < element.clientWidth * 1.1 && guard < 12) {
-      track.append(...cloneSource());
-      guard += 1;
-    }
-    marquee.half = track.scrollWidth;
-    track.append(...[...track.children].map((node) => node.cloneNode(true)));
-    marquee.x = marquee.direction > 0 ? -marquee.half : 0;
-  });
-}
 
 /* ---------------------------------------------------------------------------
    Scroll engine: per-element progress variables + velocity
@@ -431,14 +386,6 @@ function initScrubVisibility() {
   }, { rootMargin: '25% 0px' });
   scrubElements.forEach((element) => scrubObserver.observe(element));
 
-  const marqueeObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const marquee = marquees.find((item) => item.element === entry.target);
-      if (marquee) marquee.visible = entry.isIntersecting;
-    });
-    requestTick();
-  });
-  marquees.forEach((marquee) => marqueeObserver.observe(marquee.element));
 }
 
 let frame = 0;
@@ -480,18 +427,6 @@ function updateScrub() {
   });
 }
 
-function updateMarquees(delta) {
-  const skew = clamp(-velocity * 0.35, -9, 9);
-  marquees.forEach((marquee) => {
-    if (!marquee.visible || !marquee.half || !marquee.track) return;
-    const speed = (0.9 + Math.min(Math.abs(velocity), 60) * 0.42) * delta;
-    marquee.x += marquee.direction * scrollDirection * speed;
-    if (marquee.x <= -marquee.half) marquee.x += marquee.half;
-    if (marquee.x > 0) marquee.x -= marquee.half;
-    marquee.track.style.transform = `translate3d(${marquee.x.toFixed(2)}px, 0, 0) skewX(${skew.toFixed(2)}deg)`;
-  });
-}
-
 function tick(time) {
   frame = 0;
   const delta = lastTime ? clamp((time - lastTime) / 16.667, 0.2, 3) : 1;
@@ -510,8 +445,6 @@ function tick(time) {
     root.style.setProperty('--vel-abs', Math.min(Math.abs(velocity), 60).toFixed(2));
     checkPendingMedia();
     updateScrub();
-    updateMarquees(delta);
-
     if (homeHero) {
       heroPointer.x = lerp(heroPointer.x, heroPointer.tx, 0.08);
       heroPointer.y = lerp(heroPointer.y, heroPointer.ty, 0.08);
@@ -521,9 +454,8 @@ function tick(time) {
   }
 
   const heroSettling = Math.abs(heroPointer.x - heroPointer.tx) > 0.002 || Math.abs(heroPointer.y - heroPointer.ty) > 0.002;
-  const marqueeRunning = motionAllowed() && marquees.some((marquee) => marquee.visible);
   const scrolling = time - lastScrollEvent < 180 || Math.abs(velocity) > 0.05;
-  if (scrolling || marqueeRunning || heroSettling) requestTick();
+  if (scrolling || heroSettling) requestTick();
   else lastTime = 0;
 }
 
@@ -577,7 +509,7 @@ function bindPointerEffects() {
     });
   });
 
-  document.querySelectorAll('.button, .social-chip, .catalog-jump, .event-action, .choice-arrow').forEach((element) => {
+  document.querySelectorAll('.button, .social-chip, .catalog-jump, .choice-arrow').forEach((element) => {
     const target = element.matches('.choice-arrow') ? element.closest('.setup-choice') : element;
     if (!target) return;
     target.addEventListener('pointermove', (event) => {
@@ -634,14 +566,10 @@ function disableMotion() {
   heroVideo?.pause();
   showEverything();
   root.classList.remove('motion-ready');
-  marquees.forEach((marquee) => {
-    if (marquee.track) marquee.track.style.transform = '';
-  });
 }
 
 splitHeadings.forEach(splitWords);
 prepareReveals();
-buildMarquees();
 refreshScrollRange();
 bindPointerEffects();
 initDeferredBackgrounds();

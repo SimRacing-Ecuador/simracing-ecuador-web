@@ -55,7 +55,7 @@ if ($html -notmatch [regex]::Escape('https://wa.me/593989019836?text=Hola%2C%20q
 if ($html -match 'Explorar setups') { throw 'Home hero must use the quote CTA instead of Explore setups' }
 if ($html -notmatch 'Cotiza tu simulador') { throw 'Quote CTA label is missing' }
 if ($html -match 'Bundle MOZA R3 con base direct drive') { throw 'Home page must not feature MOZA R3 as a direct product card' }
-foreach ($hook in @('race-nav', 'event-band', 'about-section', 'choice-media')) {
+foreach ($hook in @('race-nav', 'setup-section', 'about-section', 'choice-media')) {
   if ($html -notmatch ('class="[^"]*' + $hook)) { throw "Missing reference-inspired hook $hook" }
 }
 if ($html -notmatch 'aria-expanded') { throw 'Mobile menu must expose aria-expanded' }
@@ -67,7 +67,7 @@ foreach ($motionHook in @('IntersectionObserver', 'dataset.reveal', 'motion-read
 foreach ($cinematicHook in @('scrollDirection', 'requestAnimationFrame', 'velocity', 'homeHero', '--pc', '--px', '--pv')) {
   if ($js -notmatch [regex]::Escape($cinematicHook)) { throw "Missing cinematic motion hook in script: $cinematicHook" }
 }
-foreach ($kineticHook in @('buildMarquees', 'dataset.tilt', 'card-glare', '--mgx', 'playIntro', 'sessionStorage', 'footer-wordmark')) {
+foreach ($kineticHook in @('dataset.tilt', 'card-glare', '--mgx', 'playIntro', 'sessionStorage')) {
   if ($js -notmatch [regex]::Escape($kineticHook)) { throw "Missing kinetic motion hook in script: $kineticHook" }
 }
 foreach ($imageMotionHook in @('dataset.scrollImg', 'scrubSelector', 'visibleScrub')) {
@@ -79,10 +79,10 @@ foreach ($motionStyle in @('motion-ready', 'prefers-reduced-motion', 'data-revea
 foreach ($imageMotionStyle in @('[data-scroll-img]', 'var(--pc', 'var(--px', 'will-change: translate')) {
   if ($css -notmatch [regex]::Escape($imageMotionStyle)) { throw "Missing image motion style: $imageMotionStyle" }
 }
-foreach ($kineticStyle in @('intro-lights', 'marquee-track', 'bg-word', 'data-tilt', 'perspective', 'hero-speed', 'scroll-progress')) {
+foreach ($kineticStyle in @('intro-lights', 'data-tilt', 'perspective', 'hero-speed', 'scroll-progress')) {
   if ($css -notmatch [regex]::Escape($kineticStyle)) { throw "Missing kinetic motion style: $kineticStyle" }
 }
-foreach ($kineticMarkup in @('class="marquee', 'class="hero-speed"', 'class="bg-word"')) {
+foreach ($kineticMarkup in @('class="hero-speed"')) {
   if ($html -notmatch [regex]::Escape($kineticMarkup)) { throw "Missing kinetic home markup: $kineticMarkup" }
 }
 foreach ($responsiveStyle in @('overflow-x: clip', 'env(safe-area-inset-left', 'env(safe-area-inset-right', 'min-width: 0', 'pointer: coarse', 'visibility: hidden')) {
@@ -121,7 +121,6 @@ foreach ($catalogSection in @('id="cockpits"', 'id="volantes-pedales"', 'id="acc
 }
 if ($products -notmatch 'src="optimized/cockpit-silla-hero\.png"') { throw 'Catalog hero must feature the cockpit pro image' }
 if ($products -notmatch 'alt="Cockpit Pro plegable con silla para simulación de carreras"') { throw 'Catalog hero must describe the cockpit pro image' }
-if ($products -notmatch 'COCKPIT PRO / COMPLETO') { throw 'Catalog hero must identify the cockpit pro' }
 if ($products -match 'src="optimized/cover-ai\.png"') { throw 'Catalog hero must no longer feature the MOZA bundle image' }
 if ($products -notmatch 'href="#cockpits"[^>]*>Ver cockpits') { throw 'Catalog hero CTA must point to the cockpit section' }
 if ($css -notmatch '\.catalog-hero-layout[^}]*min-height: 720px') { throw 'Catalog cockpit hero must reserve room for its CTA' }
