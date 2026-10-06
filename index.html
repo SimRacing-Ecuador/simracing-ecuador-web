@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-page="home">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -47,184 +47,333 @@
         ]
       }
     </script>
+    <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="sequence/f001.webp" as="image" type="image/webp" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="boot.js"></script>
+    <script src="vendor/gsap.min.js" defer></script>
+    <script src="vendor/ScrollTrigger.min.js" defer></script>
+    <script src="vendor/lenis.min.js" defer></script>
     <script src="script.js" defer></script>
   </head>
   <body class="home-page">
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-    <header class="site-header" id="inicio">
-      <div class="shell header-inner">
-        <a class="brand" href="#inicio" aria-label="Sim Racing Ecuador, volver al inicio">
-          <img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="eager" decoding="async" fetchpriority="high" width="2415" height="930" />
+    <div class="intro" aria-hidden="true">
+      <p class="intro-kicker">Sim Racing Ecuador</p>
+      <div class="intro-rig">
+        <span class="intro-light"><i></i><i></i></span>
+        <span class="intro-light"><i></i><i></i></span>
+        <span class="intro-light"><i></i><i></i></span>
+        <span class="intro-light"><i></i><i></i></span>
+        <span class="intro-light"><i></i><i></i></span>
+      </div>
+      <p class="intro-status"><span class="intro-status-text">Luces encendidas</span><span class="intro-skip">Clic o tecla para saltar</span></p>
+      <span class="intro-flag"></span>
+    </div>
+    <header class="site-header" data-header>
+      <div class="shell header-bar">
+        <a class="brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio">
+          <img src="optimized/logo.webp" alt="Sim Racing Ecuador" width="1200" height="462" decoding="async" fetchpriority="high" />
         </a>
-
-        <div class="header-tools" aria-label="Accesos rápidos">
-          <a class="social-chip" href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">IG</a>
-          <a class="social-chip" href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+        <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+          <a class="nav-link" href="index.html#setups"><span class="nav-index">01</span><span class="nav-label">Setups</span></a>
+          <a class="nav-link" href="productos.html"><span class="nav-index">02</span><span class="nav-label">Productos</span></a>
+          <a class="nav-link" href="index.html#comunidad"><span class="nav-index">03</span><span class="nav-label">Comunidad</span></a>
+          <a class="nav-link" href="#contacto"><span class="nav-index">04</span><span class="nav-label">Contacto</span></a>
+          <div class="nav-extra">
+            <a class="button button-yellow" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+            <div class="nav-social">
+              <a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </div>
+          </div>
+        </nav>
+        <div class="header-actions">
+          <a class="button button-yellow button-small header-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-toggle-label">Menú</span>
+            <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+          </button>
         </div>
-
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span class="menu-toggle-label">Menú</span>
-          <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
-        </button>
       </div>
-      <div class="race-nav">
-        <div class="shell race-nav-inner">
-          <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
-            <a class="nav-link" href="#setups">Setups</a>
-            <a class="nav-link" href="productos.html">Productos</a>
-            <a class="nav-link" href="#contacto">Contacto</a>
-            <a class="nav-link" href="#comunidad">Comunidad</a>
-            <a class="button button-small button-yellow" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer">Cotiza tu simulador <span aria-hidden="true">↗</span></a>
-          </nav>
-        </div>
-      </div>
+      <div class="scroll-progress" aria-hidden="true"><span></span></div>
     </header>
 
     <main id="contenido">
-      <section class="hero" aria-labelledby="hero-title">
-        <video class="hero-video" autoplay muted loop playsinline preload="none" poster="optimized/cover-ai.png" aria-hidden="true">
-          <source data-src="5dae82990e6d41dab0c886ad8da88529.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-shade"></div>
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-speed" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <section class="hero" id="inicio" aria-labelledby="hero-title" data-theme="dark">
+        <div class="hero-pin">
+          <div class="hero-bg" aria-hidden="true">
+            <span class="hero-glow"></span>
+            <span class="hero-grid"></span>
+            <span class="hero-streaks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
 
-        <div class="shell hero-content">
-          <div class="hero-copy">
-            <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span></div>
-            <h1 id="hero-title">El simracing<br /><em>también corre</em><br />en Ecuador.</h1>
-            <p class="hero-lede">Tu próxima vuelta empieza aquí. Descubre el equipo, el espacio y la precisión que necesitas para llevar la pista a casa.</p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer">Cotiza tu simulador <span aria-hidden="true">↗</span></a>
-              <a class="text-link" href="#setups">Ver productos <span aria-hidden="true">↓</span></a>
+          <div class="shell hero-layout">
+            <div class="hero-copy">
+              <p class="eyebrow hero-eyebrow" data-hero-in><span>Sim Racing Ecuador <span class="eyebrow-sep">/</span> Tu mejor experiencia</span></p>
+              <h1 id="hero-title" class="hero-title">
+                <span class="line"><span class="line-inner">El simracing</span></span>
+                <span class="line"><span class="line-inner"><em>también corre</em></span></span>
+                <span class="line"><span class="line-inner">en Ecuador.</span></span>
+              </h1>
+              <div class="hero-stage">
+                <div class="hero-intro">
+                  <p class="hero-lede" data-hero-in>Tu próxima vuelta empieza aquí. Descubre el equipo, el espacio y la precisión que necesitas para llevar la pista a casa.</p>
+                  <div class="hero-actions" data-hero-in>
+                    <a class="button button-primary" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+                    <a class="text-link" href="#setups"><span>Ver productos</span><span class="text-link-icon" aria-hidden="true">↓</span></a>
+                  </div>
+                </div>
+                <ol class="hero-steps" aria-label="De tu casa a la pista">
+                  <li class="hero-step"><span class="hero-step-index">01</span><div><strong>En casa</strong><span>Tu cockpit, listo para la primera vuelta.</span></div></li>
+                  <li class="hero-step"><span class="hero-step-index">02</span><div><strong>Luces fuera</strong><span>Volante, pedales y respuesta directa. Acelera.</span></div></li>
+                  <li class="hero-step"><span class="hero-step-index">03</span><div><strong>En pista</strong><span>La sensación de la carrera, sin salir de Ecuador.</span></div></li>
+                </ol>
+              </div>
+            </div>
+
+            <figure class="hero-screen" data-hero-in>
+              <img class="hero-poster" src="sequence/f001.webp" alt="" width="526" height="702" decoding="async" />
+              <canvas class="hero-canvas" width="526" height="702" role="img" aria-label="Un cockpit de simracing se transforma en un monoplaza mientras haces scroll"></canvas>
+              <div class="screen-hud" aria-hidden="true">
+                <div class="screen-top"><span class="screen-rec"><i></i>Onboard</span><span>Cam 01</span></div>
+                <div class="screen-corners"><i></i><i></i><i></i><i></i></div>
+                <div class="screen-dash">
+                  <div class="rev-lights"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="dash-readouts">
+                    <div class="dash-speed"><strong data-speed>000</strong><span>km/h</span></div>
+                    <div class="dash-gear"><span>Marcha</span><strong data-gear>N</strong></div>
+                  </div>
+                </div>
+              </div>
+            </figure>
+          </div>
+
+          <div class="hero-cue" aria-hidden="true"><span class="hero-cue-line"></span><span>Haz scroll para acelerar</span></div>
+        </div>
+      </section>
+
+      <section class="marquee-band" aria-label="Tu mejor experiencia" data-theme="light">
+        <div class="marquee" data-marquee data-direction="1">
+          <div class="marquee-track">
+            <span class="marquee-item">Tu mejor experiencia</span><span class="marquee-mark" aria-hidden="true"></span>
+            <span class="marquee-item">Sim Racing Ecuador</span><span class="marquee-mark" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="marquee marquee-ghost" data-marquee data-direction="-1" aria-hidden="true">
+          <div class="marquee-track">
+            <span class="marquee-item">Volantes</span><span class="marquee-mark"></span>
+            <span class="marquee-item">Pedales</span><span class="marquee-mark"></span>
+            <span class="marquee-item">Cockpits</span><span class="marquee-mark"></span>
+            <span class="marquee-item">Accesorios</span><span class="marquee-mark"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="setups" id="setups" aria-labelledby="setups-title" data-theme="dark">
+        <div class="setups-pin">
+          <div class="setups-track">
+            <div class="setups-intro">
+              <p class="eyebrow"><span class="eyebrow-index">01</span> Setups</p>
+              <h2 id="setups-title" class="display-title">Encuentra tu<br /><span>punto de partida.</span></h2>
+              <p class="lead">Un buen setup empieza por saber cómo quieres sentir la carrera. Elige tu camino y construye desde ahí.</p>
+              <p class="setups-hint" aria-hidden="true"><span>Sigue bajando</span><span class="setups-hint-arrow">→</span></p>
+            </div>
+
+            <a class="setup-panel setup-panel-cyan" href="productos.html#volantes-pedales" data-cursor="Ver">
+              <span class="setup-media"><img src="optimized/kit-components-bg.webp" alt="Volante, base y pedales para simracing sobre una mesa de trabajo" loading="lazy" decoding="async" width="1536" height="1024" /></span>
+              <span class="setup-index">01</span>
+              <span class="setup-body">
+                <span class="setup-kicker">Control</span>
+                <span class="setup-title">Volantes<br />y pedales</span>
+                <span class="setup-copy">El control que conecta tus manos y pies con cada curva.</span>
+                <span class="setup-cta">Ver volantes y pedales <span aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+
+            <a class="setup-panel setup-panel-yellow" href="productos.html#cockpits" data-cursor="Ver">
+              <span class="setup-media"><img src="optimized/setup-garage-bg.webp" alt="" loading="lazy" decoding="async" width="1536" height="1024" /></span>
+              <span class="setup-product setup-product-cockpit"><img src="optimized/tripode-cockpit-ai.webp" alt="Cockpit para una estación de simracing" loading="lazy" decoding="async" width="1254" height="1254" /></span>
+              <span class="setup-index">02</span>
+              <span class="setup-body">
+                <span class="setup-kicker">Estructura</span>
+                <span class="setup-title">Cockpits</span>
+                <span class="setup-copy">El espacio para ordenar tu postura, volante y pedales.</span>
+                <span class="setup-cta">Ver cockpits <span aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+
+            <a class="setup-panel setup-panel-red" href="productos.html#accesorios" data-cursor="Ver">
+              <span class="setup-media"><img src="optimized/accessories-track-bg.webp" alt="" loading="lazy" decoding="async" width="1536" height="1024" /></span>
+              <span class="setup-index">03</span>
+              <span class="setup-body">
+                <span class="setup-kicker">Detalles</span>
+                <span class="setup-title">Accesorios</span>
+                <span class="setup-copy">Mods, pistas de madera y piezas para completar tu experiencia.</span>
+                <span class="setup-cta">Ver accesorios <span aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </div>
+
+          <div class="shell setups-progress" aria-hidden="true">
+            <span class="setups-count"><b data-setups-count>01</b> / 03</span>
+            <span class="setups-bar"><span></span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="manifesto" aria-labelledby="about-title" data-theme="light">
+        <div class="shell">
+          <div class="manifesto-head">
+            <p class="eyebrow"><span class="eyebrow-index">02</span> Sobre la experiencia</p>
+            <h2 id="about-title" class="display-title">Bienvenido a<br /><span>tu carrera.</span></h2>
+          </div>
+          <p class="manifesto-text" data-words>Sim Racing Ecuador reúne equipo, espacio y criterio para que puedas pasar de mirar la pista a sentir cada vuelta. Elige cómo quieres empezar y deja que tu setup crezca contigo.</p>
+          <ol class="pillars" aria-label="Pilares de la experiencia">
+            <li class="pillar"><span class="pillar-index">01</span><strong>Setup</strong><span>Una estación pensada para ti.</span></li>
+            <li class="pillar"><span class="pillar-index">02</span><strong>Control</strong><span>Más precisión en cada decisión.</span></li>
+            <li class="pillar"><span class="pillar-index">03</span><strong>Comunidad</strong><span>Una pasión que se comparte.</span></li>
+          </ol>
+          <a class="text-link manifesto-link" href="#comunidad"><span>Conoce el siguiente paso</span><span class="text-link-icon" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="assembly" id="productos" aria-labelledby="products-title" data-theme="dark">
+        <div class="assembly-pin">
+          <div class="shell assembly-layout">
+            <div class="assembly-copy">
+              <p class="eyebrow"><span class="eyebrow-index">03</span> Productos</p>
+              <h2 id="products-title" class="display-title">Elige cada<br /><span>parte del setup.</span></h2>
+              <p class="lead assembly-lead">Así se arma el paquete MOZA R3: base Direct Drive, volante y pedales, listos para tu primera vuelta.</p>
+              <ol class="assembly-steps">
+                <li class="assembly-step"><span class="assembly-step-index">01</span><div><strong>Base R3 DD</strong><span>3,9 Nm de par y encoder de 15 bits.</span></div></li>
+                <li class="assembly-step"><span class="assembly-step-index">02</span><div><strong>Volante R3</strong><span>280 mm, 22 botones y 10 LED RGB.</span></div></li>
+                <li class="assembly-step"><span class="assembly-step-index">03</span><div><strong>Pedales SR-P Lite</strong><span>Acero y sensor Hall en el acelerador.</span></div></li>
+              </ol>
+              <div class="assembly-footer">
+                <p class="assembly-price"><span>Paquete MOZA R3</span><strong>$<b data-count-to="580">580</b></strong></p>
+                <div class="assembly-actions">
+                  <a class="button button-primary" href="moza-r3.html"><span>Ver MOZA R3</span><span class="button-icon" aria-hidden="true">↗</span></a>
+                  <a class="text-link" href="productos.html"><span>Todos los productos</span><span class="text-link-icon" aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="assembly-stage" aria-hidden="true">
+              <span class="stage-ring stage-ring-a"></span>
+              <span class="stage-ring stage-ring-b"></span>
+              <span class="stage-floor"></span>
+              <img class="part part-base" src="optimized/r3-base-cut.webp" alt="" loading="lazy" decoding="async" width="1187" height="990" />
+              <img class="part part-wheel" src="optimized/r3-wheel-cut.webp" alt="" loading="lazy" decoding="async" width="1400" height="1325" />
+              <img class="part part-pedals" src="optimized/r3-pedals-cut.webp" alt="" loading="lazy" decoding="async" width="1400" height="1170" />
+              <img class="part part-bundle" src="optimized/r3-bundle-cut.webp" alt="" loading="lazy" decoding="async" width="1400" height="961" />
+              <span class="stage-tag stage-tag-base"><b>01</b> Base · 3,9 Nm</span>
+              <span class="stage-tag stage-tag-wheel"><b>02</b> Volante · 280 mm</span>
+              <span class="stage-tag stage-tag-pedals"><b>03</b> Pedales · Sensor Hall</span>
+              <span class="stage-status"><i></i><span data-stage-status>Ensamblando</span></span>
             </div>
           </div>
-
         </div>
       </section>
 
-      <section class="section setup-section bg-word-host" id="setups" aria-labelledby="setups-title">
-        <div class="shell">
-          <div class="section-heading section-heading-split">
-            <h2 id="setups-title">Encuentra tu<br /><span>punto de partida.</span></h2>
-            <p>Un buen setup empieza por saber cómo quieres sentir la carrera. Elige tu camino y construye desde ahí.</p>
-          </div>
+      <section class="telemetry" aria-labelledby="tech-title" data-theme="dark">
+        <div class="telemetry-pin">
+          <div class="telemetry-bg" aria-hidden="true"><img src="optimized/telemetry-tech-bg.webp" alt="" loading="lazy" decoding="async" width="1536" height="1024" /></div>
+          <div class="shell telemetry-inner">
+            <div class="telemetry-head">
+              <div>
+                <p class="eyebrow"><span class="eyebrow-index">04</span> Sensación</p>
+                <h2 id="tech-title" class="display-title">La diferencia está<br /><span>en lo que sientes.</span></h2>
+              </div>
+              <p class="lead">La velocidad se ve en la pantalla. La precisión se siente en las manos, en los pies y en el momento exacto de frenar.</p>
+            </div>
 
-          <div class="setup-rail">
-            <a class="setup-choice setup-choice-blue" href="productos.html#volantes-pedales">
-              <span class="choice-media"><img src="optimized/r3-bundle-ai.png" alt="Volante, base y pedales para simracing" loading="lazy" decoding="async" width="1254" height="1254" /></span>
-              <span class="choice-number">01</span>
-              <span class="choice-title">Volantes<br />y pedales</span>
-              <span class="choice-copy">El control que conecta tus manos y pies con cada curva.</span>
-              <span class="choice-arrow" aria-hidden="true">↗</span>
-            </a>
-            <a class="setup-choice setup-choice-yellow" href="productos.html#cockpits">
-              <span class="choice-media"><img src="optimized/tripode-cockpit-ai.png" alt="Cockpit para una estación de simracing" loading="lazy" decoding="async" width="1254" height="1254" /></span>
-              <span class="choice-number">02</span>
-              <span class="choice-title">Cockpits</span>
-              <span class="choice-copy">El espacio para ordenar tu postura, volante y pedales.</span>
-              <span class="choice-arrow" aria-hidden="true">↗</span>
-            </a>
-            <a class="setup-choice setup-choice-red" href="productos.html#accesorios">
-              <span class="choice-media choice-media-accessories" aria-hidden="true"></span>
-              <span class="choice-number">03</span>
-              <span class="choice-title">Accesorios</span>
-              <span class="choice-copy">Mods, pistas de madera y piezas para completar tu experiencia.</span>
-              <span class="choice-arrow" aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-      </section>
+            <div class="telemetry-chart" aria-hidden="true">
+              <div class="chart-meta">
+                <span>Telemetría · Vuelta 01</span>
+                <span class="chart-readout"><b data-tele-speed>000</b> km/h <i></i> <b data-tele-time>00.000</b> s</span>
+              </div>
+              <svg class="chart-svg" viewBox="0 0 1200 260" preserveAspectRatio="none" focusable="false">
+                <defs><clipPath id="chart-reveal"><rect x="-10" y="-30" width="1220" height="320" /></clipPath></defs>
+                <g class="chart-grid">
+                  <line x1="0" y1="65" x2="1200" y2="65" /><line x1="0" y1="130" x2="1200" y2="130" /><line x1="0" y1="195" x2="1200" y2="195" />
+                  <line x1="300" y1="0" x2="300" y2="260" /><line x1="600" y1="0" x2="600" y2="260" /><line x1="900" y1="0" x2="900" y2="260" />
+                </g>
+                <g clip-path="url(#chart-reveal)">
+                <path class="chart-throttle" d="M0 230 L24 230 L44 40 L250 40 L262 230 L332 230 L352 40 L520 40 L534 230 L604 230 L624 40 L840 40 L852 230 L934 230 L954 40 L1200 40" />
+                <path class="chart-speed" d="M0 200 C 60 196 120 120 250 60 C 262 56 270 70 300 150 C 318 190 330 190 350 160 C 420 70 470 40 520 36 C 540 36 560 120 600 170 C 615 186 640 150 700 90 C 760 40 810 30 840 34 C 860 40 880 150 930 180 C 960 190 1000 120 1080 70 C 1130 44 1170 40 1200 38" />
+                <path class="chart-speed-glow" d="M0 200 C 60 196 120 120 250 60 C 262 56 270 70 300 150 C 318 190 330 190 350 160 C 420 70 470 40 520 36 C 540 36 560 120 600 170 C 615 186 640 150 700 90 C 760 40 810 30 840 34 C 860 40 880 150 930 180 C 960 190 1000 120 1080 70 C 1130 44 1170 40 1200 38" />
+                </g>
+              </svg>
+              <span class="chart-car"></span>
+              <div class="chart-legend"><span class="legend-speed">Velocidad</span><span class="legend-throttle">Acelerador</span></div>
+            </div>
 
-      <section class="section about-section bg-word-host" aria-labelledby="about-title">
-        <div class="shell about-layout">
-          <div class="about-copy">
-            <div class="section-tag"><span class="tag-dot"></span> Sobre la experiencia</div>
-            <h2 id="about-title">Bienvenido a<br /><span>tu carrera.</span></h2>
-            <p class="lead-copy">Sim Racing Ecuador reúne equipo, espacio y criterio para que puedas pasar de mirar la pista a sentir cada vuelta. Elige cómo quieres empezar y deja que tu setup crezca contigo.</p>
-            <a class="text-link" href="#comunidad">Conoce el siguiente paso <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="about-stats" aria-label="Pilares de la experiencia">
-            <div><strong>SETUP</strong><span>Una estación pensada para ti.</span></div>
-            <div><strong>CONTROL</strong><span>Más precisión en cada decisión.</span></div>
-            <div><strong>COMUNIDAD</strong><span>Una pasión que se comparte.</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section product-section" id="productos" aria-labelledby="products-title">
-        <div class="shell product-layout">
-          <div class="product-art product-art-catalog" aria-hidden="true"></div>
-          <div class="product-copy">
-            <div class="section-tag"><span class="tag-dot"></span> Productos</div>
-            <h2 id="products-title">Elige cada<br /><span>parte del setup.</span></h2>
-            <p class="lead-copy">Encuentra los componentes para controlar, construir y personalizar tu forma de correr.</p>
-            <ul class="spec-list">
-              <li><span>01</span><strong>Volantes y pedales</strong><small>Desde Logitech hasta los kits MOZA Direct Drive.</small></li>
-              <li><span>02</span><strong>Cockpits</strong><small>Con silla o plegables para tu espacio.</small></li>
-              <li><span>03</span><strong>Accesorios</strong><small>Mods y pistas de madera para ampliar la experiencia.</small></li>
-            </ul>
-            <div class="product-copy-actions">
-              <a class="button button-primary" href="productos.html">Ver productos <span aria-hidden="true">↗</span></a>
-              <a class="text-link product-direct-link" href="cockpit-con-silla.html">Ver cockpit con silla <span aria-hidden="true">↗</span></a>
+            <div class="tech-grid">
+              <article class="tech-item"><span class="tech-index">01</span><h3>Respuesta</h3><p>La señal llega sin distraerte del trazado.</p></article>
+              <article class="tech-item"><span class="tech-index">02</span><h3>Precisión</h3><p>Más control donde una décima cambia la vuelta.</p></article>
+              <article class="tech-item"><span class="tech-index">03</span><h3>Inmersión</h3><p>El equipo desaparece y la pista ocupa todo.</p></article>
+              <article class="tech-item"><span class="tech-index">04</span><h3>Escala</h3><p>Empieza con una pieza y construye el resto.</p></article>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section tech-section bg-word-host" aria-labelledby="tech-title">
-        <div class="shell">
-          <div class="section-heading section-heading-split">
-            <h2 id="tech-title">La diferencia está<br /><span>en lo que sientes.</span></h2>
-            <p>La velocidad se ve en la pantalla. La precisión se siente en las manos, en los pies y en el momento exacto de frenar.</p>
-          </div>
-          <div class="tech-grid">
-            <article class="tech-item"><span class="tech-symbol">↯</span><h3>Respuesta</h3><p>La señal llega sin distraerte del trazado.</p></article>
-            <article class="tech-item"><span class="tech-symbol">◒</span><h3>Precisión</h3><p>Más control donde una décima cambia la vuelta.</p></article>
-            <article class="tech-item"><span class="tech-symbol">⌁</span><h3>Inmersión</h3><p>El equipo desaparece y la pista ocupa todo.</p></article>
-            <article class="tech-item"><span class="tech-symbol">+</span><h3>Escala</h3><p>Empieza con una pieza y construye el resto.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section community-section" id="comunidad" aria-labelledby="community-title">
-        <div class="shell community-panel">
-          <div class="community-copy">
-            <div class="community-sequence" aria-hidden="true"><span></span><span></span><span></span></div>
-            <h2 id="community-title">Listo para<br /><em>salir de boxes?</em></h2>
-            <p>Cuéntanos cómo quieres correr y encuentra el punto de partida para tu próxima experiencia.</p>
-            <a class="button button-yellow" href="productos.html">Ver equipos destacados <span aria-hidden="true">↗</span></a>
+      <section class="community" id="comunidad" aria-labelledby="community-title" data-theme="dark">
+        <div class="community-frame">
+          <div class="community-media" aria-hidden="true"><img src="optimized/pitlane-community-bg.webp" alt="" loading="lazy" decoding="async" width="1536" height="1024" /></div>
+          <div class="shell community-content">
+            <div class="start-lights" aria-hidden="true">
+              <span><i></i><i></i></span><span><i></i><i></i></span><span><i></i><i></i></span><span><i></i><i></i></span><span><i></i><i></i></span>
+            </div>
+            <p class="eyebrow"><span class="eyebrow-index">05</span> Comunidad</p>
+            <h2 id="community-title" class="display-title community-title">¿Listo para<br /><em>salir de boxes?</em></h2>
+            <p class="lead">Cuéntanos cómo quieres correr y encuentra el punto de partida para tu próxima experiencia.</p>
+            <div class="community-actions">
+              <a class="button button-yellow" href="productos.html"><span>Ver equipos destacados</span><span class="button-icon" aria-hidden="true">↗</span></a>
+              <a class="text-link" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20armar%20mi%20setup%20de%20simracing" target="_blank" rel="noopener noreferrer"><span>Consulta tu setup</span><span class="text-link-icon" aria-hidden="true">↗</span></a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section flight-section bg-word-host" aria-labelledby="flight-title">
+      <section class="flight" aria-labelledby="flight-title" data-theme="light">
+        <div class="flight-word" aria-hidden="true"><span>También volamos</span><span>También volamos</span></div>
         <div class="shell flight-layout">
           <div class="flight-copy">
-            <div class="section-tag"><span class="tag-dot tag-dot-blue"></span> Otra forma de volar</div>
-            <h2 id="flight-title">También<br /><span>volamos.</span></h2>
-            <p>La simulación no termina en la curva. Explora nuevas rutas con un espacio que se adapta a tu forma de jugar.</p>
-            <a class="text-link" href="productos.html">Volver a explorar equipos <span aria-hidden="true">↗</span></a>
+            <p class="eyebrow"><span class="eyebrow-index">06</span> Otra forma de volar</p>
+            <h2 id="flight-title" class="display-title">También<br /><span>volamos.</span></h2>
+            <p class="lead">La simulación no termina en la curva. Explora nuevas rutas con un espacio que se adapta a tu forma de jugar.</p>
+            <a class="text-link" href="productos.html"><span>Volver a explorar equipos</span><span class="text-link-icon" aria-hidden="true">↗</span></a>
           </div>
           <figure class="flight-art">
-            <img src="optimized/simulador-vuelo-ai.png" alt="Control de vuelo para simulador con cabina iluminada en azul" loading="lazy" decoding="async" width="1019" height="1543" />
+            <img src="optimized/simulador-vuelo-ai.webp" alt="Control de vuelo para simulador con cabina iluminada en azul" loading="lazy" decoding="async" width="1019" height="1543" />
+            <figcaption><span>Hotas</span><span>Simulación de vuelo</span></figcaption>
           </figure>
         </div>
       </section>
-
     </main>
-
-    <footer class="site-footer" id="contacto">
-      <div class="shell footer-inner">
-        <div class="footer-grid">
-          <a class="brand footer-brand" href="#inicio" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="2415" height="930" /></a>
-          <div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div>
-          <div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
-          <div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div>
+    <footer class="site-footer" id="contacto" data-theme="dark">
+      <div class="shell footer-top">
+        <p class="eyebrow">¿Listo para tu próxima vuelta?</p>
+        <a class="footer-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Hablemos de tu setup</span><span class="footer-cta-icon" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="shell footer-grid">
+        <div class="footer-brand-block">
+          <a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/logo.webp" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="1200" height="462" /></a>
+          <p>Equipos y asesoría para simulación de carreras en Ecuador. Tu mejor experiencia.</p>
         </div>
-        <div class="footer-bottom"><div class="footer-links"><a href="#setups">Setups</a><a href="productos.html">Productos</a><a href="#contacto">Contacto</a><a href="#comunidad">Consulta tu setup</a></div><p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p></div>
+        <div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div>
+        <div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        <div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true"><span>Sim Racing</span><span>Ecuador</span></div>
+      <div class="shell footer-bottom">
+        <div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="index.html#comunidad">Comunidad</a><a href="#contacto">Contacto</a></div>
+        <p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p>
+        <a class="back-to-top" href="#contenido"><span>Volver arriba</span><span aria-hidden="true">↑</span></a>
       </div>
     </footer>
   </body>
