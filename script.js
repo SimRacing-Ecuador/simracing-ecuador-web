@@ -538,11 +538,13 @@
         scrub: 0.6,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          sequence?.seek(self.progress);
-          updateHud(self.progress);
-        },
         onRefresh: () => sequence?.resize(),
+      },
+      // Driven by the smoothed timeline (not raw scroll) so frames and HUD glide with the scrub.
+      onUpdate() {
+        const progress = this.progress();
+        sequence?.seek(progress);
+        updateHud(progress);
       },
     });
 
@@ -772,10 +774,12 @@
         scrub: 0.8,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: () => {
-          const time = tl.time();
-          setStep(time < tl.labels.wheel ? 0 : time < tl.labels.pedals ? 1 : time < tl.labels.assemble ? 2 : 3);
-        },
+      },
+      onUpdate() {
+        const time = this.time();
+        const { wheel, pedals, assemble } = this.labels;
+        if (assemble === undefined) return;
+        setStep(time < wheel ? 0 : time < pedals ? 1 : time < assemble ? 2 : 3);
       },
     });
 
@@ -861,8 +865,8 @@
           scrub: 0.6,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => update(self.progress),
         },
+        onUpdate() { update(this.progress()); },
       })
         .to(reveal, { attr: { width: 1220 }, duration: 1 }, 0)
         .fromTo('.telemetry-bg img', { yPercent: -4, scale: 1.08 }, { yPercent: 4, scale: 1, duration: 1 }, 0);
@@ -873,7 +877,8 @@
     gsap.to(reveal, {
       attr: { width: 1220 },
       ease: 'none',
-      scrollTrigger: { trigger: chart, start: 'top 85%', end: 'bottom 35%', scrub: 0.6, onUpdate: (self) => update(self.progress) },
+      scrollTrigger: { trigger: chart, start: 'top 85%', end: 'bottom 35%', scrub: 0.6 },
+      onUpdate() { update(this.progress()); },
     });
     update(0);
     return undefined;
