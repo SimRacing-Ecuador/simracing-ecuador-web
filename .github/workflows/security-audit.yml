@@ -17,3 +17,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Run dependency-free static audit
         run: python3 tests/security_audit.py
+      - name: Run static page contract
+        run: python3 tests/verify_page.py
