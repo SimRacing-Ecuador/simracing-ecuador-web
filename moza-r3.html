@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-page="product">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -8,19 +8,45 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests" />
   <title>MOZA R3 | Sim Racing Ecuador</title>
   <link rel="icon" type="image/png" href="favicon.png?v=3" />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
+  <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="boot.js"></script>
+    <script src="vendor/gsap.min.js" defer></script>
+    <script src="vendor/ScrollTrigger.min.js" defer></script>
+    <script src="vendor/lenis.min.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body class="product-detail-page moza-page r3-detail-page">
   <a class="skip-link" href="#ficha">Saltar a la ficha técnica</a>
-  <header class="site-header" id="inicio">
-    <div class="shell header-inner">
-      <a class="brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="eager" decoding="async" fetchpriority="high" width="2415" height="930" /></a>
-      <div class="header-tools" aria-label="Accesos rápidos"><a class="social-chip" href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">IG</a><a class="social-chip" href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a></div>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-toggle-label">Menú</span><span class="menu-icon" aria-hidden="true"><i></i><i></i></span></button>
-    </div>
-    <div class="race-nav"><div class="shell race-nav-inner"><nav class="site-nav" id="site-nav" aria-label="Navegación principal"><a class="nav-link" href="index.html#setups">Setups</a><a class="nav-link nav-link-current" href="productos.html">Productos</a><a class="nav-link" href="index.html#contacto">Contacto</a><a class="nav-link" href="index.html#comunidad">Comunidad</a><a class="button button-small button-yellow" href="#ficha">Ver ficha <span aria-hidden="true">↓</span></a></nav></div></div>
-  </header>
+      <header class="site-header" data-header>
+      <div class="shell header-bar">
+        <a class="brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio">
+          <img src="optimized/logo.webp" alt="Sim Racing Ecuador" width="1200" height="462" decoding="async" />
+        </a>
+        <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+          <a class="nav-link" href="index.html#setups"><span class="nav-index">01</span><span class="nav-label">Setups</span></a>
+          <a class="nav-link" href="productos.html" aria-current="page"><span class="nav-index">02</span><span class="nav-label">Productos</span></a>
+          <a class="nav-link" href="index.html#comunidad"><span class="nav-index">03</span><span class="nav-label">Comunidad</span></a>
+          <a class="nav-link" href="#contacto"><span class="nav-index">04</span><span class="nav-label">Contacto</span></a>
+          <div class="nav-extra">
+            <a class="button button-yellow" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+            <div class="nav-social">
+              <a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </div>
+          </div>
+        </nav>
+        <div class="header-actions">
+          <a class="button button-yellow button-small header-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-toggle-label">Menú</span>
+            <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+          </button>
+        </div>
+      </div>
+      <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    </header>
 
   <main>
     <section class="r3-product-hero" aria-labelledby="r3-title">
@@ -34,7 +60,7 @@
           <a class="catalog-jump" href="#ficha">Conocer el paquete <span aria-hidden="true">↓</span></a>
         </div>
         <figure class="r3-bundle-visual">
-          <img src="optimized/r3-bundle-ai.png" alt="Paquete MOZA R3 con volante, base Direct Drive, pedales y abrazaderas de mesa" loading="eager" decoding="async" fetchpriority="high" width="1254" height="1254" />
+          <img src="optimized/r3-bundle-cut.webp" alt="Paquete MOZA R3 con volante, base Direct Drive, pedales y abrazaderas de mesa" loading="eager" decoding="async" fetchpriority="high" width="1400" height="961" />
         </figure>
       </div>
     </section>
@@ -58,15 +84,15 @@
         </div>
         <div class="r3-component-grid">
           <article class="r3-component-card r3-component-base">
-            <figure><img src="optimized/r3-base-ai.png" alt="Base MOZA R3 DD Direct Drive" loading="lazy" decoding="async" width="1254" height="1254" /></figure>
+            <figure><img src="optimized/r3-base-ai.webp" alt="Base MOZA R3 DD Direct Drive" loading="lazy" decoding="async" width="1254" height="1254" /></figure>
             <div><span class="product-code">01 / BASE</span><h3>R3 DD</h3><p>3,9 Nm de par máximo, encoder de 15 bits y respuesta USB de 1000 Hz.</p></div>
           </article>
           <article class="r3-component-card r3-component-wheel">
-            <figure><img src="optimized/r3-wheel-ai.png" alt="Volante MOZA R3 de 280 milímetros con botones y luces RGB" loading="lazy" decoding="async" width="1254" height="1254" /></figure>
+            <figure><img src="optimized/r3-wheel-ai.webp" alt="Volante MOZA R3 de 280 milímetros con botones y luces RGB" loading="lazy" decoding="async" width="1254" height="1254" /></figure>
             <div><span class="product-code">02 / VOLANTE</span><h3>R3 Racing<br />Wheel</h3><p>22 botones, levas de aluminio y 10 LED RGB para el régimen de revoluciones.</p></div>
           </article>
           <article class="r3-component-card r3-component-pedals">
-            <figure><img src="optimized/r3-pedals-ai.png" alt="Pedales MOZA SR-P Lite de acero" loading="lazy" decoding="async" width="1254" height="1254" /></figure>
+            <figure><img src="optimized/r3-pedals-ai.webp" alt="Pedales MOZA SR-P Lite de acero" loading="lazy" decoding="async" width="1254" height="1254" /></figure>
             <div><span class="product-code">03 / PEDALES</span><h3>SR-P Lite</h3><p>Pedales de acero de alta resistencia con sensor Hall en el acelerador y ajustes personalizables.</p></div>
           </article>
         </div>
@@ -118,6 +144,26 @@
     </section>
   </main>
 
-  <footer class="site-footer" id="contacto"><div class="shell footer-inner"><div class="footer-grid"><a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="2415" height="930" /></a><div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div><div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div><div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div></div><div class="footer-bottom"><div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="index.html#contacto">Contacto</a><a href="index.html#comunidad">Consulta tu setup</a></div><p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p></div></div></footer>
+      <footer class="site-footer" id="contacto" data-theme="dark">
+      <div class="shell footer-top">
+        <p class="eyebrow">¿Listo para tu próxima vuelta?</p>
+        <a class="footer-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Hablemos de tu setup</span><span class="footer-cta-icon" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="shell footer-grid">
+        <div class="footer-brand-block">
+          <a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/logo.webp" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="1200" height="462" /></a>
+          <p>Equipos y asesoría para simulación de carreras en Ecuador. Tu mejor experiencia.</p>
+        </div>
+        <div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div>
+        <div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        <div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true"><span>Sim Racing</span><span>Ecuador</span></div>
+      <div class="shell footer-bottom">
+        <div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="index.html#comunidad">Comunidad</a><a href="#contacto">Contacto</a></div>
+        <p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p>
+        <a class="back-to-top" href="#contenido"><span>Volver arriba</span><span aria-hidden="true">↑</span></a>
+      </div>
+    </footer>
 </body>
 </html>

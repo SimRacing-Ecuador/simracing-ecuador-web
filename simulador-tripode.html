@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-page="product">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -8,23 +8,45 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests" />
     <title>Simulador tipo trípode | Sim Racing Ecuador</title>
     <link rel="icon" type="image/png" href="favicon.png?v=3" />
+    <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+    <script src="boot.js"></script>
+    <script src="vendor/gsap.min.js" defer></script>
+    <script src="vendor/ScrollTrigger.min.js" defer></script>
+    <script src="vendor/lenis.min.js" defer></script>
     <script src="script.js" defer></script>
   </head>
   <body class="product-detail-page">
     <a class="skip-link" href="#ficha">Saltar a la ficha técnica</a>
 
-    <header class="site-header" id="inicio">
-      <div class="shell header-inner">
-        <a class="brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="eager" decoding="async" fetchpriority="high" width="2415" height="930" /></a>
-        <div class="header-tools" aria-label="Accesos rápidos"><a class="social-chip" href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">IG</a><a class="social-chip" href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a></div>
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-toggle-label">Menú</span><span class="menu-icon" aria-hidden="true"><i></i><i></i></span></button>
-      </div>
-      <div class="race-nav"><div class="shell race-nav-inner">
+        <header class="site-header" data-header>
+      <div class="shell header-bar">
+        <a class="brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio">
+          <img src="optimized/logo.webp" alt="Sim Racing Ecuador" width="1200" height="462" decoding="async" />
+        </a>
         <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
-          <a class="nav-link" href="index.html#setups">Setups</a><a class="nav-link nav-link-current" href="productos.html">Productos</a><a class="nav-link" href="index.html#contacto">Contacto</a><a class="nav-link" href="index.html#comunidad">Comunidad</a><a class="button button-small button-yellow" href="#ficha">Ver ficha <span aria-hidden="true">↓</span></a>
+          <a class="nav-link" href="index.html#setups"><span class="nav-index">01</span><span class="nav-label">Setups</span></a>
+          <a class="nav-link" href="productos.html" aria-current="page"><span class="nav-index">02</span><span class="nav-label">Productos</span></a>
+          <a class="nav-link" href="index.html#comunidad"><span class="nav-index">03</span><span class="nav-label">Comunidad</span></a>
+          <a class="nav-link" href="#contacto"><span class="nav-index">04</span><span class="nav-label">Contacto</span></a>
+          <div class="nav-extra">
+            <a class="button button-yellow" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+            <div class="nav-social">
+              <a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </div>
+          </div>
         </nav>
-      </div></div>
+        <div class="header-actions">
+          <a class="button button-yellow button-small header-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-toggle-label">Menú</span>
+            <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+          </button>
+        </div>
+      </div>
+      <div class="scroll-progress" aria-hidden="true"><span></span></div>
     </header>
 
     <main>
@@ -37,7 +59,7 @@
             <div class="product-price-line"><strong>$185</strong><span>Precio del cockpit sin silla</span></div>
             <a class="catalog-jump" href="#ficha">Explorar ficha técnica <span aria-hidden="true">↓</span></a>
           </div>
-          <figure class="tripod-hero-product"><img src="optimized/tripode-cockpit-ai.png" alt="Simulador tipo trípode plegable con soporte de volante y placa de pedales" loading="eager" decoding="async" fetchpriority="high" width="1254" height="1254" /></figure>
+          <figure class="tripod-hero-product"><img src="optimized/tripode-cockpit-ai.webp" alt="Simulador tipo trípode plegable con soporte de volante y placa de pedales" loading="eager" decoding="async" fetchpriority="high" width="1254" height="1254" /></figure>
         </div>
       </section>
 
@@ -60,10 +82,10 @@
         <div class="shell">
           <div class="product-section-heading product-section-heading-dark"><p class="product-code">Construido para tu posición</p><h2 id="features-title">Los detalles<br /><span>que cuentan.</span></h2></div>
           <div class="tripod-feature-grid">
-            <article class="tripod-feature-card feature-main"><figure><img src="optimized/tripode-volante.jpg" alt="Placa de volante con puntos de montaje pretaladrados" loading="lazy" decoding="async" width="560" height="560" /></figure><div><span class="product-code">01 / Volante</span><h3>Placa para Volante Ajustable</h3><p>Se ajusta hacia arriba, abajo, adelante y atrás para llevar el volante a tu posición.</p></div></article>
-            <article class="tripod-feature-card"><figure><img src="optimized/tripode-ajuste-ai.png" alt="Perilla de ajuste rápido sobre la estructura del simulador" loading="lazy" decoding="async" width="1254" height="1254" /></figure><div><span class="product-code">02 / Marco</span><h3>Acero protegido</h3><p>Recubrimiento en polvo de alta calidad para evitar arañazos y óxido.</p></div></article>
-            <article class="tripod-feature-card"><figure><img src="optimized/tripode-pies-ai.png" alt="Pie de silicona ajustable para proteger el piso" loading="lazy" decoding="async" width="1254" height="1254" /></figure><div><span class="product-code">03 / Base</span><h3>Pies de silicona</h3><p>Protegen el suelo de arañazos causados por movimientos y vibraciones del juego.</p></div></article>
-            <article class="tripod-feature-card feature-fold"><figure><img src="optimized/tripode-plegado-ai.png" alt="Simulador tipo trípode plegado junto a una cama" loading="lazy" decoding="async" width="1254" height="1254" /></figure><div><span class="product-code">04 / Espacio</span><h3>Diseño Plegable</h3><p>Se guarda fácilmente cuando no estás corriendo y libera el espacio de tu habitación.</p></div></article>
+            <article class="tripod-feature-card feature-main"><figure><img src="optimized/tripode-volante.webp" alt="Placa de volante con puntos de montaje pretaladrados" loading="lazy" decoding="async" width="560" height="560" /></figure><div><span class="product-code">01 / Volante</span><h3>Placa para Volante Ajustable</h3><p>Se ajusta hacia arriba, abajo, adelante y atrás para llevar el volante a tu posición.</p></div></article>
+            <article class="tripod-feature-card"><figure><img src="optimized/tripode-ajuste-ai.webp" alt="Perilla de ajuste rápido sobre la estructura del simulador" loading="lazy" decoding="async" width="1254" height="1254" /></figure><div><span class="product-code">02 / Marco</span><h3>Acero protegido</h3><p>Recubrimiento en polvo de alta calidad para evitar arañazos y óxido.</p></div></article>
+            <article class="tripod-feature-card"><figure><img src="optimized/tripode-pies-ai.webp" alt="Pie de silicona ajustable para proteger el piso" loading="lazy" decoding="async" width="1254" height="1254" /></figure><div><span class="product-code">03 / Base</span><h3>Pies de silicona</h3><p>Protegen el suelo de arañazos causados por movimientos y vibraciones del juego.</p></div></article>
+            <article class="tripod-feature-card feature-fold"><figure><img src="optimized/tripode-plegado-ai.webp" alt="Simulador tipo trípode plegado junto a una cama" loading="lazy" decoding="async" width="1254" height="1254" /></figure><div><span class="product-code">04 / Espacio</span><h3>Diseño Plegable</h3><p>Se guarda fácilmente cuando no estás corriendo y libera el espacio de tu habitación.</p></div></article>
           </div>
           <div class="tripod-compatibility"><strong>MONTAJE PRETALADRADO</strong><span>Compatible con la mayoría de volantes, palancas de cambio y pedales, incluyendo Logitech, Fanatec y Thrustmaster.</span></div>
         </div>
@@ -95,6 +117,26 @@
       <section class="tripod-close"><div class="shell tripod-close-inner"><p class="product-code">Sim Racing Ecuador</p><h2>Tu pista cabe<br />en tu espacio.</h2><a class="button button-yellow" href="productos.html">Volver a productos <span aria-hidden="true">↗</span></a></div></section>
     </main>
 
-    <footer class="site-footer" id="contacto"><div class="shell footer-inner"><div class="footer-grid"><a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="2415" height="930" /></a><div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div><div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div><div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div></div><div class="footer-bottom"><div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="index.html#contacto">Contacto</a><a href="index.html#comunidad">Consulta tu setup</a></div><p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p></div></div></footer>
+        <footer class="site-footer" id="contacto" data-theme="dark">
+      <div class="shell footer-top">
+        <p class="eyebrow">¿Listo para tu próxima vuelta?</p>
+        <a class="footer-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Hablemos de tu setup</span><span class="footer-cta-icon" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="shell footer-grid">
+        <div class="footer-brand-block">
+          <a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/logo.webp" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="1200" height="462" /></a>
+          <p>Equipos y asesoría para simulación de carreras en Ecuador. Tu mejor experiencia.</p>
+        </div>
+        <div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div>
+        <div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        <div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true"><span>Sim Racing</span><span>Ecuador</span></div>
+      <div class="shell footer-bottom">
+        <div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="index.html#comunidad">Comunidad</a><a href="#contacto">Contacto</a></div>
+        <p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p>
+        <a class="back-to-top" href="#contenido"><span>Volver arriba</span><span aria-hidden="true">↑</span></a>
+      </div>
+    </footer>
   </body>
 </html>

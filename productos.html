@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-page="catalog">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -8,37 +8,45 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests" />
     <title>Productos | Sim Racing Ecuador</title>
     <link rel="icon" type="image/png" href="favicon.png?v=3" />
+    <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+    <script src="boot.js"></script>
+    <script src="vendor/gsap.min.js" defer></script>
+    <script src="vendor/ScrollTrigger.min.js" defer></script>
+    <script src="vendor/lenis.min.js" defer></script>
     <script src="script.js" defer></script>
   </head>
   <body class="catalog-page">
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
 
-    <header class="site-header" id="inicio">
-      <div class="shell header-inner">
+        <header class="site-header" data-header>
+      <div class="shell header-bar">
         <a class="brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio">
-          <img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="eager" decoding="async" fetchpriority="high" width="2415" height="930" />
+          <img src="optimized/logo.webp" alt="Sim Racing Ecuador" width="1200" height="462" decoding="async" />
         </a>
-        <div class="header-tools" aria-label="Accesos rápidos">
-          <a class="social-chip" href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">IG</a>
-          <a class="social-chip" href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+        <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+          <a class="nav-link" href="index.html#setups"><span class="nav-index">01</span><span class="nav-label">Setups</span></a>
+          <a class="nav-link" href="productos.html" aria-current="page"><span class="nav-index">02</span><span class="nav-label">Productos</span></a>
+          <a class="nav-link" href="index.html#comunidad"><span class="nav-index">03</span><span class="nav-label">Comunidad</span></a>
+          <a class="nav-link" href="#contacto"><span class="nav-index">04</span><span class="nav-label">Contacto</span></a>
+          <div class="nav-extra">
+            <a class="button button-yellow" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+            <div class="nav-social">
+              <a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </div>
+          </div>
+        </nav>
+        <div class="header-actions">
+          <a class="button button-yellow button-small header-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-toggle-label">Menú</span>
+            <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+          </button>
         </div>
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span class="menu-toggle-label">Menú</span>
-          <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
-        </button>
       </div>
-      <div class="race-nav">
-        <div class="shell race-nav-inner">
-          <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
-            <a class="nav-link" href="index.html#setups">Setups</a>
-            <a class="nav-link nav-link-current" href="productos.html" aria-current="page">Productos</a>
-            <a class="nav-link" href="index.html#contacto">Contacto</a>
-            <a class="nav-link" href="index.html#comunidad">Comunidad</a>
-            <a class="button button-small button-yellow" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer">Cotiza tu simulador <span aria-hidden="true">↗</span></a>
-          </nav>
-        </div>
-      </div>
+      <div class="scroll-progress" aria-hidden="true"><span></span></div>
     </header>
 
     <main id="catalogo">
@@ -51,7 +59,7 @@
             <a class="catalog-jump" href="#cockpits">Ver cockpits <span aria-hidden="true">↓</span></a>
           </div>
           <figure class="catalog-hero-art catalog-cockpit-art">
-            <img src="optimized/cockpit-silla-hero.png" alt="Cockpit Pro plegable con silla para simulación de carreras" loading="eager" decoding="async" fetchpriority="high" width="500" height="500" />
+            <img src="optimized/cockpit-silla-hero.webp" alt="Cockpit Pro plegable con silla para simulación de carreras" loading="eager" decoding="async" fetchpriority="high" width="500" height="500" />
           </figure>
           <div class="catalog-hero-index" aria-label="Categorías del catálogo">
             <span>01 / Volantes y pedales</span>
@@ -69,7 +77,7 @@
           </div>
           <div class="cockpit-lineup">
             <article class="cockpit-feature cockpit-feature-chair">
-              <div class="cockpit-visual cockpit-chair-visual"><img src="optimized/cockpit-silla-hero.png" alt="Cockpit plegable con silla para simulación de carreras" loading="lazy" decoding="async" width="500" height="500" /></div>
+              <div class="cockpit-visual cockpit-chair-visual"><img src="optimized/cockpit-silla-hero.webp" alt="Cockpit plegable con silla para simulación de carreras" loading="lazy" decoding="async" width="500" height="500" /></div>
               <div class="product-line-copy">
                 <div><span class="product-code">Cockpit / Completo</span><h3>Cockpit con silla</h3></div>
                 <p>Una estación completa para crear una posición de manejo estable y dedicada.</p>
@@ -77,7 +85,7 @@
               </div>
             </article>
             <article class="cockpit-feature">
-              <div class="cockpit-visual"><img src="optimized/tripode-cockpit-ai.png" alt="Simulador tipo trípode plegable con soporte para volante y pedales" loading="lazy" decoding="async" width="1254" height="1254" /></div>
+              <div class="cockpit-visual"><img src="optimized/tripode-cockpit-ai.webp" alt="Simulador tipo trípode plegable con soporte para volante y pedales" loading="lazy" decoding="async" width="1254" height="1254" /></div>
               <div class="product-line-copy">
                 <div><span class="product-code">Cockpit / Sin silla / Plegable</span><h3>Simulador tipo trípode</h3></div>
                 <p>Una estación compacta, ajustable y lista para guardar cuando termina la carrera.</p>
@@ -88,7 +96,7 @@
         </div>
       </section>
 
-      <section class="catalog-section control-catalog bg-word-host" id="volantes-pedales" aria-labelledby="control-title">
+      <section class="catalog-section control-catalog" id="volantes-pedales" aria-labelledby="control-title">
         <div class="shell">
           <div class="catalog-heading catalog-heading-dark">
             <h2 id="control-title">Volantes<br /><span>y pedales.</span></h2>
@@ -129,7 +137,7 @@
         </div>
       </section>
 
-      <section class="catalog-section accessories-catalog bg-word-host" id="accesorios" aria-labelledby="accessories-title">
+      <section class="catalog-section accessories-catalog" id="accesorios" aria-labelledby="accessories-title">
         <div class="shell">
           <div class="catalog-heading">
             <h2 id="accessories-title">Accesorios<br /><span>para hacerlo tuyo.</span></h2>
@@ -160,15 +168,25 @@
       </section>
     </main>
 
-    <footer class="site-footer" id="contacto">
-      <div class="shell footer-inner">
-        <div class="footer-grid">
-          <a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/sim racing.png" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="2415" height="930" /></a>
-          <div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div>
-          <div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
-          <div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div>
+        <footer class="site-footer" id="contacto" data-theme="dark">
+      <div class="shell footer-top">
+        <p class="eyebrow">¿Listo para tu próxima vuelta?</p>
+        <a class="footer-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Hablemos de tu setup</span><span class="footer-cta-icon" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="shell footer-grid">
+        <div class="footer-brand-block">
+          <a class="brand footer-brand" href="index.html" aria-label="Sim Racing Ecuador, volver al inicio"><img src="optimized/logo.webp" alt="Sim Racing Ecuador" loading="lazy" decoding="async" width="1200" height="462" /></a>
+          <p>Equipos y asesoría para simulación de carreras en Ecuador. Tu mejor experiencia.</p>
         </div>
-        <div class="footer-bottom"><div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="#contacto">Contacto</a><a href="index.html#comunidad">Consulta tu setup</a></div><p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p></div>
+        <div class="footer-column"><span class="footer-kicker">Dirección</span><p>Ecuador<br />Atención con cita previa</p></div>
+        <div class="footer-column"><span class="footer-kicker">Contacto</span><a href="tel:+593989019836">098 901 9836</a><a href="https://wa.me/593989019836" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        <div class="footer-column"><span class="footer-kicker">Redes</span><a href="https://www.instagram.com/SimRacingEcuador/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @SimRacingEcuador">@SimRacingEcuador</a><a href="https://www.facebook.com/simracingecuador" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.tiktok.com/@simracingec" target="_blank" rel="noopener noreferrer" aria-label="TikTok @simracingec">@simracingec</a></div>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true"><span>Sim Racing</span><span>Ecuador</span></div>
+      <div class="shell footer-bottom">
+        <div class="footer-links"><a href="index.html#setups">Setups</a><a href="productos.html">Productos</a><a href="index.html#comunidad">Comunidad</a><a href="#contacto">Contacto</a></div>
+        <p>© 2026 Sim Racing Ecuador · Todos los derechos reservados.</p>
+        <a class="back-to-top" href="#contenido"><span>Volver arriba</span><span aria-hidden="true">↑</span></a>
       </div>
     </footer>
   </body>
