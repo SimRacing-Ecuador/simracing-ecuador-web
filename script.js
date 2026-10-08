@@ -316,11 +316,11 @@
     cursor.append(ring);
     document.body.append(cursor);
 
-    const xTo = gsap.quickTo(cursor, 'x', { duration: 0.5, ease: 'power3' });
-    const yTo = gsap.quickTo(cursor, 'y', { duration: 0.5, ease: 'power3' });
+    const xSet = gsap.quickSetter(cursor, 'x', 'px');
+    const ySet = gsap.quickSetter(cursor, 'y', 'px');
     window.addEventListener('pointermove', (event) => {
-      xTo(event.clientX);
-      yTo(event.clientY);
+      xSet(event.clientX);
+      ySet(event.clientY);
       cursor.classList.add('is-visible');
     }, { passive: true });
     document.documentElement.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
