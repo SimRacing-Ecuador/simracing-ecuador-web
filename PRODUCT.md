@@ -8,56 +8,49 @@ web
 
 ## Stack
 
-delegated: static HTML/CSS/JavaScript so the page can be opened locally without setup
+Static HTML5, CSS3, vanilla JavaScript, GSAP, ScrollTrigger, Lenis, self-hosted web fonts and WebP media. Completely dependency-free and runnable locally without build tools or servers.
 
 ## Users
 
-Primary users are people in Ecuador who are exploring sim racing, comparing equipment, or planning a home driving setup. They need to understand the available paths quickly and know how to request more information.
+Primary users are sim racing enthusiasts, competitive drivers, and newcomers in Ecuador who are exploring racing simulation hardware, comparing direct drive options, planning a home cockpit setup, or upgrading their existing simulator.
 
 ## Product Purpose
 
-Sim Racing Ecuador presents racing simulation equipment and setup guidance in a locally recognizable, high-energy experience. The first surface should make the brand memorable, show real supplied products, and move a visitor toward exploring a setup or asking for a recommendation.
+Sim Racing Ecuador presents high-performance racing simulation equipment and cockpit solutions in a distinctive, locally anchored, technical dark experience under the **Night Telemetry** design system. The site enables visitors to evaluate setups, inspect detailed product sheets, understand compatibility, and connect directly with the local team via WhatsApp for personalized guidance and quotes.
 
 ## Positioning
 
-The product combines a local Ecuadorian identity with practical sim racing setup guidance and a curated presentation of physical equipment.
+The product combines a proud Ecuadorian motorsport identity with technical simulation rigor, featuring genuine hardware specifications (Direct Drive torque, pedal adjustability, cockpit dimensions) and curated upgrade paths from entry-level to professional competition.
 
-## Operating Context
+## Surface Architecture
 
-Visitors arrive from social media, direct links, or product sharing and scan on a phone or desktop. They evaluate the visual quality of a setup, compare upgrade paths, and then choose a product or contact action.
+The experience consists of 8 interconnected static surfaces:
+1. `index.html`: Interactive scrollytelling landing page (start lights sequence, canvas frame scrub, pinned setups gallery, telemetry chart, community section).
+2. `productos.html`: Comprehensive category-based catalog (Cockpits, Volantes y pedales, Accesorios).
+3. `cockpit-con-silla.html`: Dedicated product sheet for the Cockpit Pro plegable con silla ($350).
+4. `simulador-tripode.html`: Dedicated product sheet for the Simulador tipo trípode ($185) with embedded video.
+5. `moza-r3.html`: Dedicated product sheet for the MOZA R3 Direct Drive bundle ($580) with PC & Xbox compatibility matrix.
+6. `moza-r5.html`: Product sheet for the MOZA R5 Direct Drive base ($675).
+7. `moza-r9-kit.html`: Product sheet for the MOZA R9 Kit ($1.640) with CS V2P wheel and CRP2 pedals.
+8. `moza-r12-kit.html`: Product sheet for the MOZA R12 Kit ($1.820) with 12 Nm Direct Drive base.
 
-## Capabilities and Constraints
+## Brand Commitments & Voice
 
-- The first version is a static one-page landing page.
-- Navigation should work through section anchors and a mobile menu.
-- Product availability, contact channels, and checkout are intentionally undecided and must not be invented.
-- The page uses the existing local PNG and MP4 assets from the project folder.
+- **Brand Name:** “Sim Racing Ecuador”.
+- **Tagline:** “Tu mejor experiencia”.
+- **Palette Foundation:** Ink foundation (`#05080D`), paper surfaces (`#F2F4F7`), electric cyan (`#00B8F2`), Ecuador yellow (`#FFD400`), racing blue (`#075A9E`), and racing red (`#ED1C24`).
+- **Tricolor Identity:** Ecuadorian tricolor accent bars (50% yellow, 25% blue, 25% red) angled at `-24deg` skew in eyebrows and progress indicators.
+- **Tone:** Technical, confident, energetic, authentic, and welcoming.
 
-## Brand Commitments
+## Verified Contact & Commercial Endpoints
 
-- Use the name “Sim Racing Ecuador”.
-- Use the supplied logo as the primary identity asset.
-- Preserve the logo-derived white, electric blue, yellow, deep blue, and red palette over a dark foundation.
-- Use the phrase “Tu mejor experiencia” where it supports the brand voice.
-- Logitech G’s sim racing page is a structural reference only; the page should remain a Sim Racing Ecuador experience.
-- The Corredo motorcycle and sports events layout is a structural reference for the light masthead, colored navigation, dominant hero, event information band, image cards, and editorial content rhythm; its copy, logo, imagery, and event data are not reused.
-
-## Evidence on Hand
-
-- `sim racing.png`: supplied Sim Racing Ecuador logo.
-- `cover.png`: supplied MOZA R3 bundle product artwork.
-- `infografia soporte.png`: supplied cockpit support artwork.
-- `simulador vuelo.png`: supplied flight simulator artwork.
-- `5dae82990e6d41dab0c886ad8da88529.mp4`: supplied video for the hero treatment.
-- No verified contact endpoint, product catalog feed, customer proof, or inventory data was supplied.
+- **WhatsApp Concierge:** `+593 98 901 9836` (`https://wa.me/593989019836`)
+- **Instagram:** `@SimRacingEcuador` (`https://www.instagram.com/SimRacingEcuador/`)
+- **TikTok:** `@simracingec` (`https://www.tiktok.com/@simracingec/`)
+- **Location:** Ecuador (Atención con cita previa)
 
 ## Product Principles
 
-- Make the local identity visible immediately.
-- Show the physical equipment before asking the visitor to decide.
-- Guide visitors by setup intent: start, improve, or compete.
-- Keep commercial claims tied to supplied assets or future catalog data.
-
-## Accessibility & Inclusion
-
-Use semantic landmarks, keyboard-visible focus, readable contrast, descriptive image text, touch-friendly controls, and reduced-motion behavior.
+- **Zero Invention:** Keep technical specifications and commercial prices strictly tied to verified catalog data.
+- **Show Before Asking:** Present real physical hardware, dimensions, torque ratings, and ergonomics before prompting for a quote.
+- **Performance & Security First:** Uncompromising loading speed, zero third-party tracking, strict CSP, and full accessibility support for reduced motion.
