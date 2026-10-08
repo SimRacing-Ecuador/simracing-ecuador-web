@@ -1135,6 +1135,19 @@ html:not(.motion-ready) .hero-cue { display: none; }
 
 /* ---- Cursor (fine pointers only, injected by script.js) ------------------ */
 .cursor { position: fixed; top: 0; left: 0; z-index: 110; width: 0; height: 0; pointer-events: none; }
+.cursor-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan), 0 0 10px rgba(0, 184, 242, .45);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .3s var(--ease-expo), opacity .25s ease, background .3s ease, box-shadow .3s ease;
+}
+.cursor.is-visible .cursor-dot { opacity: 1; }
 .cursor-ring {
   position: absolute;
   display: grid;
@@ -1142,18 +1155,132 @@ html:not(.motion-ready) .hero-cue { display: none; }
   width: 34px;
   height: 34px;
   margin: -17px 0 0 -17px;
-  border: 1px solid rgba(242, 244, 247, .55);
+  border: 1px solid rgba(0, 184, 242, .45);
   border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 184, 242, .14), inset 0 0 6px rgba(0, 184, 242, .06);
   opacity: 0;
-  transition: width .5s var(--ease-expo), height .5s var(--ease-expo), margin .5s var(--ease-expo), background .4s ease, border-color .4s ease, opacity .3s ease;
+  transition: width .45s var(--ease-expo), height .45s var(--ease-expo), margin .45s var(--ease-expo), transform .45s var(--ease-expo), background .35s ease, border-color .35s ease, box-shadow .35s ease, opacity .25s ease;
 }
 .cursor.is-visible .cursor-ring { opacity: 1; }
-.cursor.is-link .cursor-ring { width: 54px; height: 54px; margin: -27px 0 0 -27px; border-color: var(--cyan); }
-.cursor.has-label .cursor-ring { width: 86px; height: 86px; margin: -43px 0 0 -43px; border-color: transparent; background: var(--yellow); }
+.cursor-ring::before,
+.cursor-ring::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .45s var(--ease-expo), background .35s ease;
+}
+.cursor-ring::before {
+  top: -6px;
+  bottom: -6px;
+  left: 50%;
+  width: 1px;
+  margin-left: -0.5px;
+  background: linear-gradient(
+    to bottom,
+    var(--cyan) 0,
+    var(--cyan) 5px,
+    transparent 5px,
+    transparent calc(100% - 5px),
+    var(--cyan) calc(100% - 5px),
+    var(--cyan) 100%
+  );
+}
+.cursor-ring::after {
+  left: -6px;
+  right: -6px;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+  background: linear-gradient(
+    to right,
+    var(--cyan) 0,
+    var(--cyan) 5px,
+    transparent 5px,
+    transparent calc(100% - 5px),
+    var(--cyan) calc(100% - 5px),
+    var(--cyan) 100%
+  );
+}
+.cursor.is-link .cursor-ring {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px rgba(0, 184, 242, .4), inset 0 0 8px rgba(0, 184, 242, .15);
+  transform: rotate(45deg);
+}
+.cursor.is-link .cursor-dot {
+  transform: scale(1.35);
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff, 0 0 14px var(--cyan);
+}
+.cursor.has-label .cursor-ring {
+  width: 86px;
+  height: 86px;
+  margin: -43px 0 0 -43px;
+  border-color: transparent;
+  background: var(--yellow);
+  box-shadow: 0 0 20px rgba(255, 212, 0, .35);
+  transform: rotate(0deg);
+}
+.cursor.has-label .cursor-ring::before,
+.cursor.has-label .cursor-ring::after {
+  opacity: 0;
+}
+.cursor.has-label .cursor-dot {
+  opacity: 0;
+  transform: scale(0.3);
+}
 .cursor-label { font-family: var(--mono); font-size: .66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); opacity: 0; transition: opacity .3s ease; }
 .cursor.has-label .cursor-label { opacity: 1; }
-.cursor.is-light .cursor-ring { border-color: rgba(5, 8, 13, .45); }
-.cursor.is-light.is-link .cursor-ring { border-color: var(--blue); }
+.cursor.is-light .cursor-ring { border-color: rgba(5, 8, 13, .45); box-shadow: none; }
+.cursor.is-light .cursor-dot { background: var(--ink); box-shadow: 0 0 4px rgba(5, 8, 13, .35); }
+.cursor.is-light .cursor-ring::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 8, 13, .65) 0,
+    rgba(5, 8, 13, .65) 5px,
+    transparent 5px,
+    transparent calc(100% - 5px),
+    rgba(5, 8, 13, .65) calc(100% - 5px),
+    rgba(5, 8, 13, .65) 100%
+  );
+}
+.cursor.is-light .cursor-ring::after {
+  background: linear-gradient(
+    to right,
+    rgba(5, 8, 13, .65) 0,
+    rgba(5, 8, 13, .65) 5px,
+    transparent 5px,
+    transparent calc(100% - 5px),
+    rgba(5, 8, 13, .65) calc(100% - 5px),
+    rgba(5, 8, 13, .65) 100%
+  );
+}
+.cursor.is-light.is-link .cursor-ring { border-color: var(--blue); box-shadow: 0 0 10px rgba(7, 90, 158, .28); }
+.cursor.is-light.is-link .cursor-dot { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
+.cursor.is-light.is-link .cursor-ring::before {
+  background: linear-gradient(
+    to bottom,
+    var(--blue) 0,
+    var(--blue) 5px,
+    transparent 5px,
+    transparent calc(100% - 5px),
+    var(--blue) calc(100% - 5px),
+    var(--blue) 100%
+  );
+}
+.cursor.is-light.is-link .cursor-ring::after {
+  background: linear-gradient(
+    to right,
+    var(--blue) 0,
+    var(--blue) 5px,
+    transparent 5px,
+    transparent calc(100% - 5px),
+    var(--blue) calc(100% - 5px),
+    var(--blue) 100%
+  );
+}
 
 /* ==========================================================================
    Inner pages: catalogue + product sheets

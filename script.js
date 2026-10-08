@@ -309,11 +309,12 @@
     if (!finePointer.matches) return;
 
     const cursor = createElement('div', 'cursor');
+    const dot = createElement('div', 'cursor-dot');
     const ring = createElement('div', 'cursor-ring');
     const label = createElement('span', 'cursor-label');
     cursor.setAttribute('aria-hidden', 'true');
     ring.append(label);
-    cursor.append(ring);
+    cursor.append(dot, ring);
     document.body.append(cursor);
 
     const xSet = gsap.quickSetter(cursor, 'x', 'px');
