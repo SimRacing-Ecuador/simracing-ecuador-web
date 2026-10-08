@@ -24,10 +24,10 @@ Páginas internas: entrada del hero (máscara de líneas, recorte del escenario,
 `prefers-reduced-motion` desactiva Lenis, pins y animaciones; sin JS la página es estática y completa.
 
 ## Regenerar recursos
-- Fotogramas: `ffmpeg -i 5dae82990e6d41dab0c886ad8da88529.mp4 -vf fps=24 -c:v libwebp -quality 74 sequence/f%03d.webp` (121 cuadros; ajusta `total` en `script.js` si cambia).
+- Fotogramas: `ffmpeg -i 5dae82990e6d41dab0c886ad8da88529.mp4 -vf "fps=121/5,scale=526:-2,crop=526:702" -c:v libwebp -quality 74 sequence/f%03d.webp` (121 cuadros a 526×702; ajusta `total` en `script.js` si cambia).
 - Recortes `optimized/r3-*-cut.webp`: generados desde los PNG de fondo blanco eliminando el fondo conectado al borde y los huecos blancos grandes.
 - Imágenes: versiones `.webp` (máx. 1920 px, calidad 80) junto a los PNG originales.
 
 ## Verificación
 - `python3 tests/security_audit.py` y `python3 tests/verify_page.py` (ambos en CI).
-- Nota: el video original lleva la marca de agua de Pika; conviene reemplazarlo por una exportación limpia y regenerar `sequence/`.
+- Nota: el video original fue reemplazado por una exportación limpia sin marca de agua (1080×1920, 24 fps, 5 s) y la secuencia `sequence/` fue regenerada a 526×702.
