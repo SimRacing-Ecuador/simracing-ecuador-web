@@ -1086,7 +1086,7 @@ html:not(.motion-ready) .hero-cue { display: none; }
   transform-origin: center;
   transition: transform .7s var(--ease-expo), color .4s ease;
 }
-.footer-cta:hover .footer-cta-icon { transform: rotate(45deg); }
+.footer-cta:hover .footer-cta-icon { transform: rotate(10deg) scale(1.08); }
 .footer-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 40px; padding-block: clamp(48px, 6vw, 72px); }
 .footer-brand { width: 150px; }
 .footer-brand-block p { max-width: 32ch; margin-top: 20px; color: var(--text-dim); font-size: .92rem; }
