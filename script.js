@@ -1052,7 +1052,8 @@
       gsap.fromTo(stage, { clipPath: 'inset(0% 0% 0% 100% round 20px)' }, { clipPath: 'inset(0% 0% 0% 0% round 20px)', duration: 1.8, ease: 'expo.inOut', delay: 0.1 });
       if (image) {
         gsap.fromTo(image, { scale: 1.25, autoAlpha: 0, rotate: -4 }, { scale: 1, autoAlpha: 1, rotate: 0, duration: 2, delay: 0.5 });
-        gsap.to(image, { yPercent: -10, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+        // Starts once the stage is centred, so stacked mobile layouts don't lift the product before it is in view.
+        gsap.to(image, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: stage, start: 'center center', end: 'bottom top', scrub: true } });
       }
       const value = $('.moza-power-inner', stage);
       if (value) gsap.to(value, { yPercent: 14, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
