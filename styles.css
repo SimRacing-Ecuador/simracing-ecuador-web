@@ -1456,27 +1456,28 @@ html:not(.motion-ready) .hero-cue { display: none; }
 }
 
 /* MOZA torque stage */
-.moza-power { background: var(--blue); color: var(--paper); }
+.moza-power { --stage: var(--blue); background: var(--stage); color: var(--paper); }
 .moza-power::before, .moza-power::after { position: absolute; top: 50%; left: 50%; z-index: -1; border: 1px solid rgba(255, 255, 255, .24); border-radius: 50%; translate: -50% -50%; content: ""; }
 .moza-power::before { width: 82%; aspect-ratio: 1; }
 .moza-power::after { width: 50%; aspect-ratio: 1; border-style: dashed; }
-.moza-power-inner { display: flex; align-items: flex-end; gap: .1em; }
-.moza-power-value { font-size: clamp(9rem, 21vw, 21rem); font-stretch: 64%; font-weight: 900; line-height: .74; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
-.moza-power-inner small { margin-bottom: .5em; color: var(--yellow); font-size: clamp(1.6rem, 3vw, 3.2rem); font-stretch: 70%; font-weight: 800; }
+/* Unit stacked under the figure so it never collides with the digits and the number sits on the ring's centre. */
+.moza-power-inner { display: flex; flex-direction: column; align-items: center; gap: clamp(14px, 1.8vw, 24px); }
+.moza-power-value { padding-bottom: .14em; font-size: clamp(9rem, 21vw, 21rem); font-stretch: 64%; font-weight: 900; line-height: .74; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.moza-power-inner small { padding: .3em .5em .3em .72em; border-radius: 999px; background: var(--stage); /* masks the ring line behind the unit */ color: var(--yellow); font-size: clamp(1.25rem, 2vw, 2rem); font-stretch: 70%; font-weight: 800; line-height: 1; letter-spacing: .22em; }
 .moza-power b { position: absolute; right: 30px; bottom: 28px; font-family: var(--mono); font-size: .68rem; font-weight: 500; letter-spacing: .16em; line-height: 1.4; text-align: right; color: var(--yellow); }
 .moza-power-gauge { position: absolute; top: 28px; right: 30px; left: 30px; display: grid; gap: 8px; font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; }
 .moza-power-gauge > span { display: flex; justify-content: space-between; opacity: .8; }
 .moza-power-gauge i { position: relative; display: block; height: 4px; overflow: hidden; border-radius: 4px; background: rgba(255, 255, 255, .2); }
 .moza-power-gauge i::after { position: absolute; inset: 0; background: currentColor; transform: scaleX(var(--torque, 0)); transform-origin: 0 50%; content: ""; }
-.moza-r5 .moza-power { background: var(--cyan); color: var(--ink); }
+.moza-r5 .moza-power { --stage: var(--cyan); color: var(--ink); }
 .moza-r5 .moza-power-inner small { color: var(--blue); }
 .moza-r5 .moza-power b { color: var(--ink); }
 .moza-r5 .moza-power::before, .moza-r5 .moza-power::after { border-color: rgba(5, 8, 13, .2); }
-.moza-r9 .moza-power { background: var(--yellow); color: var(--ink); }
+.moza-r9 .moza-power { --stage: var(--yellow); color: var(--ink); }
 .moza-r9 .moza-power-inner small { color: var(--red); }
 .moza-r9 .moza-power b { color: var(--ink); }
 .moza-r9 .moza-power::before, .moza-r9 .moza-power::after { border-color: rgba(5, 8, 13, .2); }
-.moza-r12 .moza-power { background: var(--red); }
+.moza-r12 .moza-power { --stage: var(--red); }
 
 /* ---- Section rhythm ------------------------------------------------------ */
 .catalog-section { position: relative; padding-block: clamp(96px, 11vw, 160px); }
