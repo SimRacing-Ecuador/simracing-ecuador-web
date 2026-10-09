@@ -1327,7 +1327,8 @@ html:not(.motion-ready) .hero-cue { display: none; }
   line-height: 1.6;
 }
 .r3-platform {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   margin: 16px 0 0;
   padding: 7px 12px;
   border-radius: 999px;
@@ -1359,6 +1360,25 @@ html:not(.motion-ready) .hero-cue { display: none; }
   font-variant-numeric: tabular-nums;
 }
 .product-price-line span, .moza-buy-line span { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+.moza-buy-line .buy-ask {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background .3s ease, border-color .3s ease, color .3s ease;
+}
+.moza-buy-line .buy-ask span { color: var(--yellow); font-size: .9rem; letter-spacing: 0; transition: color .3s ease; }
+.moza-buy-line .buy-ask:hover, .moza-buy-line .buy-ask:focus-visible { border-color: var(--yellow); background: var(--yellow); color: var(--ink); }
+.moza-buy-line .buy-ask:hover span, .moza-buy-line .buy-ask:focus-visible span { color: var(--ink); }
 .catalog-jump { margin-top: 26px; color: var(--yellow); }
 
 /* Product stages */
@@ -1382,7 +1402,7 @@ html:not(.motion-ready) .hero-cue { display: none; }
   aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, .22);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  translate: -50% -50%; /* not transform: the scroll spin must rotate the ring in place */
   content: "";
 }
 :is(.catalog-hero-art, .tripod-hero-product, .chair-hero-product, .r3-bundle-visual)::after {
@@ -1394,11 +1414,16 @@ html:not(.motion-ready) .hero-cue { display: none; }
   pointer-events: none;
   content: "";
 }
+/* The image box is pinned to the stage so its size never comes from the
+   width/height attributes (a 1254px-tall source used to spill out the bottom). */
 :is(.catalog-hero-art, .tripod-hero-product, .chair-hero-product, .r3-bundle-visual) img {
-  position: relative;
-  width: min(84%, 640px);
-  max-height: 82%;
+  position: absolute;
+  inset: 9% 8%;
+  width: 84%;
+  height: 82%;
+  max-width: none;
   object-fit: contain;
+  object-position: 50% 50%;
   filter: drop-shadow(0 40px 40px rgba(0, 0, 0, .45));
 }
 .catalog-cockpit-art { background: radial-gradient(60% 60% at 50% 45%, rgba(0, 184, 242, .4), transparent 70%), linear-gradient(150deg, #0b3a66, var(--blue-deep) 70%); }
@@ -1409,7 +1434,7 @@ html:not(.motion-ready) .hero-cue { display: none; }
 .chair-hero-product::before, .chair-hero-product::after { border-color: rgba(5, 8, 13, .16); }
 .chair-hero-product img { filter: drop-shadow(0 34px 30px rgba(5, 8, 13, .3)); }
 .r3-bundle-visual { background: radial-gradient(60% 60% at 50% 48%, rgba(0, 184, 242, .35), transparent 70%), linear-gradient(150deg, #0d2741, var(--ink-2) 75%); }
-.r3-bundle-visual img { width: min(94%, 820px); }
+.r3-bundle-visual img { inset: 9% 6%; width: 88%; }
 .catalog-hero-index {
   position: absolute;
   right: 0;
@@ -1432,7 +1457,7 @@ html:not(.motion-ready) .hero-cue { display: none; }
 
 /* MOZA torque stage */
 .moza-power { background: var(--blue); color: var(--paper); }
-.moza-power::before, .moza-power::after { position: absolute; top: 50%; left: 50%; z-index: -1; border: 1px solid rgba(255, 255, 255, .24); border-radius: 50%; transform: translate(-50%, -50%); content: ""; }
+.moza-power::before, .moza-power::after { position: absolute; top: 50%; left: 50%; z-index: -1; border: 1px solid rgba(255, 255, 255, .24); border-radius: 50%; translate: -50% -50%; content: ""; }
 .moza-power::before { width: 82%; aspect-ratio: 1; }
 .moza-power::after { width: 50%; aspect-ratio: 1; border-style: dashed; }
 .moza-power-inner { display: flex; align-items: flex-end; gap: .1em; }
@@ -1527,7 +1552,10 @@ a.price-ask:hover { background: var(--ink); color: var(--paper); }
 .control-row-link:hover h3 { transform: translateX(10px); }
 .control-row p { max-width: 30ch; color: var(--text-dim); font-size: .96rem; transition: color .4s ease; }
 .control-row-link:hover p, .control-row-link:hover .product-code, .control-row-link:hover .control-number { color: var(--ink); }
-.control-row .price-ask { color: var(--text-dim); }
+.control-row a.price-ask { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-color: var(--line-strong); color: var(--paper); white-space: nowrap; }
+.control-row a.price-ask span { color: var(--yellow); font-size: .9rem; letter-spacing: 0; }
+.control-row a.price-ask:hover, .control-row a.price-ask:focus-visible { border-color: var(--yellow); background: var(--yellow); color: var(--ink); }
+.control-row a.price-ask:hover span, .control-row a.price-ask:focus-visible span { color: var(--ink); }
 .control-row-action { display: block; margin-top: 10px; font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
 .control-row-link:hover .control-row-action { color: var(--ink); }
 .catalog-price { color: var(--yellow); font-size: clamp(2.4rem, 4vw, 4.4rem); font-stretch: 70%; font-weight: 800; line-height: .9; white-space: nowrap; transition: color .4s ease; }

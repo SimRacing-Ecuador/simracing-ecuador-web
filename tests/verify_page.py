@@ -124,6 +124,19 @@ for price in ("$580", "$675", "$1.640", "$1.820"):
 for part in ("CS V2P", "CRP2", "Solo disponible en kit"):
     require(part in products, f"Missing kit detail: {part}")
 
+# Every "Consultar disponibilidad" label must be a working WhatsApp link, never plain text.
+for name, markup in pages.items():
+    for match in re.finditer(r"<(\w+)\b([^>]*)>\s*Consultar disponibilidad", markup):
+        tag, attrs = match.groups()
+        require(tag == "a" and 'href="https://wa.me/593989019836' in attrs,
+                f"'Consultar disponibilidad' is not a WhatsApp link on {name}: <{tag}{attrs}>")
+for product in ("simulador%20tipo%20tr%C3%ADpode", "volante%20Logitech%20G29"):
+    require(f"disponibilidad%20del%20{product}" in products, f"Catalog availability link missing for {product}")
+require("disponibilidad%20del%20MOZA%20R3" in r3, "MOZA R3 availability must link to WhatsApp")
+require("disponibilidad%20del%20MOZA%20R5" in r5, "MOZA R5 availability must link to WhatsApp")
+require('index.html#comunidad"><span class="nav-index">03</span><span class="nav-label">Comunidad' not in "".join(pages.values()),
+        "Navigation must not label the home CTA section as 'Comunidad'")
+
 # ---- Product sheets ---------------------------------------------------------
 for detail in ("youtube.com/embed/Qryc6QBhAPc", "Placa para Volante Ajustable", "Diseño Plegable", "522x831x815mm", "20kg (44lbs)",
                "optimized/tripode-pies-ai.webp", "optimized/tripode-cockpit-ai.webp", "optimized/tripode-volante.webp",
