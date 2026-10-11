@@ -60,8 +60,9 @@ for name, markup in pages.items():
     require("viewport-fit=cover" in markup, f"Missing safe-area viewport on {name}")
     require("Content-Security-Policy" in markup, f"Missing CSP on {name}")
     require(' style="' not in markup, f"Inline style attribute (blocked by CSP) on {name}")
+    script_sources = {source.split("?", 1)[0] for source in re.findall(r'<script\b[^>]*\bsrc="([^"]+)"', markup)}
     for script in ("boot.js", "vendor/gsap.min.js", "vendor/ScrollTrigger.min.js", "vendor/lenis.min.js", "script.js"):
-        require(f'src="{script}"' in markup, f"Missing {script} on {name}")
+        require(script in script_sources, f"Missing {script} on {name}")
     for token in ("footer-grid", "098 901 9836", "Todos los derechos reservados", 'id="contacto"'):
         require(token in markup, f"Missing sitewide footer detail on {name}: {token}")
     for link in ("https://www.instagram.com/SimRacingEcuador/", "https://www.tiktok.com/@simracingec", "https://wa.me/593989019836"):

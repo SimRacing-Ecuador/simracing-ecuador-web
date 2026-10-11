@@ -1100,7 +1100,10 @@
     root.classList.remove('motion-pending');
   }
 
-  const refresh = () => ScrollTrigger.refresh();
+  const refresh = () => {
+    ScrollTrigger.refresh();
+    lenis?.resize();
+  };
   document.fonts?.ready.then(refresh);
   window.addEventListener('load', () => {
     refresh();
