@@ -1537,7 +1537,7 @@ a.price-ask:hover { background: var(--ink); color: var(--paper); }
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, 1fr) 15.5rem;
   align-items: center;
   gap: 28px;
   min-height: 150px;
@@ -1546,6 +1546,7 @@ a.price-ask:hover { background: var(--ink); color: var(--paper); }
   color: var(--paper);
 }
 .control-row::before { position: absolute; inset: 0; z-index: -1; background: var(--row-accent, var(--cyan)); transform: scaleY(0); transform-origin: 50% 100%; transition: transform .7s var(--ease-expo); content: ""; }
+.control-row > :last-child { justify-self: end; }
 .control-row-link:hover::before, .control-row-link:focus-visible::before { transform: scaleY(1); }
 .control-row-link:hover, .control-row-link:focus-visible { color: var(--ink); }
 .control-number { align-self: start; padding-top: 6px; font-family: var(--mono); font-size: .72rem; color: var(--yellow); }
