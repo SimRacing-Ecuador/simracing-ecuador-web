@@ -69,3 +69,4 @@ Subject: Exact Logitech G29 Driving Force PlayStation wheel with its own base an
 - Browser verification: 29 successful checks across the five affected pages at 360, 390, 768, 960 and 1440 px, including both enabled and reduced motion. No image decode failures, horizontal overflow, duplicate IDs or JavaScript exceptions.
 - Visible copy in all four modified existing HTML pages is identical to the baseline, including all commercial prices and specifications.
 - Visual inspection: G29 desktop/mobile, R5 specification image, and R9/R12 component cards; hardware stays fully in-frame and text remains legible.
+- Independent review completed; its minor G29 back-to-top finding was fixed and verified in the browser (target exists, scroll returns to the top, no broken local anchors).
