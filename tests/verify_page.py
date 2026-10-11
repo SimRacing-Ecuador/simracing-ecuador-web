@@ -28,7 +28,7 @@ def contains(text: str, token: str) -> bool:
 
 
 PAGES = ["index.html", "productos.html", "simulador-tripode.html", "cockpit-con-silla.html",
-         "moza-r3.html", "moza-r5.html", "moza-r9-kit.html", "moza-r12-kit.html"]
+         "moza-r3.html", "moza-r5.html", "moza-r9-kit.html", "moza-r12-kit.html", "logitech-g29.html"]
 REQUIRED_FILES = PAGES + [
     "styles.css", "script.js", "boot.js", "favicon.png",
     "vendor/gsap.min.js", "vendor/ScrollTrigger.min.js", "vendor/lenis.min.js",
