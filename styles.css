@@ -1569,6 +1569,7 @@ article.control-row-link:is(:hover, :focus-within) a.price-ask { border-color: v
 article.control-row-link:is(:hover, :focus-within) a.price-ask span { color: var(--ink); }
 .catalog-price { color: var(--yellow); font-size: clamp(2.4rem, 4vw, 4.4rem); font-stretch: 70%; font-weight: 800; line-height: .9; white-space: nowrap; transition: color .4s ease; }
 .control-row-link:hover .catalog-price { color: var(--ink); }
+.g29-catalog-action { display: grid; justify-items: end; gap: 12px; }
 .control-row-featured { --row-accent: var(--paper); margin-inline: -24px; padding-inline: 48px; border-radius: var(--radius-sm); border-bottom-color: transparent; background: var(--yellow); color: var(--ink); }
 .control-row-featured .product-code, .control-row-featured .control-number, .control-row-featured .control-row-action { color: var(--blue); }
 .control-row-featured p { color: var(--ink-dim); }

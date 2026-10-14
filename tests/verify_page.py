@@ -174,6 +174,8 @@ for detail in ("youtube.com/embed/IKJ4k8QA4Hk", "sandbox=", "900 grados de giro 
 for asset in ("bundle", "driver", "wheel-detail", "pedals", "wheel"):
     require(f"optimized/logitech-g29-{asset}.webp" in g29, f"Missing Logitech G29 asset: {asset}")
 require('href="logitech-g29.html"' in products, "Logitech G29 must open its own detail page from the catalog")
+require("$375" in products, "Logitech G29 catalog price must be $375")
+require("$375" in g29, "Logitech G29 detail page price must be $375")
 require(re.search(r"\.g29-spec-heading figure \{[^}]*aspect-ratio:\s*1\s*/\s*1", css) is not None,
         "Logitech G29 specification image must use a stable square frame")
 require(re.search(r"\.g29-spec-heading figure img \{[^}]*object-fit:\s*contain", css) is not None,
