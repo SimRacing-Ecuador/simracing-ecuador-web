@@ -2056,6 +2056,50 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 :is(.catalog-hero-art, .tripod-hero-product, .chair-hero-product, .r3-bundle-visual)::before, .moza-power::after { rotate: calc(var(--spin, 0) * 90deg); }
 .motion-pending :is(.catalog-hero, .tripod-hero, .chair-hero, .r3-product-hero, .moza-hero) :is(h1, p, .product-price-line, .moza-buy-line, .catalog-jump, figure, .moza-power, .catalog-hero-index) { visibility: hidden; }
 
+/* Logitech G29: full product sheet */
+.g29-platform { display: inline-flex; margin: 18px 0 0; padding: 7px 10px; background: var(--yellow); color: var(--ink); font-family: var(--mono); font-size: .7rem; font-weight: 800; letter-spacing: .08em; }
+.g29-hero-visual { position: relative; }
+.g29-hero-visual img { width: min(100%, 740px); }
+.g29-hero-visual figcaption { position: absolute; right: 8%; bottom: 8%; padding: 8px 11px; border: 1px solid var(--line-strong); background: var(--ink); color: var(--yellow); font-family: var(--mono); font-size: .64rem; letter-spacing: .08em; }
+.g29-overview { padding-block: clamp(88px, 11vw, 156px); background: var(--paper); color: var(--ink); }
+.g29-overview-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 20px; }
+.g29-overview-copy { display: grid; align-content: center; min-height: 430px; padding: clamp(26px, 4vw, 58px); background: var(--yellow); }
+.g29-overview h2, .g29-video h2, .g29-spec-heading h2 { max-width: 9ch; margin: 20px 0 24px; font-size: clamp(3.25rem, 6.5vw, 7.2rem); }
+.g29-overview h2 span, .g29-spec-heading h2 span { color: var(--blue); }
+.g29-overview-copy > p:last-child, .g29-spec-heading > p:last-of-type { max-width: 35ch; margin: 0; color: var(--ink-2); }
+.g29-driver-photo { position: relative; min-height: 430px; margin: 0; overflow: hidden; background: var(--ink-2); }
+.g29-driver-photo img { width: 100%; height: 100%; object-fit: cover; }
+.g29-driver-photo figcaption { position: absolute; right: 16px; bottom: 16px; padding: 7px 10px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: .66rem; letter-spacing: .08em; }
+.g29-detail-card { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 320px; overflow: hidden; background: var(--cyan); }
+.g29-detail-card > img { width: 100%; height: 100%; object-fit: cover; background: var(--paper); }
+.g29-detail-card > div { display: grid; align-content: center; padding: clamp(22px, 3vw, 40px); }
+.g29-detail-card h3 { margin: 14px 0 16px; font-size: clamp(2rem, 4vw, 4.25rem); }
+.g29-detail-card > div > p:last-child { max-width: 26ch; margin: 0; color: var(--ink-2); }
+.g29-pedals-card { background: var(--blue); color: var(--paper); }
+.g29-pedals-card .product-code { color: var(--yellow); }
+.g29-pedals-card > div > p:last-child { color: var(--paper-2); }
+.g29-video { padding-block: clamp(88px, 11vw, 156px); background: var(--ink); color: var(--paper); }
+.g29-video-heading { display: grid; grid-template-columns: .42fr 1fr; align-items: end; gap: 24px; margin-bottom: 42px; }
+.g29-video h2 { margin: 0; color: var(--paper); }
+.g29-video h2 span { color: var(--yellow); }
+.g29-video .product-code { color: var(--cyan); }
+.g29-video-frame { aspect-ratio: 16 / 8.5; overflow: hidden; border: 1px solid var(--line-strong); box-shadow: 16px 16px 0 var(--blue); background: var(--ink-2); }
+.g29-video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.g29-specs { padding-block: clamp(88px, 11vw, 156px); background: var(--paper); color: var(--ink); }
+.g29-specs-layout { display: grid; grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); align-items: start; gap: clamp(40px, 7vw, 104px); }
+.g29-spec-heading { position: sticky; top: 32px; }
+.g29-spec-heading figure { max-width: 290px; margin: 34px 0 0; background: var(--blue); }
+.g29-spec-heading figure img { display: block; width: 100%; }
+.g29-spec-tables { display: grid; gap: 44px; }
+.g29-spec-block { border-top: 3px solid var(--ink); }
+.g29-spec-block h3 { margin: 20px 0 0; font-size: clamp(1.9rem, 3.3vw, 3.55rem); }
+.g29-spec-block table { width: 100%; margin-top: 18px; border-collapse: collapse; }
+.g29-spec-block caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.g29-spec-block th, .g29-spec-block td { padding: 14px 12px; border-bottom: 1px solid var(--line-ink); text-align: left; vertical-align: top; }
+.g29-spec-block th { width: 38%; font-family: var(--mono); font-size: .69rem; letter-spacing: .06em; text-transform: uppercase; }
+.g29-spec-block td { color: var(--ink-2); }
+.g29-close .product-code { color: var(--yellow); }
+
 @media (max-width: 960px) {
   .hero-stage { min-height: 104px; }
   .part-base { top: 12%; left: 57%; width: 36%; }
@@ -2064,4 +2108,18 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
   .part-bundle { top: 10%; left: 3%; width: 94%; }
   .stage-tag-base { top: 4%; right: 0; }
   .stage-tag-pedals { bottom: 4%; left: 0; }
+  .g29-overview-grid, .g29-specs-layout { grid-template-columns: minmax(0, 1fr); }
+  .g29-spec-heading { position: static; }
+  .g29-video-heading { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 680px) {
+  .g29-overview { padding-block: 72px; }
+  .g29-overview-copy, .g29-driver-photo { min-height: 350px; }
+  .g29-detail-card { grid-template-columns: minmax(0, 1fr); }
+  .g29-detail-card > img { min-height: 260px; }
+  .g29-video, .g29-specs { padding-block: 72px; }
+  .g29-video-frame { box-shadow: 9px 9px 0 var(--blue); }
+  .g29-spec-heading figure { display: none; }
+  .g29-spec-block th { width: 44%; }
 }

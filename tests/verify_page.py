@@ -36,6 +36,9 @@ REQUIRED_FILES = PAGES + [
     "fonts/jetbrains-mono-latin-wght-normal.woff2", "optimized/logo.webp",
     "optimized/r3-base-cut.webp", "optimized/r3-wheel-cut.webp", "optimized/r3-pedals-cut.webp",
     "optimized/r3-bundle-cut.webp", "sequence/f001.webp", "sequence/f121.webp",
+    "optimized/logitech-g29-bundle.webp", "optimized/logitech-g29-driver.webp",
+    "optimized/logitech-g29-wheel-detail.webp", "optimized/logitech-g29-pedals.webp",
+    "optimized/logitech-g29-wheel.webp",
 ]
 for name in REQUIRED_FILES:
     require((ROOT / name).exists(), f"Missing required file: {name}")
@@ -51,6 +54,7 @@ r3 = read("moza-r3.html")
 r5 = read("moza-r5.html")
 r9 = read("moza-r9-kit.html")
 r12 = read("moza-r12-kit.html")
+g29 = read("logitech-g29.html")
 css = read("styles.css")
 js = read("script.js")
 pages = {name: read(name) for name in PAGES}
@@ -162,6 +166,14 @@ for detail in ("MOZA R9", "$1.640", "9 Nm", "Volante CS V2P", "Pedales CRP2", "S
     require(detail in r9, f"Missing R9 kit detail: {detail}")
 for detail in ("MOZA R12", "$1.820", "12 Nm", "NexGen 4.0", "Volante CS V2P", "Pedales CRP2", "Solo disponible en kit"):
     require(detail in r12, f"Missing R12 kit detail: {detail}")
+for detail in ("youtube.com/embed/IKJ4k8QA4Hk", "sandbox=", "900 grados de giro de bloqueo a bloqueo",
+               "Force Feedback con dos motores", "Pedal del freno no lineal", "Calibración automática",
+               "Cuero cosido a mano", "Termoplástico polioximetileno (POM)", "Windows® 11",
+               "Dos años de garantía de hardware limitada", "941-000111", "941-000122"):
+    require(detail in g29, f"Missing Logitech G29 detail: {detail}")
+for asset in ("bundle", "driver", "wheel-detail", "pedals", "wheel"):
+    require(f"optimized/logitech-g29-{asset}.webp" in g29, f"Missing Logitech G29 asset: {asset}")
+require('href="logitech-g29.html"' in products, "Logitech G29 must open its own detail page from the catalog")
 
 if errors:
     print("Static page contract failed:")
