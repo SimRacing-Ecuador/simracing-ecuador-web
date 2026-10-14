@@ -2088,8 +2088,8 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .g29-specs { padding-block: clamp(88px, 11vw, 156px); background: var(--paper); color: var(--ink); }
 .g29-specs-layout { display: grid; grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); align-items: start; gap: clamp(40px, 7vw, 104px); }
 .g29-spec-heading { position: sticky; top: 32px; }
-.g29-spec-heading figure { max-width: 290px; margin: 34px 0 0; background: var(--blue); }
-.g29-spec-heading figure img { display: block; width: 100%; }
+.g29-spec-heading figure { display: grid; max-width: 290px; aspect-ratio: 1 / 1; margin: 34px 0 0; padding: 6%; place-items: center; background: var(--blue); }
+.g29-spec-heading figure img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .g29-spec-tables { display: grid; gap: 44px; }
 .g29-spec-block { border-top: 3px solid var(--ink); }
 .g29-spec-block h3 { margin: 20px 0 0; font-size: clamp(1.9rem, 3.3vw, 3.55rem); }
