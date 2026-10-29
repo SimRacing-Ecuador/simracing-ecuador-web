@@ -19,3 +19,7 @@ jobs:
         run: python3 tests/security_audit.py
       - name: Run static page contract
         run: python3 tests/verify_page.py
+      - name: Verify generated SEO and indexable inventory
+        run: python3 tools/generate_seo.py --check && python3 tests/verify_seo.py
+      - name: Verify consent and event payloads without sending traffic
+        run: node tests/verify_analytics.js

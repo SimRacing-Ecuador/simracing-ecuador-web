@@ -1,0 +1,90 @@
+{
+  "index.html": {
+    "title": "Sim Racing Ecuador | Volantes, cockpits y simuladores",
+    "description": "Volantes, pedales y cockpits para simracing en Ecuador. Explora Logitech y MOZA, compara fichas y consulta tu setup con Sim Racing Ecuador en Quito.",
+    "name": "Inicio",
+    "image": "sequence/f001.webp"
+  },
+  "productos.html": {
+    "title": "Volantes y cockpits en Ecuador | Sim Racing Ecuador",
+    "description": "Compara volantes Logitech G29, MOZA Direct Drive y cockpits plegables. Consulta precios publicados, fichas técnicas y disponibilidad en Ecuador.",
+    "name": "Productos",
+    "image": "optimized/cockpit-silla-hero.webp"
+  },
+  "cockpit-con-silla.html": {
+    "title": "Cockpit plegable con silla en Ecuador | Sim Racing Ecuador",
+    "description": "Explora el cockpit con silla de $350: diseño plegable, placa de volante inclinable y soporte para palanca. Consulta disponibilidad en Ecuador.",
+    "name": "Cockpit con silla",
+    "image": "optimized/cockpit-silla-hero.webp",
+    "item_id": "cockpit-con-silla",
+    "category": "Cockpits",
+    "price": 350,
+    "brand": null
+  },
+  "simulador-tripode.html": {
+    "title": "Soporte plegable tipo trípode | Sim Racing Ecuador",
+    "description": "Conoce el soporte tipo trípode de $185, sin silla: dimensiones, ajustes y diseño plegable. Consulta disponibilidad con Sim Racing Ecuador.",
+    "name": "Simulador tipo trípode",
+    "image": "optimized/tripode-cockpit-ai.webp",
+    "item_id": "simulador-tripode",
+    "category": "Cockpits",
+    "price": 185,
+    "brand": null
+  },
+  "moza-r3.html": {
+    "title": "MOZA R3 para PC y Xbox en Ecuador | Sim Racing Ecuador",
+    "description": "MOZA R3 Bundle de $580: Direct Drive de 3,9 Nm, volante y pedales SR-P Lite para PC y Xbox. Revisa la ficha y consulta disponibilidad.",
+    "name": "MOZA R3",
+    "image": "optimized/r3-bundle-cut.webp",
+    "item_id": "moza-r3",
+    "category": "Volantes y pedales",
+    "price": 580,
+    "brand": "MOZA"
+  },
+  "moza-r5.html": {
+    "title": "MOZA R5 Direct Drive en Ecuador | Sim Racing Ecuador",
+    "description": "Conoce la base MOZA R5 Direct Drive de 5,5 Nm para PC, a $675. Revisa sus especificaciones y consulta disponibilidad en Ecuador.",
+    "name": "MOZA R5",
+    "image": "optimized/moza-r5-hero-cutout-ai.webp",
+    "item_id": "moza-r5",
+    "category": "Volantes y pedales",
+    "price": 675,
+    "brand": "MOZA"
+  },
+  "moza-r9-kit.html": {
+    "title": "MOZA R9 Kit en Ecuador | Sim Racing Ecuador",
+    "description": "MOZA R9 Kit de $1.640: base Direct Drive de 9 Nm, volante CS V2P y pedales CRP2. Solo disponible en kit; consulta disponibilidad.",
+    "name": "MOZA R9 Kit",
+    "image": "optimized/moza-r9-kit-hero-cutout-ai.webp",
+    "item_id": "moza-r9-kit",
+    "category": "Volantes y pedales",
+    "price": 1640,
+    "brand": "MOZA"
+  },
+  "moza-r12-kit.html": {
+    "title": "MOZA R12 Kit en Ecuador | Sim Racing Ecuador",
+    "description": "MOZA R12 Kit de $1.820: base Direct Drive de 12 Nm, volante CS V2P y pedales CRP2. Solo disponible en kit; consulta disponibilidad.",
+    "name": "MOZA R12 Kit",
+    "image": "optimized/moza-r12-kit-hero-cutout-ai.webp",
+    "item_id": "moza-r12-kit",
+    "category": "Volantes y pedales",
+    "price": 1820,
+    "brand": "MOZA"
+  },
+  "logitech-g29.html": {
+    "title": "Logitech G29 en Ecuador | Sim Racing Ecuador",
+    "description": "Logitech G29 Driving Force de $375: volante con Force Feedback, giro de 900° y tres pedales para PlayStation y PC. Consulta disponibilidad.",
+    "name": "Logitech G29",
+    "image": "optimized/logitech-g29-bundle.webp",
+    "item_id": "logitech-g29",
+    "category": "Volantes y pedales",
+    "price": 375,
+    "brand": "Logitech"
+  },
+  "privacidad.html": {
+    "title": "Privacidad y cookies | Sim Racing Ecuador",
+    "description": "Consulta cómo funciona la analítica opcional, cómo cambiar tus preferencias de cookies y cómo contactar a Sim Racing Ecuador sobre privacidad.",
+    "name": "Privacidad y cookies",
+    "image": "social-logo.png"
+  }
+}

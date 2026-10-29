@@ -1,0 +1,149 @@
+[
+  {
+    "original": "optimized/cockpit-silla-hero.webp",
+    "original_bytes": 1494790,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-hero-640.webp",
+        "bytes": 30770
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-hero-1280.webp",
+        "bytes": 111592
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-hero-1920.webp",
+        "bytes": 227116
+      }
+    ]
+  },
+  {
+    "original": "optimized/cockpit-silla-cover.webp",
+    "original_bytes": 4700782,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-cover-640.webp",
+        "bytes": 30874
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-cover-1280.webp",
+        "bytes": 84338
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-cover-1920.webp",
+        "bytes": 171846
+      }
+    ]
+  },
+  {
+    "original": "optimized/cockpit-silla-pedal-plate.webp",
+    "original_bytes": 857072,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-pedal-plate-640.webp",
+        "bytes": 16870
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-pedal-plate-1280.webp",
+        "bytes": 39494
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-pedal-plate-1920.webp",
+        "bytes": 74426
+      }
+    ]
+  },
+  {
+    "original": "optimized/cockpit-silla-folded.webp",
+    "original_bytes": 2491062,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-folded-640.webp",
+        "bytes": 26148
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-folded-1280.webp",
+        "bytes": 69020
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-folded-1920.webp",
+        "bytes": 124390
+      }
+    ]
+  },
+  {
+    "original": "optimized/cockpit-silla-wheel-plate.webp",
+    "original_bytes": 768686,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-wheel-plate-640.webp",
+        "bytes": 17736
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-wheel-plate-1280.webp",
+        "bytes": 51630
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-wheel-plate-1920.webp",
+        "bytes": 103024
+      }
+    ]
+  },
+  {
+    "original": "optimized/cockpit-silla-scene.webp",
+    "original_bytes": 5531048,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-scene-640.webp",
+        "bytes": 65448
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-scene-1280.webp",
+        "bytes": 209846
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-scene-1920.webp",
+        "bytes": 368690
+      }
+    ]
+  },
+  {
+    "original": "optimized/cockpit-silla-rear.webp",
+    "original_bytes": 1152364,
+    "variants": [
+      {
+        "width": 640,
+        "file": "optimized/responsive/cockpit-silla-rear-640.webp",
+        "bytes": 37644
+      },
+      {
+        "width": 1280,
+        "file": "optimized/responsive/cockpit-silla-rear-1280.webp",
+        "bytes": 97162
+      },
+      {
+        "width": 1920,
+        "file": "optimized/responsive/cockpit-silla-rear-1920.webp",
+        "bytes": 168420
+      }
+    ]
+  }
+]
