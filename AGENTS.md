@@ -105,6 +105,7 @@ The motion experience is orchestrated in `script.js` with assistance from `boot.
 The CI test `python3 tests/security_audit.py` enforces these rules on every commit:
 
 1. **Strict Content Security Policy:**
+   - Approved exception for the requested GA4 implementation (2026-10-29): `script-src` also permits `https://www.googletagmanager.com`; `connect-src` and `img-src` permit that host, `https://www.google-analytics.com` and `https://region1.google-analytics.com`. These are exact origins, loaded only after consent on the production host. No other CDN, wildcard, inline execution or eval exception is allowed. Keep the meta policy and `_headers` synchronized.
    Every HTML file MUST include the exact CSP `<meta>` tag:
    ```html
    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests" />

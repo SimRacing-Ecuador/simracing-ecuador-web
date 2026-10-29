@@ -147,7 +147,7 @@ for detail in ("youtube.com/embed/Qryc6QBhAPc", "Placa para Volante Ajustable", 
                "optimized/tripode-pies-ai.webp", "optimized/tripode-cockpit-ai.webp", "optimized/tripode-volante.webp",
                "optimized/tripode-plegado-ai.webp", "optimized/tripode-ajuste-ai.webp", "$185"):
     require(detail in tripod, f"Missing tripod product detail: {detail}")
-require('src="https://www.youtube.com/embed/Qryc6QBhAPc?rel=0&modestbranding=1"' in tripod, "Tripod video must use the canonical YouTube embed URL")
+require('data-video-src="https://www.youtube.com/embed/Qryc6QBhAPc?rel=0&amp;modestbranding=1"' in tripod, "Tripod video must use the canonical YouTube embed URL after an explicit click")
 for asset in ("hero", "rear", "scene", "cover", "folded", "wheel-plate", "pedal-plate", "mounting", "dimensions"):
     require(f"optimized/cockpit-silla-{asset}.webp" in chair, f"Missing chair cockpit asset: {asset}")
 for detail in ("Diseño plegable", "Soporte para palanca de cambios ajustable", "Puntos de montaje pretaladrados", "Placa de volante inclinable",

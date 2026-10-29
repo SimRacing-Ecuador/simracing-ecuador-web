@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-29",
+  "commit": "e28396b0f60d4e131a542d5e20b8efec80bc4ac8",
+  "production": "https://simracingec.com/",
+  "hosting": "Cloudflare Pages (GitHub check)",
+  "pages": {
+    "index.html": {
+      "title": "Sim Racing Ecuador | Tu mejor experiencia",
+      "canonical": "https://simracingec.com/",
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "productos.html": {
+      "title": "Productos | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "cockpit-con-silla.html": {
+      "title": "Cockpit con silla | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "simulador-tripode.html": {
+      "title": "Simulador tipo trípode | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "moza-r3.html": {
+      "title": "MOZA R3 | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "moza-r5.html": {
+      "title": "MOZA R5 | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "moza-r9-kit.html": {
+      "title": "MOZA R9 Kit | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "moza-r12-kit.html": {
+      "title": "MOZA R12 Kit | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    },
+    "logitech-g29.html": {
+      "title": "Logitech G29 | Sim Racing Ecuador",
+      "canonical": null,
+      "has_WebSite": false,
+      "has_Product": false,
+      "has_analytics": false
+    }
+  }
+}

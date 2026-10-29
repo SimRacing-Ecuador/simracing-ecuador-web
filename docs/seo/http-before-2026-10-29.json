@@ -1,0 +1,83 @@
+[
+  {
+    "url": "https://simracingec.com/",
+    "status": 200,
+    "location": null,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 28345
+  },
+  {
+    "url": "http://simracingec.com/",
+    "status": 301,
+    "location": "https://simracingec.com/",
+    "content_type": "text/html; charset=UTF-8",
+    "csp": null,
+    "robots": null,
+    "bytes": 167
+  },
+  {
+    "url": "https://www.simracingec.com/",
+    "status": 200,
+    "location": null,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 28345
+  },
+  {
+    "url": "http://www.simracingec.com/",
+    "status": 301,
+    "location": "https://www.simracingec.com/",
+    "content_type": "text/html; charset=UTF-8",
+    "csp": null,
+    "robots": null,
+    "bytes": 167
+  },
+  {
+    "url": "https://simracingec.com/moza-r3.html",
+    "status": 308,
+    "location": "/moza-r3",
+    "content_type": null,
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 0
+  },
+  {
+    "url": "https://simracingec.com/moza-r3",
+    "status": 200,
+    "location": null,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 15893
+  },
+  {
+    "url": "https://simracingec.com/robots.txt",
+    "status": 200,
+    "location": null,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 28345
+  },
+  {
+    "url": "https://simracingec.com/sitemap.xml",
+    "status": 200,
+    "location": null,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 28345
+  },
+  {
+    "url": "https://simracingec.com/nonexistent-seo-audit-20261029",
+    "status": 200,
+    "location": null,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests",
+    "robots": null,
+    "bytes": 28345
+  }
+]

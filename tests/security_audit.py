@@ -50,7 +50,7 @@ class SecurityParser(HTMLParser):
                 self.errors.append("target=_blank link lacks noopener and noreferrer")
 
         if tag.lower() == "iframe":
-            source = urlparse(attributes.get("src", ""))
+            source = urlparse(attributes.get("src", "") or attributes.get("data-video-src", ""))
             if source.scheme != "https" or source.hostname not in ALLOWED_FRAME_HOSTS:
                 self.errors.append("iframe source is not an approved HTTPS origin")
             if "sandbox" not in attributes:
