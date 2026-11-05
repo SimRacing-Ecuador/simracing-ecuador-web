@@ -64,12 +64,7 @@
     "persistent_debug": false
   },
   "pending": [
-    "Signals and user-provided data console audit",
-    "internal/developer filters audit",
-    "session/attribution/referral settings audit",
-    "custom definition persistence recheck",
-    "key events no-default-value persistence recheck",
-    "Search Console linking and report collection publication"
+    "Google tag consent diagnostic remains Urgente; do not claim cleared from a successful collection request alone"
   ],
   "last_public_verification": "2026-11-05",
   "custom_definition": {
@@ -77,18 +72,86 @@
     "scope": "Evento",
     "parameter": "cta_location",
     "save_clicked": true,
-    "persistence_recheck": "pending; browser connection unavailable on 2026-11-05"
+    "persistence_recheck": "Observed in console on 2026-11-05; event scope, existing since 2026-10-29"
   },
   "key_events": {
     "whatsapp_click": {
       "created_and_listed": true,
-      "default_value": "No default value saved; persistence recheck pending"
+      "default_value": "No default value; observed 2026-11-05"
     },
     "phone_call_click": {
       "created_and_listed": true,
-      "default_value": "No default value selected on creation; persistence recheck pending"
+      "default_value": "No default value; saved and reopened 2026-11-05",
+      "correction_2026_11_05": "Found existing 1 USD per click; removed to avoid invented revenue"
     },
     "meaning": "Contact click intent only; no sale, qualified lead or monetary value implied",
     "production_contact_test": "No contact action generated for validation"
+  },
+  "last_console_verification": "2026-11-05",
+  "current_console_audit": {
+    "ga4_search_console_link": {
+      "status": "Vinculación creada correctamente",
+      "search_console_property": "https://simracingec.com/",
+      "ga4_property": "561497036",
+      "stream_name": "Sim Racing Ecuador — Web",
+      "stream_id": "16231880754",
+      "link_date": "2026-11-05",
+      "evidence": "Success result and row in GA4 link table directly observed after user action-time confirmation",
+      "verified_from_both_products": true
+    },
+    "ga4_reports": {
+      "search_console_collection": "Publicada para todos",
+      "queries_and_organic_landing_reports_visible": true
+    },
+    "ga4_settings_current": {
+      "retention_event_months": 14,
+      "retention_user_months": 14,
+      "reset_on_activity": false,
+      "internal_traffic_filter": {
+        "operation": "Exclude",
+        "state": "Testing"
+      },
+      "google_signals": "not activated",
+      "user_provided_data": "not activated",
+      "granular_location_device": "on (existing)",
+      "property_ad_personalization": "existing default allows 307 regions; client explicitly denies advertising; not changed",
+      "measurement_id": "G-Q6H1XX68P2",
+      "stream_id": "16231880754",
+      "received_traffic_last_48h": true,
+      "email_redaction": "active",
+      "redacted_query_keys": 19,
+      "connected_site_tags": 0,
+      "enhanced_measurement": {
+        "page_loads": true,
+        "history_changes": false,
+        "scroll": false,
+        "outbound_clicks": false,
+        "site_search": false,
+        "forms": false,
+        "youtube_api_video": true,
+        "downloads": true
+      }
+    },
+    "tag_settings": {
+      "session_timeout_minutes": 30,
+      "engaged_session_seconds": 10,
+      "unwanted_referral_rules": "none configured",
+      "cross_domain_conditions": "none configured; only own domain suggested",
+      "universal_analytics_event_collection": false,
+      "modified": false
+    },
+    "tag_diagnostic": {
+      "status": "Urgente",
+      "issue": "0% consent; all consent signals marked denied",
+      "not_claimed_cleared": true,
+      "current_validation": "Analytics storage is explicitly granted on acceptance and a normal request returns 204; the three advertising consents intentionally remain denied. No advertising permissions were granted to suppress the warning.",
+      "tag_assistant_limit": "Standalone Tag Assistant did not connect under the existing security policy; temporary debugging was stopped without weakening CSP/COOP."
+    },
+    "ai_channel_note": {
+      "official_current_behavior": "GA4 has a native AI Assistant default channel; no redundant custom group required for recognized referrals",
+      "source": "https://support.google.com/analytics/answer/9756891",
+      "release_note": "https://support.google.com/analytics/answer/9164320",
+      "verified_from_official_docs_on": "2026-11-05"
+    }
   }
 }
