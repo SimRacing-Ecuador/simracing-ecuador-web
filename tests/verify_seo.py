@@ -3,6 +3,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import json
+import hashlib
 import re
 import xml.etree.ElementTree as ET
 
@@ -14,12 +15,13 @@ titles = set()
 
 class Page(HTMLParser):
     def __init__(self):
-        super().__init__(); self.links = []; self.images = []; self.canonicals = []; self.h1 = 0
+        super().__init__(); self.links = []; self.images = []; self.canonicals = []; self.scripts = []; self.h1 = 0
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == 'h1': self.h1 += 1
         if tag == 'a': self.links.append(attrs.get('href', ''))
         if tag == 'img': self.images.append(attrs)
+        if tag == 'script' and attrs.get('src'): self.scripts.append(attrs['src'])
         if tag == 'link' and attrs.get('rel') == 'canonical': self.canonicals.append(attrs['href'])
 
 for filename, data in PAGES.items():
@@ -37,6 +39,10 @@ for filename, data in PAGES.items():
     assert title not in titles, filename
     titles.add(title)
     assert 'name="robots" content="index, follow' in text, filename
+    # A changed client/config/catalog must get a new browser and CDN cache key.
+    for asset in ['measurement-config.js', 'analytics-catalog.js', 'analytics.js']:
+        digest = hashlib.sha256((ROOT/asset).read_bytes()).hexdigest()[:12]
+        assert asset+'?v='+digest in parser.scripts, (filename, asset, 'measurement URL must track actual file content')
     graph = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)[1])['@graph']
     if filename == 'index.html':
         website = next(entry for entry in graph if entry['@type'] == 'WebSite')

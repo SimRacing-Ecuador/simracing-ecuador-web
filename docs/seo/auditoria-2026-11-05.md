@@ -146,3 +146,10 @@ Las pruebas de analítica usan un contexto simulado sin red. No prueban recepci�
 En la sesión actual se pudo leer Search Console autenticado mostrando Racing Hobbies. Al intentar abrir el selector se perdió el control del ordenador: Chrome y Safari devuelven `timeoutReached`, también después de reiniciar la sesión de control. No se confirmó una ausencia de Sim Racing, ni se alteró la propiedad ajena. Se solicitó dejar el Mac desbloqueado para reanudar la comprobación directa.
 
 Reversión de código: revertir el commit de esta revisión mediante PR o volver al despliegue anterior de Cloudflare. No borrar propiedades de Google, verificación, datos o historial como forma de reversión.
+
+
+## Corrección de caché detectada al publicar
+
+La PR [#20](https://github.com/SimRacing-Ecuador/simracing-ecuador-web/pull/20) se integró en `e00b21c66a85967f4996a7a33a54dee188d37528`, con CI y Cloudflare correctos. La comprobación HTTP posterior encontró el sitemap nuevo, pero dos scripts antiguos: respuestas `cf-cache-status: HIT`, `Age` de aproximadamente 1000 segundos y `Cache-Control: max-age=14400` en el dominio público. Las mismas rutas con una consulta de versión devolvieron exactamente los bytes nuevos. No se confundió el estado de despliegue con los bytes que recibía el visitante.
+
+Para resolverlo, el generador incorpora un hash SHA-256 abreviado a las URLs de configuración, catálogo y cliente de medición en las diez páginas. Calcula el hash del catálogo que va a escribir, de modo que basta una generación. Conserva el orden y `defer`, sin cargar Google antes del consentimiento. Una prueba falló primero por falta de versión; la suite y una prueba aislada de cambios simultáneos de inventario/configuración pasan tras la corrección. La comprobación final debe verificar las URLs versionadas que aparecen en el HTML, además del sitemap y las páginas.
