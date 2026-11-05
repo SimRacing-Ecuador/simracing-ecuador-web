@@ -2150,7 +2150,7 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .guidance-grid h3 { font: 700 24px/1.2 var(--sans); margin-bottom: 16px; }
 .guidance-grid p, .guidance-contact { line-height: 1.65; }
 .guidance-contact { margin-top: 32px; }
-.guidance-contact a { text-decoration: underline; text-underline-offset: 4px; }
+.guidance-contact a, .guidance-grid a { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 960px) { .guidance-grid { grid-template-columns: 1fr; } }
 .g29-video-frame { position: relative; }
 .video-load { position: absolute; inset: 40% 12%; z-index: 1; height: fit-content; }

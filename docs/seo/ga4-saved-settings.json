@@ -64,11 +64,31 @@
     "persistent_debug": false
   },
   "pending": [
-    "Signals console audit",
+    "Signals and user-provided data console audit",
     "internal/developer filters audit",
     "session/attribution/referral settings audit",
-    "custom definition",
-    "key events",
-    "Search Console linking"
-  ]
+    "custom definition persistence recheck",
+    "key events no-default-value persistence recheck",
+    "Search Console linking and report collection publication"
+  ],
+  "last_public_verification": "2026-11-05",
+  "custom_definition": {
+    "name": "Ubicación de CTA",
+    "scope": "Evento",
+    "parameter": "cta_location",
+    "save_clicked": true,
+    "persistence_recheck": "pending; browser connection unavailable on 2026-11-05"
+  },
+  "key_events": {
+    "whatsapp_click": {
+      "created_and_listed": true,
+      "default_value": "No default value saved; persistence recheck pending"
+    },
+    "phone_call_click": {
+      "created_and_listed": true,
+      "default_value": "No default value selected on creation; persistence recheck pending"
+    },
+    "meaning": "Contact click intent only; no sale, qualified lead or monetary value implied",
+    "production_contact_test": "No contact action generated for validation"
+  }
 }

@@ -1,6 +1,6 @@
 # Sim Racing Ecuador — auditoría, implementación y registro
 
-Fecha: 29 de octubre de 2026. Mercado: Ecuador, español; ciudad comercial verificada: Quito. Objetivo del sitio: consultas de equipamiento por WhatsApp y teléfono. El catálogo no tiene carrito, cobro, formularios ni confirmación de ventas.
+Inicio: 29 de octubre de 2026. Última actualización: 5 de noviembre de 2026. Mercado: Ecuador, español; ciudad comercial verificada: Quito. Objetivo del sitio: consultas de equipamiento por WhatsApp y teléfono. El catálogo no tiene carrito, cobro, formularios ni confirmación de ventas.
 
 Este registro diferencia trabajo local, publicación y cambios guardados en Google. El estado se actualiza tras cada verificación; un script local no demuestra recepción en Analytics ni indexación.
 
@@ -17,7 +17,7 @@ Este registro diferencia trabajo local, publicación y cambios guardados en Goog
 
 ## Matriz de trabajo
 
-Todos los cambios locales de esta tabla están fechados el 29-10-2026.
+Implementación inicial: 29-10-2026. Corrección publicada y verificación HTTP renovada: 05-11-2026. Las comprobaciones en Google conservan su fecha propia.
 
 | Tarea | Estado | Valor anterior → nuevo | Evidencia | Pendiente |
 |---|---|---|---|---|
@@ -29,17 +29,17 @@ Todos los cambios locales de esta tabla están fechados el 29-10-2026.
 | Navegación y rastreo | Publicado y comprobado | Enlaces de catálogo HTML existentes → migas visibles y BreadcrumbList; corregido ancla inexistente del catálogo | Prueba de enlaces y fragmentos | Mantener |
 | Sitemap y robots | Publicado y comprobado | Ambos devolvían HTML de portada con 200 → XML de diez URLs canónicas y robots de texto | `sitemap.xml`, `robots.txt`, generador idempotente | Sitemap enviado y procesado correctamente: 10 URLs descubiertas el 29-10-2026 |
 | Errores 404 | Publicado y comprobado | Cualquier ruta desconocida devolvía portada con 200 → 404.html propio y noindex | Línea base HTTP, página 404 con recursos absolutos; `production-verification.json` | Comprobados 404 en raíz y ruta anidada |
-| Datos estructurados | Publicado y comprobado | Organization solo en portada → WebSite, Store, WebPage/CollectionPage, BreadcrumbList y siete ItemPage | JSON analizado, inventario local | Validador externo y prueba pública |
-| Product/Offer | Publicado y comprobado / parcialmente no aplicable | Sin marcado → ItemPage para las fichas; Product/Offer pendientes de stock confirmado | Siete fichas y catálogo existente; prueba de Google MOZA R3, 29-10-2026 | La prueba de Google detectó que Product sin oferta/reseñas no cumple los requisitos de fragmentos de producto. Se corrige a ItemPage; no se añaden stock, SKU, GTIN ni reseñas sin evidencia |
+| Datos estructurados | Publicado y comprobado por HTTP; nueva prueba de Google pendiente | Organization solo en portada → WebSite, Store, WebPage/CollectionPage, BreadcrumbList y siete ItemPage | JSON analizado, inventario local | Validador externo y prueba pública |
+| Product/Offer | ItemPage publicado y comprobado; Product/Offer pendiente de datos | Sin marcado → ItemPage para las fichas; Product/Offer pendientes de stock confirmado | Siete fichas y catálogo existente; prueba de Google MOZA R3, 29-10-2026 | La prueba de Google detectó que Product sin oferta/reseñas no cumple los requisitos de fragmentos de producto. Se corrige a ItemPage; no se añaden stock, SKU, GTIN ni reseñas sin evidencia |
 | Información local | Publicado y comprobado | Enlace a otra empresa → ficha propia y dirección pública contrastada | `local-business-verified.json`; footer de todas las páginas; cuenta de Google Business con cero empresas administradas | Reconciliar horarios de Maps con atención con cita; propiedad de la ficha |
 | Contenidos comerciales | Publicado y comprobado | Introducción genérica → catálogo y portada explícitos sobre equipos y mercado, guía breve para plataforma/espacio/conjunto | Contenido visible, precios originales conservados | El negocio debe confirmar disponibilidad, entrega, garantías y devoluciones |
-| Consentimiento | Implementado y probado localmente | Inexistente → aceptar/rechazar/cambiar preferencias, seis meses, rechazo por defecto y retirada | `analytics.js`, `tests/verify_analytics.js`, vista local | Aceptación en producción comprobada; recepción real de page_view y view_item verificada con el ID real |
-| GA4 | Configurado y guardado en Google; implementación local | Ningún ID encontrado en el código → propiedad propia, flujo web e ID G-Q6H1XX68P2 | `measurement-config.js`; propiedad 561497036, flujo 16231880754, ID real G-Q6H1XX68P2 | Recepción real comprobada: una page_view y una view_item para MOZA R3; terminar ajustes restantes |
+| Consentimiento | Publicado; pruebas locales y aceptación real comprobadas | Inexistente → aceptar/rechazar/cambiar preferencias, seis meses, rechazo por defecto y retirada | `analytics.js`, `tests/verify_analytics.js`, vista local | Aceptación en producción comprobada; recepción real de page_view y view_item verificada con el ID real |
+| GA4 | Propiedad y flujo guardados; etiqueta publicada con recepción real | Ningún ID encontrado en el código → propiedad propia, flujo web e ID G-Q6H1XX68P2 | `measurement-config.js`; propiedad 561497036, flujo 16231880754, ID real G-Q6H1XX68P2 | Recepción real comprobada: una page_view y una view_item para MOZA R3; terminar ajustes restantes |
 | Search Console | Configurado y verificado en Google | No figuraba Sim Racing en selector actual → propiedad de prefijo iniciada y token propio obtenido | Meta de verificación de portada emitida para https://simracingec.com/ | Propiedad verificada por etiqueta HTML; sitemap procesado; portada indexada y prueba publicada correcta. Informes aún procesándose |
 | Vínculo GA4 / Search Console | Pendiente | Sin vínculo comprobado → objetivo mismo sitio y flujo | Plan de configuración | Requiere ambas propiedades y permisos; no se tocaron vínculos ajenos |
-| Imágenes | Implementado y probado localmente | Siete originales de cockpit sumaban 16.995.804 bytes → copias de 640 suman 225.490 bytes; selección responsive | `responsive-images.json`; originales nativos retenidos | Publicado; completar métricas de laboratorio por pantalla; no equivale a mejora medida de LCP |
-| Rendimiento | Parcialmente comprobado | Poster principal con prioridad, fuentes locales y dimensiones ya existentes → prioridad explícita de poster, copias adaptables y caché de fuentes/secuencia | Código y pruebas locales | API PageSpeed devolvió 429 en móvil y escritorio; faltan métricas de laboratorio y datos de campo de esta propiedad |
-| Seguridad | Implementado y probado localmente | CSP solo local → tres orígenes exactos de GA permitidos en script/connect/img según necesidad | Meta y `_headers` idénticos; auditoría de seguridad | Comprobar cabeceras efectivas en producción; sin `unsafe-inline`, eval ni comodines de origen |
+| Imágenes | Publicado y comprobado | Siete originales de cockpit sumaban 16.995.804 bytes → copias de 640 suman 225.490 bytes; selección responsive | `responsive-images.json`; originales nativos retenidos | Publicado; completar métricas de laboratorio por pantalla; no equivale a mejora medida de LCP |
+| Rendimiento | Parcialmente comprobado | Poster principal con prioridad, fuentes locales y dimensiones ya existentes → prioridad explícita de poster, copias adaptables y caché de fuentes/secuencia | Código y pruebas locales | PageSpeed móvil de portada: 80 rendimiento, 90 accesibilidad, 96 buenas prácticas, 100 SEO; LCP 3,4 s, TBT 353 ms, CLS 0. Escritorio: LCP 0,8 s, TBT 134 ms, CLS 0. Faltan muestras de catálogo/ficha y datos de campo; ver performance-lab-2026-10-29.json |
+| Seguridad | Publicado; cabeceras efectivas comprobadas | CSP solo local → tres orígenes exactos de GA permitidos en script/connect/img según necesidad | Meta y `_headers` idénticos; auditoría de seguridad | Cabeceras comprobadas el 05-11-2026; sin `unsafe-inline`, eval ni comodines de origen |
 | YouTube | Implementado y probado localmente | Iframes automáticos → carga al pulsar un botón que identifica el servicio externo, sin referente | Fichas de trípode y G29 | Comprobar reproducción pública; no se afirma medición de reproducción |
 | Merchant Center | Pendiente de datos / no listo para alta | Catálogo de consulta; sin stock fiable, entrega ni devoluciones publicadas | Revisión del sitio | Validar requisitos comerciales antes de feed o fichas gratuitas; no anuncios |
 | Bing / IndexNow | Pendiente / opcional | Sin acceso de Bing contrastado | No se han inventado claves ni enviado URLs | Importación de Search Console tras verificar, si hay cuenta. IndexNow solo para cambios reales y motores compatibles |
@@ -54,18 +54,18 @@ Integración prevista: gtag.js directo, una sola propiedad y un flujo de esta em
 | `view_item_list` | Producto del catálogo entra en pantalla después de aceptar; lista de categoría e items sin repetir por vista | Exposición al equipo | No |
 | `select_item` | Enlace de ficha en catálogo; categoría e item | Selección desde lista | No |
 | `view_item` | Ficha actual, también al aceptar tarde; item, USD y precio publicado | Consulta de producto | No |
-| `whatsapp_click` | Enlace WhatsApp, método fijo y `cta_location`; nunca URL/mensaje/teléfono del enlace | Intención de contacto, sin confirmar mensaje ni lead | Configurado como microconversión en GA4; sin importe predeterminado |
-| `phone_call_click` | Enlace de llamada, método fijo y `cta_location` | Intención de llamada, sin confirmar conversación | Configurado como microconversión en GA4; sin importe predeterminado |
+| `whatsapp_click` | Enlace WhatsApp, método fijo y `cta_location`; nunca URL/mensaje/teléfono del enlace | Intención de contacto, sin confirmar mensaje ni lead | Creado y listado como evento clave; elegido sin importe predeterminado, relectura pendiente |
+| `phone_call_click` | Enlace de llamada, método fijo y `cta_location` | Intención de llamada, sin confirmar conversación | Creado y listado como evento clave; elegido sin importe predeterminado, relectura pendiente |
 | `scroll` | Primera llegada al 90 % tras aceptar | Lectura aproximada de una página; una vez por vista | No |
 
 No aplicables al funcionamiento actual: search, carrito, checkout, contact_form_submit, generate_lead, purchase y refund. No hay un sistema que confirme leads cualificados, pedidos, cobros o devoluciones. Si se añade, la medición exige confirmación fiable y deduplicación por identificador de transacción.
 
-Solo se propone una dimensión propia: **Ubicación de CTA**, ámbito evento, parámetro `cta_location` (alta pendiente de verificar). Los eventos ya separan métodos de contacto y los parámetros estándar no requieren duplicarse. No se crea User-ID ni se recogen datos aportados por usuarios.
+Solo se propone una dimensión propia: **Ubicación de CTA**, ámbito evento, parámetro `cta_location` (se pulsó Guardar; pendiente de comprobar la fila persistida). Los eventos ya separan métodos de contacto y los parámetros estándar no requieren duplicarse. No se crea User-ID ni se recogen datos aportados por usuarios.
 
 Configuración de GA4: nombre, mercado, moneda, tamaño y medición mejorada **guardados**; el resto se diferencia a continuación:
 
 - Propiedad `Sim Racing Ecuador`, URL https://simracingec.com/, Ecuador, America/Guayaquil y USD. Sector seleccionado: Juegos. Tamaño de 1 a 10 confirmado por el propietario.
-- `send_page_view:false`, vistas explícitas; Google Signals y personalización desactivados. Publicidad denegada siempre.
+- `send_page_view:false`, vistas explícitas; Google Signals y personalización desactivados en el código. Publicidad denegada siempre. La revisión de los interruptores de la consola sigue pendiente.
 - Medición mejorada: desactivar historial, clics salientes, búsquedas y formularios automáticos para evitar duplicidad y captura de texto. Scroll explícito en código: desactivar scroll automático. No hay descargas de archivos publicadas. Los iframes actuales no usan la API de YouTube; no se afirma medición automática de vídeo.
 - Conservación guardada y persistente tras recargar: eventos 2 → 14 meses, usuarios 14 meses; reinicio por actividad activo → desactivado. Justificación: análisis de 28/90 días y comparativas anuales; privacidad actualizada. El cambio tarda 24 horas en aplicarse. Sin eliminación de históricos.
 - Revisar ocultación de emails/consultas, etiquetas conectadas, permisos, exclusiones de referencias, sesión, atribución y ventanas. Sin multidominio, Ads, BigQuery o Signals por defecto.
@@ -142,3 +142,28 @@ La línea base de 28/90 días de esta empresa no está disponible aún en las pr
 ### Corrección tras la prueba real de Google
 
 La primera publicación incorporó Product sin Offer porque no hay stock confirmado. La prueba publicada de Google en MOZA R3 lo marcó no apto para fragmentos de producto: exige offers, review o aggregateRating. Se sustituyó ese marcado por ItemPage en las siete fichas. Los datos de catálogo y precios para eventos se conservan, pero Product/Offer y Merchant Center requieren disponibilidad, entrega y condiciones verificadas. Esta corrección no promete resultados enriquecidos. El catálogo superó la prueba publicada, con una ruta de exploración válida; se solicitó su indexación una sola vez. También se solicitó una vez el nuevo rastreo de la portada.
+
+
+## Cierre de verificación parcial — 5 de noviembre de 2026
+
+- PR [#19](https://github.com/SimRacing-Ecuador/simracing-ecuador-web/pull/19) integrada con commit `73c30b31c4c63272371dd3b0fb644c8ceaa92606`, después de CI y Cloudflare correctos. La corrección ItemPage ya está publicada en las siete fichas y la privacidad informa de los 14 meses guardados en GA4.
+- `production-verification-2026-11-05.json` registra una nueva lectura directa de las diez páginas canónicas: 200, canónica autorreferente, producción sin cabecera noindex, CSP de orígenes exactos. Robots devuelve texto; sitemap devuelve XML; dos rutas inexistentes devuelven 404. La configuración pública contiene el ID propio G-Q6H1XX68P2.
+- La nueva guía de catálogo explica plataforma, cockpit y componentes e incorpora enlaces a las siete fichas. Solo utiliza información comercial ya publicada. No se añaden palabras ajenas a la actividad para aparentar relevancia en búsquedas de todos los automóviles o carreras.
+- El trabajo de navegador quedó interrumpido por fallos de conexión al leer y manejar Chrome. Se intentó recuperar la pestaña y la sesión volvió a fallar. Los ajustes que no pudieron releerse se mantienen pendientes; no se convierten intentos de guardar en una verificación persistente.
+
+| Requisito restante | Evidencia actual | Próximo paso concreto |
+|---|---|---|
+| GA4: eventos clave | Ambos eventos aparecieron en el listado; WhatsApp corregido a sin valor y teléfono creado sin valor | Reabrir sus valores y verificar persistencia; no enviar WhatsApp ni efectuar llamada de prueba |
+| GA4: dimensión | Formulario de ámbito Evento, parámetro cta_location; se pulsó Guardar | Comprobar fila guardada tras recargar |
+| GA4: Signals, datos aportados, filtros, sesión, atribución y referencias | Código conservador; ajustes de consola aún sin auditar | Revisar y registrar valores reales; no inventar IP ni activar filtros permanentes sin prueba |
+| Search Console → GA4 | Propiedad de prefijo verificada y flujo propio existentes | Crear vínculo del mismo sitio; publicar colección de informes y verificarla |
+| Search Console: producto corregido | ItemPage ya comprobado en el HTML público | Repetir prueba en vivo MOZA R3 y solicitar indexación una vez si es indexable; no repetir portada/catálogo |
+| Seguridad e informes de Search Console | Acciones manuales sin problemas el 29-10; informes entonces procesándose | Comprobar problemas de seguridad, HTTPS, cobertura y datos disponibles; no confundir prueba viva con indexación |
+| Retirada de consentimiento en producción | Aceptación y recepción reales comprobadas; retirada cubierta por simulación local | Cambiar preferencias, rechazar, comprobar cliente y cookies tras recarga; no generar conversiones de prueba |
+| Rendimiento | Portada móvil/escritorio medida en laboratorio; no campo | Medir catálogo y una ficha en ambos tamaños; registrar resultados reales, sin inferir INP de TBT |
+| Dominio y ficha local | Cuenta Cloudflare sin acceso al proyecto; Google Business con cero empresas administradas | Acceso efectivo del propietario para www → raíz y corregir la ficha existente; autorización del usuario ya concedida |
+| Datos comerciales | Precios y componentes verificados; stock, plazos/costes, garantía y devoluciones sin confirmar | Respuesta del negocio antes de Product/Offer o Merchant Center |
+| Bing | Sin cuenta o importación verificada | Revisar acceso y posible importación de la propiedad propia; no asumir alta |
+| Línea base 28/90 días | Propiedad creada el 29-10; todavía no hay 28 días propios | Cuando se disponga de periodos completos, comparar marca/sin marca, país, dispositivo, página y contactos; no programar recurrencias |
+
+Este registro no declara terminado el encargo completo. El nombre del sitio y las mejoras publicadas facilitan que Google interprete la web; Google decide cuándo rastrear, qué nombre mostrar y cómo ordenar cada búsqueda. No existe una configuración que garantice la primera posición permanente para todas las búsquedas.

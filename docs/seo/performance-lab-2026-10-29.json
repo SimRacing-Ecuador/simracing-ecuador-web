@@ -1,0 +1,35 @@
+{
+  "observed_date": "2026-10-29",
+  "source": "Google PageSpeed Insights browser report",
+  "report_url": "https://pagespeed.web.dev/analysis/https-simracingec-com/xnk5xby2ru",
+  "url": "https://simracingec.com/",
+  "lighthouse_version": "13.5.0",
+  "field_data": "No real-user data available in the observed report",
+  "mobile": {
+    "performance": 80,
+    "accessibility": 90,
+    "best_practices": 96,
+    "seo": 100,
+    "FCP_ms": 1200,
+    "LCP_ms": 3373,
+    "TBT_ms": 353,
+    "CLS": 0,
+    "speed_index_ms": 4942,
+    "device": "Emulated Moto G Power, slow 4G"
+  },
+  "desktop": {
+    "performance": null,
+    "FCP_ms": 361,
+    "LCP_ms": 818,
+    "TBT_ms": 134,
+    "CLS": 0,
+    "speed_index_ms": 1669
+  },
+  "limits": [
+    "Laboratory measurements, not INP or field Core Web Vitals",
+    "Desktop score not captured; do not infer it from metrics",
+    "Catalog and product representative measurements still pending",
+    "API returned 429; report re-open through web tool failed on 2026-11-05",
+    "Browser connection failed on 2026-11-05 before remaining measurements"
+  ]
+}
