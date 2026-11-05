@@ -69,7 +69,14 @@
         return pages[route]?.url || '';
       }
       // External paths and arbitrary hosts can contain personal identifiers.
-      return ['www.google.com', 'www.google.com.ec', 'www.instagram.com', 'l.instagram.com', 'www.facebook.com', 'l.facebook.com', 'www.tiktok.com', 'www.bing.com'].includes(url.hostname) ? url.origin + '/' : '';
+      const origins = [
+        'https://www.google.com', 'https://www.google.com.ec', 'https://www.instagram.com',
+        'https://l.instagram.com', 'https://www.facebook.com', 'https://l.facebook.com',
+        'https://www.tiktok.com', 'https://www.bing.com', 'https://chatgpt.com',
+        'https://www.perplexity.ai', 'https://perplexity.ai', 'https://claude.ai',
+        'https://gemini.google.com', 'https://copilot.microsoft.com'
+      ];
+      return origins.includes(url.origin) ? url.origin + '/' : '';
     } catch (_) { return ''; }
   }
 

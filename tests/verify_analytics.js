@@ -4,14 +4,16 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('analytics.js', 'utf8');
 const catalog = fs.readFileSync('analytics-catalog.js', 'utf8');
+const measurement = fs.readFileSync('measurement-config.js', 'utf8');
 
-function setup({ host = 'simracingec.com', path = '/moza-r3', query = '', stored = null, blocked = false } = {}) {
+function setup({ host = 'simracingec.com', path = '/moza-r3', query = '', stored = null, blocked = false,
+  referrer = 'https://www.google.com/search?q=person%40example.com', productionConfig = false } = {}) {
   const listeners = {}, windowListeners = {}, requests = [], writes = [], saved = new Map();
   if (stored) saved.set('sre-consent-v1', JSON.stringify({ value: stored, expires: Date.now() + 100000 }));
   const button = { focus() {} };
   const panel = { hidden: true, querySelector: () => button, contains: () => false, querySelectorAll: () => [] };
   const document = {
-    referrer: 'https://www.google.com/search?q=person%40example.com',
+    referrer,
     activeElement: button,
     documentElement: { scrollHeight: 3000 },
     head: { appendChild: script => requests.push(script.src) },
@@ -27,7 +29,9 @@ function setup({ host = 'simracingec.com', path = '/moza-r3', query = '', stored
     SRE_MEASUREMENT: { measurementId: 'G-TESTONLY', hosts: ['simracingec.com'], campaignValues: ['google', 'social'] },
     addEventListener: (name, fn) => { windowListeners[name] = fn; }, scrollY: 0, innerHeight: 800 };
   context.window = context;
-  vm.createContext(context); vm.runInContext(catalog, context); vm.runInContext(source, context);
+  vm.createContext(context);
+  if (productionConfig) vm.runInContext(measurement, context);
+  vm.runInContext(catalog, context); vm.runInContext(source, context);
   const click = attribute => listeners.click({ target: { closest: () => ({ hasAttribute: name => name === attribute }) } });
   const event = href => listeners.click({ target: { closest: () => ({ hasAttribute: () => false, matches: () => false, tagName: 'A', href, closest: selector => selector === 'header' ? {} : null }) } });
   const commands = () => Array.from(context.dataLayer, args => Array.from(args));
@@ -83,4 +87,23 @@ blocked.click('data-consent-accept'); blocked.click('data-consent-reject');
 assert.equal(blocked.context['ga-disable-G-TESTONLY'], true);
 assert.equal(blocked.location.reloaded, undefined, 'retain in-memory denial when storage fails');
 blocked.event('tel:+593989019836'); assert.equal(blocked.events().length, 0);
+
+// Removing an approved origin loses AI referrals; permissive matching leaks private URLs.
+for (const host of ['chatgpt.com', 'www.perplexity.ai', 'perplexity.ai', 'claude.ai', 'gemini.google.com', 'copilot.microsoft.com']) {
+  const referral = setup({ stored: 'accepted', referrer: `https://${host}/c/private-conversation?email=private%40example.com#secret` });
+  assert.equal(referral.events()[0][2].page_referrer, `https://${host}/`, host + ': origin-only attribution');
+}
+for (const referrer of ['https://chatgpt.com.evil.invalid/c/private', 'https://chatgpt.com:8443/private', 'http://chatgpt.com/private', 'https://not-approved.invalid/private', 'not a URL']) {
+  const unknownReferrer = setup({ stored: 'accepted', referrer });
+  assert.equal(unknownReferrer.events()[0][2].page_referrer, '', 'unapproved or malformed origin is dropped');
+}
+for (const host of ['chatgpt.com', 'perplexity.ai', 'claude.ai', 'gemini.google.com', 'copilot.microsoft.com']) {
+  const campaign = setup({ stored: 'accepted', referrer: '', productionConfig: true,
+    query: `?utm_source=${host}&utm_medium=referral&utm_content=private%40example.com&email=private%40example.com#secret` });
+  assert.equal(campaign.events()[0][2].page_location, `https://simracingec.com/moza-r3?utm_source=${host}&utm_medium=referral`);
+  assert(!JSON.stringify(campaign.commands()).includes('private'), 'AI campaigns never admit arbitrary identifiers');
+  const unconsented = setup({ referrer: `https://${host}/private`, productionConfig: true });
+  assert.equal(unconsented.requests.length, 0, 'AI traffic still requires consent');
+  assert.equal(unconsented.events().length, 0);
+}
 console.log('PASS: consent, late views, host gating, withdrawal, payload privacy and real catalogue amounts (no network)');
