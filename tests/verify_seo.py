@@ -46,8 +46,9 @@ for filename, data in PAGES.items():
         crumbs = next(entry for entry in graph if entry['@type'] == 'BreadcrumbList')['itemListElement']
         assert crumbs[-1]['item'] == BASE+route
     if 'item_id' in data:
-        product = next(entry for entry in graph if entry['@type'] == 'Product')
-        assert not any(key in product for key in ['offers', 'aggregateRating', 'review', 'gtin', 'sku'])
+        page = next(entry for entry in graph if entry['@type'] == 'ItemPage')
+        assert not any(entry['@type'] == 'Product' for entry in graph), 'Do not emit incomplete Google Product snippets without verified offers/reviews'
+        assert not any(key in page for key in ['offers', 'aggregateRating', 'review', 'gtin', 'sku'])
         assert data['name'].split()[0].lower() in text.lower()
     for image in parser.images:
         assert image.get('width') and image.get('height'), (filename, image)

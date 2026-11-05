@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://4fac7b6c.racinghobbies-web.pages.dev/",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "robots": "noindex",
+    "title": "Sim Racing Ecuador | Volantes, cockpits y simuladores"
+  },
+  {
+    "url": "https://4fac7b6c.racinghobbies-web.pages.dev/robots.txt",
+    "status": 200,
+    "type": "text/plain; charset=utf-8",
+    "robots": "noindex",
+    "title": null
+  },
+  {
+    "url": "https://4fac7b6c.racinghobbies-web.pages.dev/sitemap.xml",
+    "status": 200,
+    "type": "application/xml; charset=utf-8",
+    "robots": "noindex",
+    "title": null
+  },
+  {
+    "url": "https://4fac7b6c.racinghobbies-web.pages.dev/not-found-seo-test",
+    "status": 404,
+    "type": "text/html; charset=utf-8",
+    "robots": null,
+    "title": "P\u00e1gina no encontrada | Sim Racing Ecuador"
+  }
+]

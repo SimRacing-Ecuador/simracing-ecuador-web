@@ -53,19 +53,16 @@ def render_pages():
         crumbs = [{'@type':'ListItem','position':1,'name':'Inicio','item':BASE}]
         if 'item_id' in data:
             crumbs.append({'@type':'ListItem','position':2,'name':'Productos','item':BASE+'productos'})
-            product={'@type':'Product','@id':url+'#product','name':data['name'],'url':url,'description':data['description'],
-                     'image':image,'category':data['category'],'mainEntityOfPage':{'@id':url+'#page'}}
-            if data.get('brand'): product['brand']={'@type':'Brand','name':data['brand']}
-            # Stock is unconfirmed. Do not invent an Offer, SKU, GTIN or rich-result eligibility.
-            graph.append(product)
+            # Google Product snippets require an Offer or reviews. Stock is unconfirmed;
+            # describe the factual detail page as ItemPage until an offer can be verified.
         if filename != 'index.html':
             crumbs.append({'@type':'ListItem','position':len(crumbs)+1,'name':data['name'],'item':url})
             graph.append({'@type':'BreadcrumbList','@id':url+'#breadcrumbs','itemListElement':crumbs})
             source = re.sub(r'<nav class="seo-breadcrumb\b[^\"]*"[\s\S]*?</nav>\s*', '', source)
             links = ' <span aria-hidden="true">/</span> '.join(f'<a href="{c["item"].replace(BASE, "/")}">{esc(c["name"])}</a>' if c != crumbs[-1] else f'<span aria-current="page">{esc(c["name"])}</span>' for c in crumbs)
             source = re.sub(r'(<main\b[^>]*>)\s*', r'\1\n<nav class="seo-breadcrumb shell" aria-label="Ruta de navegación">'+links+'</nav>\n', source, count=1)
-        graph.append({'@type':'CollectionPage' if filename=='productos.html' else 'WebPage','@id':url+'#page','url':url,'name':data['title'],'description':data['description'],
-                      'inLanguage':'es-EC','isPartOf':{'@id':BASE+'#website'}})
+        graph.append({'@type':'CollectionPage' if filename=='productos.html' else 'ItemPage' if 'item_id' in data else 'WebPage','@id':url+'#page','url':url,'name':data['title'],'description':data['description'],
+                      'image':image,'inLanguage':'es-EC','isPartOf':{'@id':BASE+'#website'}})
         tags += ['<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('<','\\u003c')+'</script>', END]
         source = re.sub(r'\s*</head>', '\n'+'\n'.join(tags)+'\n</head>', source, count=1)
         output[filename] = source

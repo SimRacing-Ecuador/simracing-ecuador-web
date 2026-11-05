@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-29",
+  "account_id": "406621799",
+  "property_id": "561497036",
+  "property_name": "Sim Racing Ecuador",
+  "stream_id": "16231880754",
+  "measurement_id": "G-Q6H1XX68P2",
+  "stream_url": "https://simracingec.com",
+  "country": "Ecuador",
+  "time_zone": "America/Guayaquil",
+  "currency": "USD",
+  "industry": "Juegos",
+  "company_size": "1-10, confirmed by owner",
+  "enhanced_measurement": {
+    "page_loads": true,
+    "history_changes": false,
+    "scroll": false,
+    "outbound_clicks": false,
+    "site_search": false,
+    "form_interactions": false,
+    "compatible_videos": true,
+    "downloads": true
+  },
+  "connected_site_tags": 0,
+  "retention": {
+    "event_months_before": 2,
+    "event_months": 14,
+    "user_months": 14,
+    "reset_on_activity_before": true,
+    "reset_on_activity": false,
+    "saved_and_reloaded": true
+  },
+  "redaction": {
+    "email": true,
+    "query_parameters": [
+      "email",
+      "e-mail",
+      "phone",
+      "telefono",
+      "tel",
+      "nombre",
+      "name",
+      "firstname",
+      "lastname",
+      "address",
+      "direccion",
+      "token",
+      "access_token",
+      "message",
+      "mensaje",
+      "text",
+      "q",
+      "query",
+      "search"
+    ]
+  },
+  "realtime_controlled_validation": {
+    "page_title": "MOZA R3 para PC y Xbox en Ecuador | Sim Racing Ecuador",
+    "page_view": 1,
+    "view_item": 1,
+    "session_start": 1,
+    "first_visit": 1,
+    "actual_reception_confirmed": true,
+    "persistent_debug": false
+  },
+  "pending": [
+    "Signals console audit",
+    "internal/developer filters audit",
+    "session/attribution/referral settings audit",
+    "custom definition",
+    "key events",
+    "Search Console linking"
+  ]
+}
