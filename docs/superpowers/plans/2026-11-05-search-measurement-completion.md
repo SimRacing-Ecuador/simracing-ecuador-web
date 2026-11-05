@@ -43,5 +43,7 @@ Files: tools/generate_seo.py, sitemap.xml, tests/verify_seo.py.
 Files: docs/seo/auditoria-2026-11-05.md, docs/seo/production-verification-2026-11-05.json, README.md.
 - [x] Fetch production pages, scripts, sitemap, robots, redirects, representative images and real 404s without executing analytics.
 - [x] Record current results, limits and exact remaining account settings with property IDs and official sources; include GA4 custom dimensions, channel grouping, reports and Search Console linking steps.
-- [ ] Review changes independently, run required checks, push a reviewable PR using the existing repository and hosting workflow.
+- [x] Review changes independently, run required checks, push a reviewable PR using the existing repository and hosting workflow.
 - [ ] Verify publication if integrated; keep external console tasks explicitly pending until observed.
+
+Deployment ruling: Cloudflare served stale unversioned measurement scripts after the first successful deploy. Add content-derived script URL versions, verify the same-run catalogue hash and recheck the exact URLs present in production HTML. Console access remains pending due to native-control timeouts.
