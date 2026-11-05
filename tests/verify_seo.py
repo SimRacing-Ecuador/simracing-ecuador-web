@@ -67,8 +67,25 @@ for filename, data in PAGES.items():
             assert re.search(r'\bid=["\']'+re.escape(unquote(url.fragment))+r'["\']', target.read_text()), (filename, link, 'missing fragment')
 
 tree = ET.parse(ROOT/'sitemap.xml')
-actual = [node.text for node in tree.findall('.//{*}loc')]
+ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'image': 'http://www.google.com/schemas/sitemap-image/1.1'}
+entries = tree.findall('s:url', ns)
+actual = [node.find('s:loc', ns).text for node in entries]
 assert set(actual) == set(urls) and len(actual) == len(urls)
+# Missing image entries lose explicit discovery; wrong URLs must not silently ship.
+images_by_page = {node.find('s:loc', ns).text: [image.text for image in node.findall('image:image/image:loc', ns)] for node in entries}
+assert images_by_page[BASE+'/moza-r3'] == [BASE+'/optimized/r3-bundle-cut.webp'], 'discover the actual MOZA R3 image'
+assert images_by_page[BASE+'/'] == [BASE+'/sequence/f001.webp'], 'discover the initial canvas poster'
+assert images_by_page[BASE+'/privacidad'] == [], 'privacy is not a product image page'
+for filename, data in PAGES.items():
+    route = '/' if filename == 'index.html' else '/' + filename[:-5]
+    found = images_by_page[BASE+route]
+    if filename != 'privacidad.html':
+        assert found == [BASE+'/'+data['image']], (filename, 'image inventory mismatch')
+    parser = Page(); parser.feed((ROOT/filename).read_text())
+    for image in found:
+        relative = image.removeprefix(BASE+'/')
+        assert (ROOT/relative).is_file(), (filename, 'sitemap image must exist')
+        assert any(row.get('src') == relative for row in parser.images), (filename, 'image must appear on the page')
 assert 'lastmod' not in (ROOT/'sitemap.xml').read_text()
 assert 'Sitemap: '+BASE+'/sitemap.xml' in (ROOT/'robots.txt').read_text()
 assert 'noindex' in (ROOT/'404.html').read_text()

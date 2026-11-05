@@ -78,3 +78,18 @@ Ambas pruebas deben finalizar con código de salida `0` para que cualquier cambi
 - Consulta [AGENTS.md](AGENTS.md) para conocer las reglas de diseño, tokens CSS, restricciones de CSP y directrices arquitectónicas para modelos de IA.
 - Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para el flujo de trabajo de ramas, convenciones de commit y checklist de revisión.
 - Consulta [SECURITY.md](SECURITY.md) para la política de divulgación de vulnerabilidades.
+
+## Search Console, Analytics e indexación
+
+La configuración existente utiliza GA4 con consentimiento, metadatos y sitemap generados desde `seo-pages.json`. Consulta el [estado y las tareas de cierre del 5 de noviembre de 2026](docs/seo/auditoria-2026-11-05.md), que separa publicación, medición y ajustes privados de Google. La atribución desde asistentes de IA conserva únicamente orígenes y campañas aprobados; no conserva conversaciones.
+
+Al modificar contenido o imágenes del inventario, ejecuta `python3 tools/generate_seo.py` y después:
+
+```bash
+python3 tools/generate_seo.py --check
+python3 tests/verify_seo.py
+node tests/verify_analytics.js
+node tests/verify_advice_navigation.js
+```
+
+Estas comprobaciones complementan las dos pruebas obligatorias anteriores. El sitemap incluye las imágenes principales reales sin modificar el inventario de páginas. La inclusión en un buscador y su posición dependen del buscador.
