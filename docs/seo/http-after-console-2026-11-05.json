@@ -1,0 +1,607 @@
+{
+  "date": "2026-11-05",
+  "method": "Public HTTP GET with curl; no JavaScript execution, cookies, Google sign-in or analytics events",
+  "google_console_state": "Not observable in this audit; historical records are separate",
+  "deployed_commit": "0f2f8ad795f5e76885951e949705de76eb2344b9",
+  "pull_request": "https://github.com/SimRacing-Ecuador/simracing-ecuador-web/pull/22",
+  "rows": [
+    {
+      "url": "https://simracingec.com/",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": true,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "WebSite",
+        "Store",
+        "WebPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/productos",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/productos",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/productos"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "CollectionPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/cockpit-con-silla",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/cockpit-con-silla",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/cockpit-con-silla"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/simulador-tripode",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/simulador-tripode",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/simulador-tripode"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/moza-r3",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/moza-r3",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/moza-r3"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/moza-r5",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/moza-r5",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/moza-r5"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/moza-r9-kit",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/moza-r9-kit",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/moza-r9-kit"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/moza-r12-kit",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/moza-r12-kit",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/moza-r12-kit"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/logitech-g29",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/logitech-g29",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/logitech-g29"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/privacidad",
+      "kind": "page",
+      "status": 200,
+      "final_url": "https://simracingec.com/privacidad",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/privacidad"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": true,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "WebPage"
+      ],
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/cockpit-silla-hero.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/cockpit-silla-hero.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/logitech-g29-bundle.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/logitech-g29-bundle.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/moza-r12-kit-hero-cutout-ai.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/moza-r12-kit-hero-cutout-ai.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/moza-r5-hero-cutout-ai.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/moza-r5-hero-cutout-ai.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/moza-r9-kit-hero-cutout-ai.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/moza-r9-kit-hero-cutout-ai.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/r3-bundle-cut.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/r3-bundle-cut.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/optimized/tripode-cockpit-ai.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/optimized/tripode-cockpit-ai.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/sequence/f001.webp",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/sequence/f001.webp",
+      "content_type": "image/webp",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/social-logo.png",
+      "kind": "image",
+      "status": 200,
+      "final_url": "https://simracingec.com/social-logo.png",
+      "content_type": "image/png",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/analytics.js?v=2de32cf95e68",
+      "kind": "asset",
+      "status": 200,
+      "final_url": "https://simracingec.com/analytics.js?v=2de32cf95e68",
+      "content_type": "application/javascript",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/analytics-catalog.js?v=99fe6915961d",
+      "kind": "asset",
+      "status": 200,
+      "final_url": "https://simracingec.com/analytics-catalog.js?v=99fe6915961d",
+      "content_type": "application/javascript",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true
+    },
+    {
+      "url": "https://simracingec.com/measurement-config.js?v=4f409ebb8b46",
+      "kind": "asset",
+      "status": 200,
+      "final_url": "https://simracingec.com/measurement-config.js?v=4f409ebb8b46",
+      "content_type": "application/javascript",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true,
+      "measurement_id": "G-Q6H1XX68P2"
+    },
+    {
+      "url": "https://simracingec.com/robots.txt",
+      "kind": "asset",
+      "status": 200,
+      "final_url": "https://simracingec.com/robots.txt",
+      "content_type": "text/plain; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true,
+      "body": "User-agent: *\nAllow: /\n\nSitemap: https://simracingec.com/sitemap.xml\n"
+    },
+    {
+      "url": "https://simracingec.com/sitemap.xml",
+      "kind": "asset",
+      "status": 200,
+      "final_url": "https://simracingec.com/sitemap.xml",
+      "content_type": "application/xml; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "matches_local_bytes": true,
+      "pages": [
+        "https://simracingec.com/",
+        "https://simracingec.com/productos",
+        "https://simracingec.com/cockpit-con-silla",
+        "https://simracingec.com/simulador-tripode",
+        "https://simracingec.com/moza-r3",
+        "https://simracingec.com/moza-r5",
+        "https://simracingec.com/moza-r9-kit",
+        "https://simracingec.com/moza-r12-kit",
+        "https://simracingec.com/logitech-g29",
+        "https://simracingec.com/privacidad"
+      ],
+      "images": [
+        "https://simracingec.com/sequence/f001.webp",
+        "https://simracingec.com/optimized/cockpit-silla-hero.webp",
+        "https://simracingec.com/optimized/cockpit-silla-hero.webp",
+        "https://simracingec.com/optimized/tripode-cockpit-ai.webp",
+        "https://simracingec.com/optimized/r3-bundle-cut.webp",
+        "https://simracingec.com/optimized/moza-r5-hero-cutout-ai.webp",
+        "https://simracingec.com/optimized/moza-r9-kit-hero-cutout-ai.webp",
+        "https://simracingec.com/optimized/moza-r12-kit-hero-cutout-ai.webp",
+        "https://simracingec.com/optimized/logitech-g29-bundle.webp"
+      ]
+    },
+    {
+      "url": "https://simracingec.com/seo-check-no-existe-20261105",
+      "kind": "404",
+      "status": 404,
+      "final_url": "https://simracingec.com/seo-check-no-existe-20261105",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [],
+      "robots": [
+        "noindex, follow"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [],
+      "local_measurement_scripts": null,
+      "csp_header_matches_meta": true,
+      "structured_data_types": []
+    },
+    {
+      "url": "https://simracingec.com/seo-check-no-existe-20261105/ruta",
+      "kind": "404",
+      "status": 404,
+      "final_url": "https://simracingec.com/seo-check-no-existe-20261105/ruta",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [],
+      "robots": [
+        "noindex, follow"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [],
+      "local_measurement_scripts": null,
+      "csp_header_matches_meta": true,
+      "structured_data_types": []
+    },
+    {
+      "url": "http://simracingec.com/",
+      "kind": "redirect",
+      "status": 200,
+      "final_url": "https://simracingec.com/",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [
+        "HTTP/1.1 301 Moved Permanently"
+      ],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": true,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": null,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "WebSite",
+        "Store",
+        "WebPage"
+      ]
+    },
+    {
+      "url": "https://www.simracingec.com/moza-r3?utm_source=google",
+      "kind": "redirect",
+      "status": 200,
+      "final_url": "https://www.simracingec.com/moza-r3?utm_source=google",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/moza-r3"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": null,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ]
+    },
+    {
+      "url": "https://simracingec.com/moza-r3.html",
+      "kind": "redirect",
+      "status": 200,
+      "final_url": "https://simracingec.com/moza-r3",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [
+        "HTTP/2 308 "
+      ],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/moza-r3"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": false,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": null,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "BreadcrumbList",
+        "ItemPage"
+      ]
+    },
+    {
+      "url": "https://simracingec.com/index.html",
+      "kind": "redirect",
+      "status": 200,
+      "final_url": "https://simracingec.com/",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_statuses": [
+        "HTTP/2 308 "
+      ],
+      "x_robots_tag": null,
+      "canonical": [
+        "https://simracingec.com/"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "verification_present": true,
+      "measurement_script_urls": [
+        "measurement-config.js?v=4f409ebb8b46",
+        "analytics-catalog.js?v=99fe6915961d",
+        "analytics.js?v=2de32cf95e68"
+      ],
+      "local_measurement_scripts": null,
+      "csp_header_matches_meta": true,
+      "structured_data_types": [
+        "WebSite",
+        "Store",
+        "WebPage"
+      ]
+    }
+  ]
+}
