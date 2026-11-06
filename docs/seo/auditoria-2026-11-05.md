@@ -105,9 +105,13 @@ En una navegación normal de producción se verificaron los estados mediante Dev
 3. Una solicitud normal a `region1.google-analytics.com/g/collect` del ID correcto respondió **204 No Content** en la pestaña Network. La señal `gcs=G101` y `npa=1` era coherente con analítica permitida y publicidad denegada. No se conserva la consulta completa ni los identificadores personales del tráfico.
 4. Al retirar el consentimiento desde las preferencias, el sitio recargó: elección `rejected`, sin cliente de Google, sin cookie analítica y **cero solicitudes de Analytics** en esa carga. La prueba quedó con Analytics rechazado y sin depuración persistente.
 
+Después se comprobó la recepción dentro del informe **Resumen en tiempo real** de la propiedad correcta: aparecen eventos `page_view` y `view_item` de la ficha MOZA R3. Esta observación añade evidencia de recepción en GA4 a la respuesta HTTP 204; corresponde a la validación controlada y no se utiliza como rendimiento comercial. No se publican identificadores de cliente ni datos de usuarios.
+
 **Limitación abierta:** la calidad de la etiqueta en Google todavía muestra **«Urgente»**, con diagnóstico de 0 % de consentimiento/señales denegadas. La prueba real anterior no se presenta como eliminación de esa alerta ni demuestra por sí sola cómo la calcula Google. Tag Assistant independiente no consiguió conectarse con las protecciones actuales; se detuvo la sesión sin relajar CSP/COOP ni conceder publicidad para ocultar el aviso. No se probaron contactos o compras ficticios.
 
-Referencias: [diagnóstico de consentimiento](https://support.google.com/tagmanager/answer/14522438?hl=en), [verificación de Consent Mode](https://developers.google.com/tag-platform/security/guides/consent-debugging).
+**Seguimiento del 6 de noviembre:** Configuración del consentimiento mantiene «Urgente» y marca `analytics_storage` como inactivo; no se atribuye el aviso únicamente a las señales publicitarias. La documentación de Google indica que estas notificaciones pueden tardar **48–72 horas** en actualizarse. Esa ventana es un límite de la comprobación actual, no una confirmación de que el aviso vaya a desaparecer. El modo básico utilizado también excluye la modelización de comportamiento sin consentimiento; no se habilita recopilación previa a la aceptación para obtenerla.
+
+Referencias: [diagnóstico de consentimiento](https://support.google.com/tagmanager/answer/14522438?hl=en), [verificación de Consent Mode](https://developers.google.com/tag-platform/security/guides/consent-debugging), [estado y actualización de las señales en Analytics](https://support.google.com/analytics/answer/14275483?hl=en).
 
 ### Dimensiones y eventos clave
 
@@ -159,6 +163,8 @@ Se inspeccionaron las diez canónicas individualmente:
 
 Los seis resultados aceptados mostraron explícitamente **«Se ha solicitado la indexación»** después de la comprobación de la URL publicada. Una solicitud aceptada incorpora la URL a una cola de rastreo prioritaria: **no equivale a indexación**. Google advierte que repetirla no cambia su prioridad. La respuesta de cuota para privacidad se respeta; puede solicitarse en otro día si sigue siendo necesario, sin eludir el límite mediante otras propiedades o cuentas.
 
+**Seguimiento del 6 de noviembre:** privacidad sigue sin indexar y Google vuelve a devolver **«Cuota superada»** tras una única nueva comprobación. Esa solicitud tampoco quedó aceptada. Se conserva el total de seis solicitudes de producto aceptadas el día 5; no se repitieron. El cambio de fecha local o UTC no demuestra que la cuota del servicio se haya reiniciado.
+
 En Ajustes → IA generativa en la Búsqueda se guardó **«Incluir»** explícitamente para esta propiedad, desactivando la herencia. Se confirmó «Se han guardado los cambios», la selección final y el botón Guardar desactivado. Es un permiso de inclusión en las funciones de Google, no una garantía de selección o de recomendaciones de otros asistentes.
 
 Referencia: [control de IA generativa de Search Console](https://support.google.com/webmasters/answer/16908024).
@@ -177,7 +183,7 @@ Referencia: [verificar la titularidad](https://support.google.com/webmasters/ans
 
 **Host preferido:** en la zona correcta de Cloudflare, configurar una redirección permanente del host exacto `www.simracingec.com` a `https://simracingec.com`, conservando ruta y consulta. Verificar certificado de `www`, raíz, una ficha y parámetros. No redirigir otros negocios, no crear bucles ni intentar una regla por dominio en `_redirects`, que no la soporta.
 
-La comprobación actual del panel redirige al inicio de sesión. Hay un perfil guardado, pero continuar exige aceptar términos de Cloudflare; se solicitó confirmación antes de iniciar sesión. No se modificó DNS ni se presenta la redirección como aplicada. La configuración propuesta es una regla de redirección 301 para `http.host eq "www.simracingec.com"`, destino dinámico `concat("https://simracingec.com", http.request.uri.path)`, conservando la consulta. Debe revisarse frente a las reglas existentes y comprobarse por HTTP después de guardarla. [Documentación de redirecciones de Cloudflare](https://developers.cloudflare.com/rules/url-forwarding/single-redirects/create-dashboard/).
+**Seguimiento del 6 de noviembre:** se completaron los accesos autorizados de los tres perfiles guardados de Cloudflare. Ninguno muestra en su selector la cuenta que genera los despliegues de este repositorio. No se localizó la zona `simracingec.com` durante la revisión; hace falta identificar la cuenta que administra esa zona para continuar. No se modificó DNS ni se presenta la redirección como aplicada. La configuración propuesta es una regla de redirección 301 para `http.host eq "www.simracingec.com"`, destino dinámico `concat("https://simracingec.com", http.request.uri.path)`, conservando la consulta. Debe revisarse frente a las reglas existentes y comprobarse por HTTP después de guardarla. [Documentación de redirecciones de Cloudflare](https://developers.cloudflare.com/rules/url-forwarding/single-redirects/create-dashboard/).
 
 **Perfil de Empresa:** el registro anterior encontró la ficha pública propia y cero negocios administrados en esa sesión. Para añadir la web en Maps y mantener dirección/horario hace falta gestionar esa ficha legítima. No reclamar otra empresa ni crear duplicados. Confirmar antes stock, envíos, garantías, devoluciones y horarios.
 
