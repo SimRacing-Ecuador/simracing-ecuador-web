@@ -72,22 +72,22 @@
     "scope": "Evento",
     "parameter": "cta_location",
     "save_clicked": true,
-    "persistence_recheck": "Observed in console on 2026-11-05; event scope, existing since 2026-10-29"
+    "persistence_recheck": "Observed again in console on 2026-11-06; event scope, cta_location, existing since 2026-10-29"
   },
   "key_events": {
     "whatsapp_click": {
       "created_and_listed": true,
-      "default_value": "No default value; observed 2026-11-05"
+      "default_value": "No default monetary value; selected state observed in console on 2026-11-06"
     },
     "phone_call_click": {
       "created_and_listed": true,
-      "default_value": "No default value; saved and reopened 2026-11-05",
+      "default_value": "No default monetary value; selected state observed in console on 2026-11-06",
       "correction_2026_11_05": "Found existing 1 USD per click; removed to avoid invented revenue"
     },
     "meaning": "Contact click intent only; no sale, qualified lead or monetary value implied",
     "production_contact_test": "No contact action generated for validation"
   },
-  "last_console_verification": "2026-11-05",
+  "last_console_verification": "2026-11-06",
   "current_console_audit": {
     "ga4_search_console_link": {
       "status": "Vinculación creada correctamente",
@@ -97,7 +97,8 @@
       "stream_id": "16231880754",
       "link_date": "2026-11-05",
       "evidence": "Success result and row in GA4 link table directly observed after user action-time confirmation",
-      "verified_from_both_products": true
+      "verified_from_both_products": true,
+      "last_row_observed": "2026-11-06"
     },
     "ga4_reports": {
       "search_console_collection": "Publicada para todos",
@@ -109,12 +110,19 @@
       "reset_on_activity": false,
       "internal_traffic_filter": {
         "operation": "Exclude",
-        "state": "Testing"
+        "state": "Testing",
+        "last_observed": "2026-11-06"
       },
       "google_signals": "not activated",
       "user_provided_data": "not activated",
       "granular_location_device": "on (existing)",
-      "property_ad_personalization": "existing default allows 307 regions; client explicitly denies advertising; not changed",
+      "property_ad_personalization": {
+        "previous": "307 of 307 regions allowed by existing default",
+        "current": "0 of 307 regions allowed",
+        "saved_and_reloaded": true,
+        "changed_on": "2026-11-06",
+        "reason": "Align property with the non-advertising consent configuration and privacy policy"
+      },
       "measurement_id": "G-Q6H1XX68P2",
       "stream_id": "16231880754",
       "received_traffic_last_48h": true,
@@ -130,7 +138,8 @@
         "forms": false,
         "youtube_api_video": true,
         "downloads": true
-      }
+      },
+      "redaction_last_observed": "2026-11-06; emails active, 19 query keys"
     },
     "tag_settings": {
       "session_timeout_minutes": 30,
@@ -152,6 +161,14 @@
       "source": "https://support.google.com/analytics/answer/9756891",
       "release_note": "https://support.google.com/analytics/answer/9164320",
       "verified_from_official_docs_on": "2026-11-05"
+    },
+    "attribution_settings": {
+      "observed_on": "2026-11-06",
+      "model": "Data-driven, paid and organic channels",
+      "acquisition_lookback_days": 30,
+      "other_key_events_lookback_days": 90,
+      "engaged_view_lookback_days": 3,
+      "modified": false
     }
   }
 }

@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-06",
+  "environment": "Local preview, localhost; excluded from GA4 production host gate",
+  "pages": [
+    "/productos"
+  ],
+  "viewport_checks": [
+    {
+      "width": 360,
+      "height": 800,
+      "scroll_width": 360,
+      "rows_fit": true,
+      "list_items": 5,
+      "menu_visible": true
+    },
+    {
+      "width": 640,
+      "height": 900,
+      "scroll_width": 640,
+      "rows_fit": true,
+      "list_items": 5,
+      "menu_visible": true
+    },
+    {
+      "width": 900,
+      "height": 900,
+      "scroll_width": 900,
+      "rows_fit": true,
+      "list_items": 5,
+      "menu_visible": true
+    },
+    {
+      "width": 1100,
+      "height": 900,
+      "scroll_width": 1100,
+      "rows_fit": true,
+      "list_items": 5,
+      "menu_visible": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "scroll_width": 1440,
+      "rows_fit": true,
+      "list_items": 5,
+      "menu_visible": false
+    }
+  ],
+  "menu": {
+    "accessible_name": "Menú principal",
+    "open": {
+      "aria_expanded": true,
+      "navigation_open": true,
+      "scroll_locked": true
+    },
+    "escape_close": {
+      "aria_expanded": false,
+      "navigation_open": false,
+      "scroll_locked": false,
+      "focus_restored_to": "menu-toggle"
+    }
+  },
+  "catalogue": {
+    "native_list": "ul",
+    "native_children": "li",
+    "product_rows": 5,
+    "existing_links_and_analytics_attributes_retained": true,
+    "original_article_focus_styles_retained": true
+  },
+  "google_client_present": false,
+  "viewport_override_reset": true,
+  "visual_review": "Mobile product rows and wide catalogue reviewed; no new horizontal overflow. Screenshots saved privately outside the public repository.",
+  "reduced_motion": "No motion engine or animation selectors changed; existing bypass retained. No new system-level reduced-motion emulation claimed.",
+  "production_check": "Pending deployment and fresh PageSpeed recheck"
+}

@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-06",
+  "source": "PageSpeed Insights, visible reports",
+  "lighthouse_version": "13.6.0",
+  "release_before_accessibility_fix": "e3ffcff",
+  "field_data": "No data in both URL reports; laboratory results only",
+  "pages": [
+    {
+      "url": "https://simracingec.com/productos",
+      "report_url": "https://pagespeed.web.dev/analysis/https-simracingec-com-productos/f8swm2bi6x",
+      "capture_local": "2026-11-06 03:09:36 Europe/Berlin",
+      "mobile": {
+        "performance": 93,
+        "accessibility": 91,
+        "best_practices": 96,
+        "seo": 100,
+        "FCP_s": 0.9,
+        "LCP_s": 3.2,
+        "TBT_ms": 10,
+        "CLS": 0,
+        "speed_index_s": 1.8
+      },
+      "desktop": {
+        "performance": 100,
+        "accessibility": 96,
+        "best_practices": 96,
+        "seo": 100,
+        "FCP_s": 0.2,
+        "LCP_s": 0.7,
+        "TBT_ms": 0,
+        "CLS": 0.009,
+        "speed_index_s": 0.7
+      }
+    },
+    {
+      "url": "https://simracingec.com/cockpit-con-silla",
+      "report_url": "https://pagespeed.web.dev/analysis/https-simracingec-com-cockpit-con-silla/jsm0229pmj",
+      "capture_local": "2026-11-06 03:09:53 Europe/Berlin",
+      "mobile": {
+        "performance": 93,
+        "accessibility": 94,
+        "best_practices": 96,
+        "seo": 100,
+        "FCP_s": 1.2,
+        "LCP_s": 3.2,
+        "TBT_ms": 10,
+        "CLS": 0,
+        "speed_index_s": 1.9
+      },
+      "desktop": {
+        "performance": 100,
+        "accessibility": 100,
+        "best_practices": 96,
+        "seo": 100,
+        "FCP_s": 0.2,
+        "LCP_s": 0.7,
+        "TBT_ms": 0,
+        "CLS": 0,
+        "speed_index_s": 0.7
+      }
+    }
+  ],
+  "audit_findings": [
+    "Mobile menu button loses accessible name when visible label is hidden by CSS",
+    "Catalogue category index has an aria-label on a generic div without a supporting role",
+    "Catalogue article forces an incompatible listitem role; replace the product list with native ul/li semantics",
+    "Console warning: frame-ancestors in meta CSP is ignored by browsers; the directive remains effective in the server header and unchanged under repository CSP instructions"
+  ],
+  "limits": [
+    "Single laboratory run per URL/device; scores vary",
+    "TBT is not INP; no field Core Web Vitals conclusion",
+    "Values copied from visible metric summaries, rounded as displayed",
+    "Accessibility corrections still require public recheck after deployment"
+  ]
+}
