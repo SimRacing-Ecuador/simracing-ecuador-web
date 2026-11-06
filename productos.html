@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self'; media-src 'self'; frame-src https://www.youtube.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests" />
     <link rel="icon" type="image/png" href="favicon.png?v=3" />
     <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=catalogue-alignment-20261011" />
+    <link rel="stylesheet" href="styles.css?v=catalogue-accessibility-20261106" />
     <script src="boot.js"></script>
     <script src="vendor/gsap.min.js" defer></script>
     <script src="vendor/ScrollTrigger.min.js" defer></script>
@@ -60,7 +60,7 @@
         </nav>
         <div class="header-actions">
           <a class="button button-yellow button-small header-cta" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20cotizar%20un%20simulador" target="_blank" rel="noopener noreferrer"><span>Cotiza tu simulador</span><span class="button-icon" aria-hidden="true">↗</span></a>
-          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Menú principal" aria-expanded="false" aria-controls="site-nav">
             <span class="menu-toggle-label">Menú</span>
             <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
           </button>
@@ -82,7 +82,7 @@
           <figure class="catalog-hero-art catalog-cockpit-art">
             <img src="optimized/cockpit-silla-hero.webp" alt="Cockpit Pro plegable con silla para simulación de carreras" loading="eager" decoding="async" fetchpriority="high" width="500" height="500" srcset="optimized/responsive/cockpit-silla-hero-640.webp 640w, optimized/responsive/cockpit-silla-hero-1280.webp 1280w, optimized/responsive/cockpit-silla-hero-1920.webp 1920w, optimized/cockpit-silla-hero.webp 3000w" sizes="(max-width: 680px) calc(100vw - 32px), (max-width: 960px) 80vw, 50vw" />
           </figure>
-          <div class="catalog-hero-index" aria-label="Categorías del catálogo">
+          <div class="catalog-hero-index" role="group" aria-label="Categorías del catálogo">
             <span>01 / Volantes y pedales</span>
             <span>02 / Cockpits</span>
             <span>03 / Accesorios</span>
@@ -123,38 +123,38 @@
             <h2 id="control-title">Volantes<br /><span>y pedales.</span></h2>
             <p>Desde una primera vuelta con Logitech hasta los paquetes Direct Drive de MOZA.</p>
           </div>
-          <div class="control-list" role="list">
-            <article class="control-row control-row-link" role="listitem">
+          <ul class="control-list" role="list">
+            <li><article class="control-row control-row-link">
               <span class="control-number">01</span>
               <div><span class="product-code">LOGITECH</span><h3><a data-analytics-item="logitech-g29" href="logitech-g29.html" aria-label="Ver ficha completa del Logitech G29">Logitech G29</a></h3></div>
               <p>Volante para comenzar tu experiencia de simracing. <a data-analytics-item="logitech-g29" class="control-row-action" href="logitech-g29.html">Ver ficha completa ↗</a></p>
               <div class="g29-catalog-action"><strong class="catalog-price">$375</strong><a class="price-ask" href="https://wa.me/593989019836?text=Hola%2C%20quiero%20consultar%20la%20disponibilidad%20del%20volante%20Logitech%20G29" target="_blank" rel="noopener noreferrer">Consultar disponibilidad <span aria-hidden="true">↗</span></a></div>
-            </article>
-            <a data-analytics-item="moza-r3" class="control-row control-row-featured control-row-link" href="moza-r3.html" role="listitem" aria-label="Ver ficha completa del MOZA R3">
+            </article></li>
+            <li><a data-analytics-item="moza-r3" class="control-row control-row-featured control-row-link" href="moza-r3.html" aria-label="Ver ficha completa del MOZA R3">
               <span class="control-number">02</span>
               <div><span class="product-code">MOZA / DIRECT DRIVE</span><h3>MOZA R3</h3></div>
               <p>Paquete Direct Drive compatible con PC y Xbox. <span class="control-row-action">Ver ficha completa ↗</span></p>
               <strong class="catalog-price">$580</strong>
-            </a>
-            <a data-analytics-item="moza-r5" class="control-row control-row-link" href="moza-r5.html" role="listitem" aria-label="Ver ficha completa del MOZA R5">
+            </a></li>
+            <li><a data-analytics-item="moza-r5" class="control-row control-row-link" href="moza-r5.html" aria-label="Ver ficha completa del MOZA R5">
               <span class="control-number">03</span>
               <div><span class="product-code">MOZA / DIRECT DRIVE</span><h3>MOZA R5</h3></div>
               <p>Más fuerza y respuesta para seguir creciendo. <span class="control-row-action">Ver ficha completa ↗</span></p>
               <strong class="catalog-price">$675</strong>
-            </a>
-            <a data-analytics-item="moza-r9-kit" class="control-row control-row-link" href="moza-r9-kit.html" role="listitem" aria-label="Ver ficha completa del MOZA R9 Kit">
+            </a></li>
+            <li><a data-analytics-item="moza-r9-kit" class="control-row control-row-link" href="moza-r9-kit.html" aria-label="Ver ficha completa del MOZA R9 Kit">
               <span class="control-number">04</span>
               <div><span class="product-code">MOZA / KIT DIRECT DRIVE</span><h3>MOZA R9 Kit</h3></div>
               <p>Base R9, volante CS V2P y pedales CRP2. <span class="control-row-action">Solo disponible en kit ↗</span></p>
               <strong class="catalog-price">$1.640</strong>
-            </a>
-            <a data-analytics-item="moza-r12-kit" class="control-row control-row-r12 control-row-link" href="moza-r12-kit.html" role="listitem" aria-label="Ver ficha completa del MOZA R12 Kit">
+            </a></li>
+            <li><a data-analytics-item="moza-r12-kit" class="control-row control-row-r12 control-row-link" href="moza-r12-kit.html" aria-label="Ver ficha completa del MOZA R12 Kit">
               <span class="control-number">05</span>
               <div><span class="product-code">MOZA / KIT DIRECT DRIVE</span><h3>MOZA R12 Kit</h3></div>
               <p>Base R12, volante CS V2P y pedales CRP2. <span class="control-row-action">Solo disponible en kit ↗</span></p>
               <strong class="catalog-price">$1.820</strong>
-            </a>
-          </div>
+            </a></li>
+          </ul>
         </div>
       </section>
 

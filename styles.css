@@ -1532,7 +1532,7 @@ a.price-ask:hover { background: var(--ink); color: var(--paper); }
 .control-catalog { overflow: hidden; background: var(--blue-deep); color: var(--paper); }
 .control-catalog::before { position: absolute; inset: 0; background: radial-gradient(50% 60% at 90% 10%, rgba(0, 184, 242, .18), transparent 70%); pointer-events: none; content: ""; }
 .catalog-heading-dark h2 span:not([class]) { color: var(--yellow); }
-.control-list { position: relative; border-top: 1px solid var(--line-strong); }
+.control-list { position: relative; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line-strong); }
 .control-row {
   position: relative;
   isolation: isolate;

@@ -83,7 +83,7 @@ Se volvieron a observar el flujo, el ID de medición y el indicador de tráfico 
 | Google Signals | Sin activar |
 | Datos proporcionados por usuarios | Sin activar |
 | Ubicación/dispositivo granular | Activado previamente; conservado |
-| Personalización publicitaria de la propiedad | Permiso regional existente, sin cambios; el cliente deniega los tres consentimientos publicitarios |
+| Personalización publicitaria de la propiedad | El 5-11 permitía 307 regiones por defecto. El 6-11 se cambió a **0 de 307**, se aplicó y se comprobó tras recargar; el cliente sigue denegando los tres consentimientos publicitarios |
 | Filtro Internal Traffic | Excluir, en modo **Testing**; sin activar exclusiones nuevas ni inventar IPs |
 | Ocultación de datos | Emails activa y 19 claves sensibles de consulta configuradas |
 | Etiquetas de sitios conectados | Cero |
@@ -215,3 +215,37 @@ Reversión de código: revertir el commit de esta revisión mediante PR o volver
 La PR [#20](https://github.com/SimRacing-Ecuador/simracing-ecuador-web/pull/20) se integró en `e00b21c66a85967f4996a7a33a54dee188d37528`, con CI y Cloudflare correctos. La comprobación HTTP posterior encontró el sitemap nuevo, pero dos scripts antiguos: respuestas `cf-cache-status: HIT`, `Age` de aproximadamente 1000 segundos y `Cache-Control: max-age=14400` en el dominio público. Las mismas rutas con una consulta de versión devolvieron exactamente los bytes nuevos. No se confundió el estado de despliegue con los bytes que recibía el visitante.
 
 Para resolverlo, el generador incorpora un hash SHA-256 abreviado a las URLs de configuración, catálogo y cliente de medición en las diez páginas. Calcula el hash del catálogo que va a escribir, de modo que basta una generación. Conserva el orden y `defer`, sin cargar Google antes del consentimiento. Una prueba falló primero por falta de versión; la suite y una prueba aislada de cambios simultáneos de inventario/configuración pasan tras la corrección. Después de la PR #21 se comprobó que las diez páginas, las tres URLs versionadas, el sitemap, robots y los recursos de imagen coincidían con los archivos publicados esperados. La evidencia HTTP histórica se conserva por separado; no sustituye el estado actual de la cuenta.
+
+
+## Actualización de privacidad y persistencia — 6 de noviembre de 2026
+
+Se volvió a observar la propiedad **Sim Racing Ecuador**, el vínculo de Search Console con el flujo `16231880754`, la dimensión `cta_location` de ámbito Evento y ambos eventos clave de contacto. En los dos eventos está seleccionada la opción de no asignar valor predeterminado; no se generaron llamadas ni mensajes de prueba.
+
+Se comprobó en consola que Google Signals y los datos proporcionados por usuarios siguen sin activar. El filtro Internal Traffic permanece Excluir / Prueba. El flujo sigue mostrando tráfico en las últimas 48 horas, ocultación de email y 19 claves de consulta, medición mejorada limitada a página/vídeo compatible/descargas y cero etiquetas de sitio conectadas.
+
+La personalización publicitaria de propiedad permitía las 307 regiones por defecto. Se eligió **No permitir ninguno**, se pulsó **Aplicar** y, tras recargar, se observó **0 de 307 regiones**. Esto alinea la consola con el uso de analítica opcional sin publicidad del sitio. No se activaron campañas, Signals, datos aportados por usuarios ni modelización previa al consentimiento. La ubicación/dispositivo granular conserva el estado existente.
+
+Atribución observada, sin cambios: basada en datos para canales de pago y orgánicos, ventana de adquisición de 30 días, otros eventos clave de 90 días y visualización interesada fija de 3 días. Esta denominación del modelo no significa que se hayan creado campañas de pago.
+
+El control del navegador resultó intermitente; se completó el ajuste mediante los controles nativos de la ventana correcta de Chrome. Las capturas de la dimensión y de la privacidad se conservan fuera del repositorio público como evidencias privadas de esta conversación. Estas verificaciones no eliminan por sí mismas el diagnóstico de consentimiento «Urgente» ni las dependencias de acceso y datos comerciales indicadas arriba.
+
+
+## Laboratorio y accesibilidad — 6 de noviembre de 2026
+
+Se completaron mediciones independientes del catálogo y de una ficha de cockpit en móvil y escritorio. Los enlaces compartibles y valores observados se conservan en `performance-lab-2026-11-06.json`. No hay datos de usuarios reales en esos informes.
+
+| Página y dispositivo | Rendimiento | Accesibilidad | SEO básico | LCP | TBT | CLS |
+|---|---:|---:|---:|---:|---:|---:|
+| Catálogo, móvil | 93 | 91 | 100 | 3,2 s | 10 ms | 0 |
+| Catálogo, escritorio | 100 | 96 | 100 | 0,7 s | 0 ms | 0,009 |
+| Cockpit con silla, móvil | 93 | 94 | 100 | 3,2 s | 10 ms | 0 |
+| Cockpit con silla, escritorio | 100 | 100 | 100 | 0,7 s | 0 ms | 0 |
+
+Estos valores son anteriores a la corrección de accesibilidad de esta rama. Se detectaron tres causas concretas: el nombre del menú desaparecía al ocultarse su texto en móvil, el índice de categorías etiquetaba un div genérico y una fila article forzaba un rol listitem incompatible. La corrección añade un nombre accesible al menú de las once páginas, un grupo etiquetado para categorías y una lista HTML ul/li que conserva los enlaces, componentes, clases de animación y estilos de foco del catálogo. No modifica los precios ni las rutas.
+
+Las recomendaciones conservan 96 por el aviso del navegador sobre frame-ancestors en la meta CSP. La política del servidor sí incluye esa protección; no se elimina ni se relaja para obtener una puntuación. LCP móvil sigue ofreciendo margen de mejora. TBT no se interpreta como INP y una puntuación SEO de Lighthouse no demuestra posiciones en buscadores.
+
+
+La comprobación local del catálogo abarcó 360, 640, 900, 1100 y 1440 px: cinco filas dentro del ancho disponible y sin desbordamiento horizontal. En móvil se comprobó el nombre «Menú principal», apertura, bloqueo de desplazamiento, cierre con Escape y retorno del foco al botón. Se conservaron los atributos de medición y los estilos de foco del artículo Logitech. La copia local no carga Google y los tamaños temporales del navegador se restablecieron. Detalle: `accessibility-verification-2026-11-06.json`.
+
+La URL de CSS del catálogo cambia a `styles.css?v=catalogue-accessibility-20261106` para que la nueva lista y su normalización de márgenes se publiquen juntas, evitando una hoja antigua en caché. Las otras páginas reciben el nombre accesible del menú sin cambios de presentación.
