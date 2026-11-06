@@ -109,7 +109,9 @@ Después se comprobó la recepción dentro del informe **Resumen en tiempo real*
 
 **Limitación abierta:** la calidad de la etiqueta en Google todavía muestra **«Urgente»**, con diagnóstico de 0 % de consentimiento/señales denegadas. La prueba real anterior no se presenta como eliminación de esa alerta ni demuestra por sí sola cómo la calcula Google. Tag Assistant independiente no consiguió conectarse con las protecciones actuales; se detuvo la sesión sin relajar CSP/COOP ni conceder publicidad para ocultar el aviso. No se probaron contactos o compras ficticios.
 
-Referencias: [diagnóstico de consentimiento](https://support.google.com/tagmanager/answer/14522438?hl=en), [verificación de Consent Mode](https://developers.google.com/tag-platform/security/guides/consent-debugging).
+**Seguimiento del 6 de noviembre:** Configuración del consentimiento mantiene «Urgente» y marca `analytics_storage` como inactivo; no se atribuye el aviso únicamente a las señales publicitarias. La documentación de Google indica que estas notificaciones pueden tardar **48–72 horas** en actualizarse. Esa ventana es un límite de la comprobación actual, no una confirmación de que el aviso vaya a desaparecer. El modo básico utilizado también excluye la modelización de comportamiento sin consentimiento; no se habilita recopilación previa a la aceptación para obtenerla.
+
+Referencias: [diagnóstico de consentimiento](https://support.google.com/tagmanager/answer/14522438?hl=en), [verificación de Consent Mode](https://developers.google.com/tag-platform/security/guides/consent-debugging), [estado y actualización de las señales en Analytics](https://support.google.com/analytics/answer/14275483?hl=en).
 
 ### Dimensiones y eventos clave
 
@@ -160,6 +162,8 @@ Se inspeccionaron las diez canónicas individualmente:
 | `/privacidad` | Google no reconoce la URL | **Cuota diaria superada**; no aceptada ni repetida |
 
 Los seis resultados aceptados mostraron explícitamente **«Se ha solicitado la indexación»** después de la comprobación de la URL publicada. Una solicitud aceptada incorpora la URL a una cola de rastreo prioritaria: **no equivale a indexación**. Google advierte que repetirla no cambia su prioridad. La respuesta de cuota para privacidad se respeta; puede solicitarse en otro día si sigue siendo necesario, sin eludir el límite mediante otras propiedades o cuentas.
+
+**Seguimiento del 6 de noviembre:** privacidad sigue sin indexar y Google vuelve a devolver **«Cuota superada»** tras una única nueva comprobación. Esa solicitud tampoco quedó aceptada. Se conserva el total de seis solicitudes de producto aceptadas el día 5; no se repitieron. El cambio de fecha local o UTC no demuestra que la cuota del servicio se haya reiniciado.
 
 En Ajustes → IA generativa en la Búsqueda se guardó **«Incluir»** explícitamente para esta propiedad, desactivando la herencia. Se confirmó «Se han guardado los cambios», la selección final y el botón Guardar desactivado. Es un permiso de inclusión en las funciones de Google, no una garantía de selección o de recomendaciones de otros asistentes.
 
