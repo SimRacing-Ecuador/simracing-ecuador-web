@@ -10,6 +10,13 @@
 /404
   X-Robots-Tag: noindex
 
+# Keep the Cloudflare Pages origin and previews out of search.
+https://racinghobbies-web.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:deployment.racinghobbies-web.pages.dev/*
+  X-Robots-Tag: noindex
+
 /robots.txt
   Content-Type: text/plain; charset=utf-8
 
