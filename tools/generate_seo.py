@@ -48,7 +48,7 @@ def render_pages(script_versions):
             tags.append(f'<meta name="google-site-verification" content="{VERIFY}" />')
             graph.extend([
                 {'@type': 'WebSite', '@id': BASE+'#website', 'url': BASE, 'name': NAME, 'alternateName':'SimRacing Ecuador', 'inLanguage': 'es-EC', 'publisher': {'@id':BASE+'#organization'}},
-                {'@type':'Store','@id':BASE+'#organization','name':NAME,'alternateName':'SimRacing Ecuador','url':BASE,'logo':BASE+'logo-primary.png',
+                {'@type':'Store','@id':BASE+'#organization','name':NAME,'alternateName':'SimRacing Ecuador','url':BASE,'logo':BASE+'brand-logo.png',
                  'image': BASE+'social-logo.png','description':'Equipos y asesoría para simulación de carreras en Ecuador.',
                  'telephone':'+593989019836','areaServed':{'@type':'Country','name':'Ecuador'},
                  'address':{'@type':'PostalAddress','streetAddress':'Av. Eloy Alfaro 40-348','addressLocality':'Quito','postalCode':'170513','addressCountry':'EC'},
