@@ -7,9 +7,14 @@ const catalog = fs.readFileSync('analytics-catalog.js', 'utf8');
 const measurement = fs.readFileSync('measurement-config.js', 'utf8');
 
 function setup({ host = 'simracingec.com', path = '/moza-r3', query = '', stored = null, blocked = false,
+  stores = { local: new Map(), session: new Map() }, localWriteBlocked = false, preferenceCookie = null,
   referrer = 'https://www.google.com/search?q=person%40example.com', productionConfig = false } = {}) {
-  const listeners = {}, windowListeners = {}, requests = [], writes = [], saved = new Map();
-  if (stored) saved.set('sre-consent-v1', JSON.stringify({ value: stored, expires: Date.now() + 100000 }));
+  const listeners = {}, windowListeners = {}, requests = [], writes = [];
+  if (stored) {
+    const record = JSON.stringify({ value: stored, expires: Date.now() + 100000 });
+    stores.local.set('sre-consent-v1', record);
+    stores.session.set('sre-consent-v1', record);
+  }
   const button = { focus() {} };
   const panel = { hidden: true, querySelector: () => button, contains: () => false, querySelectorAll: () => [] };
   const document = {
@@ -22,10 +27,19 @@ function setup({ host = 'simracingec.com', path = '/moza-r3', query = '', stored
     querySelectorAll: () => [],
     addEventListener: (name, fn) => { listeners[name] = fn; }
   };
-  Object.defineProperty(document, 'cookie', { get: () => '_ga=old; _ga_TEST=old; required_cookie=keep', set: value => writes.push(value) });
-  const storage = { getItem: name => { if (blocked) throw Error('blocked'); return saved.get(name) || null; }, setItem: (name, value) => { if (blocked) throw Error('blocked'); saved.set(name, value); } };
+  Object.defineProperty(document, 'cookie', {
+    get: () => ['_ga=old; _ga_TEST=old; required_cookie=keep', preferenceCookie?.value].filter(Boolean).join('; '),
+    set: value => {
+      writes.push(value);
+      if (preferenceCookie && value.startsWith('sre-consent-v1=')) preferenceCookie.value = value.split(';')[0];
+    }
+  });
+  const storage = (saved, writeBlocked) => ({
+    getItem: name => { if (blocked) throw Error('blocked'); return saved.get(name) || null; },
+    setItem: (name, value) => { if (blocked || writeBlocked) throw Error('blocked'); saved.set(name, value); }
+  });
   const location = { hostname: host, protocol: host === 'localhost' ? 'http:' : 'https:', port: '', pathname: path, href: 'https://' + host + path + query, reload: () => { location.reloaded = true; } };
-  const context = { document, location, sessionStorage: storage, localStorage: storage, URL, URLSearchParams, Date,
+  const context = { document, location, sessionStorage: storage(stores.session), localStorage: storage(stores.local, localWriteBlocked), URL, URLSearchParams, Date,
     SRE_MEASUREMENT: { measurementId: 'G-TESTONLY', hosts: ['simracingec.com'], campaignValues: ['google', 'social'] },
     addEventListener: (name, fn) => { windowListeners[name] = fn; }, scrollY: 0, innerHeight: 800 };
   context.window = context;
@@ -86,7 +100,39 @@ const blocked = setup({ blocked: true });
 blocked.click('data-consent-accept'); blocked.click('data-consent-reject');
 assert.equal(blocked.context['ga-disable-G-TESTONLY'], true);
 assert.equal(blocked.location.reloaded, undefined, 'retain in-memory denial when storage fails');
+blocked.windowListeners.pageshow({ persisted: true });
+assert.equal(blocked.location.reloaded, undefined, 'back/forward restore retains in-memory denial');
 blocked.event('tel:+593989019836'); assert.equal(blocked.events().length, 0);
+
+const partialStores = { local: new Map(), session: new Map() };
+const partial = setup({ stored: 'accepted', stores: partialStores, localWriteBlocked: true });
+assert.equal(partial.requests.length, 1);
+partial.click('data-consent-reject');
+assert.equal(partial.location.reloaded, true);
+const afterPartial = setup({ path: '/productos', stores: partialStores, localWriteBlocked: true });
+assert.equal(afterPartial.requests.length, 0, 'an older readable acceptance cannot override a saved rejection');
+assert.equal(afterPartial.panel.hidden, true);
+
+const sharedStores = { local: new Map(), session: new Map() };
+const firstTab = setup({ stored: 'accepted', stores: sharedStores });
+const secondTab = setup({ stores: { local: sharedStores.local, session: new Map(sharedStores.session) } });
+firstTab.click('data-consent-reject');
+secondTab.windowListeners.storage({ key: 'sre-consent-v1' });
+assert.equal(secondTab.context['ga-disable-G-TESTONLY'], true, 'a rejection in another tab supersedes an older session record');
+assert.equal(secondTab.location.reloaded, true);
+
+const fallbackCookie = {};
+const fallback = setup({ blocked: true, preferenceCookie: fallbackCookie });
+fallback.click('data-consent-accept');
+assert.equal(fallback.requests.length, 1);
+assert(fallback.writes.some(value => value.startsWith('sre-consent-v1=') && !/Domain=|Max-Age=|Expires=/i.test(value)));
+const fallbackNext = setup({ path: '/productos', blocked: true, preferenceCookie: fallbackCookie });
+assert.equal(fallbackNext.requests.length, 1, 'session cookie preserves acceptance across navigation');
+fallbackNext.click('data-consent-reject');
+assert.equal(fallbackNext.location.reloaded, true);
+const fallbackRejected = setup({ blocked: true, preferenceCookie: fallbackCookie });
+assert.equal(fallbackRejected.requests.length, 0, 'session cookie preserves withdrawal across navigation');
+assert.equal(fallbackRejected.panel.hidden, true);
 
 // Removing an approved origin loses AI referrals; permissive matching leaks private URLs.
 for (const host of ['chatgpt.com', 'www.perplexity.ai', 'perplexity.ai', 'claude.ai', 'gemini.google.com', 'copilot.microsoft.com']) {
