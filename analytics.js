@@ -5,6 +5,8 @@
   const config = window.SRE_MEASUREMENT || {};
   const pages = window.SRE_PAGES || {};
   const key = 'sre-consent-v1';
+  const preferenceLifetime = 180 * 86400000;
+  const preferenceStores = ['localStorage', 'sessionStorage'];
   const campaignKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
   const denied = { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' };
   const id = config.measurementId || '';
@@ -12,6 +14,7 @@
   const path = location.pathname === '/index.html' ? '/' : location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   const page = pages[path];
   let choice = null;
+  let memoryPreference = null;
   let loaded = false;
   let viewed = false;
   let lastFocus = null;
@@ -19,24 +22,66 @@
   const seenItems = new Set();
   let listObserver = null;
 
-  function readChoice() {
-    for (const name of ['localStorage', 'sessionStorage']) {
+  function cookies() {
+    try { return document.cookie.split(';').map(cookie => cookie.trim()); }
+    catch (_) { return []; }
+  }
+
+  function readPreference() {
+    const candidates = [];
+    for (const name of preferenceStores) {
       try {
-        const record = JSON.parse(window[name].getItem(key));
-        if (record && record.expires > Date.now() && ['accepted', 'rejected'].includes(record.value)) return record.value;
+        candidates.push(window[name].getItem(key));
       } catch (_) { /* Storage can be unavailable. */ }
     }
-    return null;
+    const cookie = cookies().find(value => value.startsWith(key + '='));
+    if (cookie) {
+      try { candidates.push(decodeURIComponent(cookie.slice(key.length + 1))); }
+      catch (_) { /* Ignore an invalid preference cookie. */ }
+    }
+    const now = Date.now();
+    let latest = memoryPreference?.expires > now ? memoryPreference : null;
+    for (const candidate of candidates) {
+      try {
+        const record = JSON.parse(candidate);
+        if (!record || !Number.isFinite(record.expires) || record.expires <= now ||
+            !['accepted', 'rejected'].includes(record.value)) continue;
+        const savedAt = Number.isFinite(record.savedAt) ? record.savedAt : record.expires - preferenceLifetime;
+        if (!latest || savedAt > latest.savedAt || (savedAt === latest.savedAt && record.value === 'rejected')) {
+          latest = { value: record.value, expires: record.expires, savedAt };
+        }
+      } catch (_) { /* Ignore an invalid storage record. */ }
+    }
+    return latest;
   }
 
   function saveChoice(value) {
     choice = value;
-    const record = JSON.stringify({ value, expires: Date.now() + 180 * 86400000 });
+    const now = Date.now();
+    const previous = readPreference();
+    const record = {
+      value,
+      expires: now + preferenceLifetime,
+      savedAt: Math.max(now, (previous?.savedAt ?? 0) + 1)
+    };
+    const encoded = JSON.stringify(record);
+    memoryPreference = null;
     let persisted = false;
-    for (const name of ['localStorage', 'sessionStorage']) {
-      try { window[name].setItem(key, record); persisted = true; } catch (_) { /* Keep choice in memory. */ }
+    for (const name of preferenceStores) {
+      try { window[name].setItem(key, encoded); persisted = true; }
+      catch (_) {
+        try { window[name].removeItem(key); } catch (_) { /* A read-only store may also block removal. */ }
+      }
     }
-    return persisted;
+    if (!persisted) {
+      try {
+        const secure = location.protocol === 'https:' ? '; Secure' : '';
+        document.cookie = `${key}=${encodeURIComponent(encoded)}; Path=/; SameSite=Lax${secure}`;
+      } catch (_) { /* A blocked cookie leaves the choice in memory. */ }
+    }
+    if (readPreference()?.value === value) return true;
+    memoryPreference = record;
+    return false;
   }
 
   function campaignFrom(input) {
@@ -142,7 +187,7 @@
   }
 
   function clearCookies() {
-    const names = document.cookie.split(';').map(cookie => cookie.split('=')[0].trim()).filter(name => /^_ga(?:_|$)|^_gid$|^_gat(?:_|$)/.test(name));
+    const names = cookies().map(cookie => cookie.split('=')[0].trim()).filter(name => /^_ga(?:_|$)|^_gid$|^_gat(?:_|$)/.test(name));
     const labels = location.hostname.split('.');
     const domains = ['', ...labels.map((_, index) => labels.slice(index).join('.')).filter(value => value.includes('.'))];
     const segments = location.pathname.split('/').filter(Boolean);
@@ -151,9 +196,11 @@
       paths.add('/' + segments.slice(0, i).join('/'));
       paths.add('/' + segments.slice(0, i).join('/') + '/');
     }
-    for (const name of names) for (const domain of domains) for (const cookiePath of paths) {
-      document.cookie = `${name}=; Max-Age=0; Path=${cookiePath}; SameSite=Lax${domain ? '; Domain=' + domain : ''}${location.protocol === 'https:' ? '; Secure' : ''}`;
-    }
+    try {
+      for (const name of names) for (const domain of domains) for (const cookiePath of paths) {
+        document.cookie = `${name}=; Max-Age=0; Path=${cookiePath}; SameSite=Lax${domain ? '; Domain=' + domain : ''}${location.protocol === 'https:' ? '; Secure' : ''}`;
+      }
+    } catch (_) { /* Cookie writes can be blocked. */ }
   }
 
   const panel = document.getElementById('consent-panel');
@@ -216,20 +263,21 @@
   window.addEventListener('storage', event => {
     if (event.key !== key) return;
     const previous = choice;
-    choice = readChoice();
+    choice = readPreference()?.value ?? null;
     if (choice === 'accepted') start();
     else if (previous === 'accepted') {
-      window['ga-disable-' + id] = true; window.dataLayer.length = 0; clearCookies(); location.reload();
+      window['ga-disable-' + id] = true; window.dataLayer.length = 0; clearCookies();
+      if (!memoryPreference) location.reload();
     }
   });
   window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
-    choice = readChoice();
+    choice = readPreference()?.value ?? null;
     if (choice === 'accepted') {
       viewed = false; scrolled = false; seenItems.clear(); listObserver?.disconnect(); start();
     } else {
       window['ga-disable-' + id] = true; window.dataLayer.length = 0; clearCookies();
-      if (loaded) location.reload();
+      if (loaded && !memoryPreference) location.reload();
     }
   });
   document.addEventListener('keydown', event => {
@@ -239,7 +287,7 @@
     if (event.shiftKey && document.activeElement === focusables[0]) { event.preventDefault(); focusables.at(-1)?.focus(); }
     else if (!event.shiftKey && document.activeElement === focusables.at(-1)) { event.preventDefault(); focusables[0]?.focus(); }
   });
-  choice = readChoice();
+  choice = readPreference()?.value ?? null;
   if (choice === 'accepted') start();
   else { clearCookies(); if (!choice) openPanel(); }
 })();
