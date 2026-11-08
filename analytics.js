@@ -40,6 +40,7 @@
       catch (_) { /* Ignore an invalid preference cookie. */ }
     }
     const now = Date.now();
+    // A newer withdrawal must take precedence over a stale acceptance in another store.
     let latest = memoryPreference?.expires > now ? memoryPreference : null;
     for (const candidate of candidates) {
       try {
